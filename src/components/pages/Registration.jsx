@@ -27,9 +27,9 @@ const Registration = () => {
                     type="text" placeholder='Password' />
                 </div>
                 <div className='w-[368px] text-[#11175D] mt-12'>
-                  <button className='w-full bg-primary rounded-full text-white py-5 font-second font-semibold text-[20px] relative'>
+                  <button className='w-full bg-primary rounded-full text-white py-5 font-second font-semibold text-[20px] relative z-[999999]'>
                     <span className=''>Sign up</span>
-                    <span className='absolute top-1/2 left-1/2 bg-[#5B36F5]/25 w-[100px] h-[50px] blur-[10px] -translate-1/2 '></span>
+                    <span className='absolute top-1/2 left-1/2 bg-[#5B36F5]/25 w-[78px] h-[30px] blur-[10px] -translate-1/2 -z-[999999] '></span>
                   </button>
                 </div>
                 <div className='w-[368px] mt-8 '>

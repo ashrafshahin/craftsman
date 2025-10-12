@@ -1,0 +1,55 @@
+import React from 'react'
+import login from "../images/login.png"
+
+import { FcGoogle } from "react-icons/fc";
+
+
+const Login = () => {
+  return (
+    <div>
+      <div className='flex justify-between items-center'>
+        <div className='w-1/2 flex justify-end mr-[70px]  '>
+          <div>
+            <div>
+              <h3 className='w-[497px] font-bold font-third text-[34px] text-[#03014C] '>Login to your account!</h3>
+              
+              
+            </div>
+            <div className='relative w-[220px] text-[#03014C] mt-12 cursor-pointer'>
+              {/* <div className=''>
+                <FcGoogle className='absolute top-[25px] left-[25px] border-2 border-[#B3B3C9] ' />
+              </div> */}
+              <div>
+                <button className='w-full bg-transparent border-2 border-[#B3B3C9] rounded-lg py-5 font-third font-semibold text-[14px] cursor-pointer'><span><FcGoogle className='absolute top-[22px] left-[0px] w-1/3 h-1/3 cursor-pointer ' /></span>Login with Google</button>
+                </div>
+              
+            </div>
+            <div className='relative w-[368px] text-[#11175D] mt-12 '>
+              <p className='absolute top-[-10px] bg-white px-3 tracking-[2px] text-[#585D8E] font-semibold text-[14px] font-third '>Email Address</p>
+              <input className='w-full border-b-2 text-[#585D8E] font-third py-[20px] pl-[12px] pr-[66px] rounded-[9px] outline-0 '
+                type="email" placeholder='Enter Your Email Address' />
+            </div>
+            
+            <div className='relative w-[368px] text-[#11175D] mt-10 '>
+              <p className='absolute top-[-10px] bg-white px-3 tracking-[2px] text-[#585D8E] font-semibold font-second text-[14px] '>Password</p>
+              <input className='w-full border-b-2 text-[#585D8E] font-second py-[20px] pl-[12px] pr-[66px] rounded-[9px] outline-0 '
+                type="text" placeholder='Enter your password' />
+            </div>
+            <div className='w-[368px] text-[#11175D] mt-12'>
+              <button className='w-full bg-primary rounded-lg text-white py-5 font-third font-semibold text-[20px] relative'>Login to Continue</button>
+            </div>
+            <div className='w-[368px] mt-8 '>
+              <p className='w-full pl-[52px] text-[#03014C] font-third text-[13px] '>Don’t have an account ? <span className='text-[#EA6C00] font-bold'>Sign up</span></p>
+            </div>
+          </div>
+
+        </div>
+        <div className='w-1/2'>
+          <img className='w-full h-screen object-cover' src={login} alt="" />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Login
