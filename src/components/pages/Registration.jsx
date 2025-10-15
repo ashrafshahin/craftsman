@@ -38,11 +38,11 @@ const Registration = () => {
 
   return (
     <div>
-          <div className='flex justify-between items-center'>
-            <div className='w-1/2 flex justify-end mr-[70px]  '>
+          <div className='md:flex md:justify-between items-center'>
+            <div className='md:w-1/2 flex justify-end mr-[70px]  '>
               <div>
                 <div>
-                  <h3 className='w-[497px] font-bold font-second text-[34px] text-[#11175D] '>Get started with easily register</h3>
+                  <h3 className='md:w-[497px] font-bold font-second text-[25px] md:text-[34px] text-[#11175D] '>Get started with easily register</h3>
                   <p className='text-[#808080] font-second text-[20px] mt-[13px] '>Free register and you can enjoy it</p>
                 </div>
                 <div className='relative w-[368px] text-[#11175D] mt-10 '>
@@ -78,8 +78,8 @@ const Registration = () => {
               </div>
               
             </div>
-            <div className='w-1/2'>
-              <img className='w-full h-screen object-cover' src={registration} alt="" />
+            <div className='md:w-1/2'>
+          <img className='w-100 md:w-full h-screen object-cover ml-10 md:ml-0' src={registration} alt="" />
             </div>
           </div>
         </div>

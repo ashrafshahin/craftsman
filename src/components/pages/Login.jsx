@@ -7,11 +7,11 @@ import { FcGoogle } from "react-icons/fc";
 const Login = () => {
   return (
     <div>
-      <div className='flex justify-between items-center'>
-        <div className='w-1/2 flex justify-end mr-[70px]  '>
+      <div className='md:flex md:justify-between items-center'>
+        <div className='md:w-1/2 flex justify-end mr-[70px]  '>
           <div>
             <div>
-              <h3 className='w-[497px] font-bold font-third text-[34px] text-[#03014C] '>Login to your account!</h3>
+              <h3 className='md:w-[497px] font-bold font-third text-[25px] md:text-[34px] text-[#03014C] '>Login to your account!</h3>
               
               
             </div>
@@ -44,8 +44,8 @@ const Login = () => {
           </div>
 
         </div>
-        <div className='w-1/2'>
-          <img className='w-full h-screen object-cover' src={login} alt="" />
+        <div className='md:w-1/2'>
+          <img className='w-100 md:w-full h-screen object-cover ml-10 md:ml-0' src={login} alt="" />
         </div>
       </div>
     </div>
