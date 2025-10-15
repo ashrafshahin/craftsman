@@ -5,32 +5,43 @@ const Registration = () => {
 
   const [email, setEmail] = useState('')
   const [fullName, setFullName] = useState('')
+  const [password, setPassword] = useState('')
 
   const [emailError, setEmailError] = useState('')
   const [fullNameError, setFullNameError] = useState('')
+  const [passwordError, setPasswordError] = useState('')
   
 
   const handleEmail = (e) => {
-    console.log('show email value');
+    console.log('email value check');
     setEmail(e.target.value)
     setEmailError('')
 
   }
   const handleFullName = (e) => {
-    console.log('show full name value');
+    console.log('name value check');
     setFullName(e.target.value)
     setFullNameError('')
     
   }
+  const handlePassword = (e) => {
+    console.log('password value check');
+    setPassword(e.target.value)
+    setPasswordError('')
+  }
 
   const handleSignUp = () => {
-    console.log(email, fullName);
+    console.log(email, fullName, password);
     if (!email) {
       console.log('show email error');
       setEmailError('bhai email de');  
     } if (!fullName) {
       console.log('show name error');
       setFullNameError('bhai full name de')
+      
+    } if (!password) {
+      console.log('password error');
+      setPasswordError('A valid Password is Required!')
       
     }
     
@@ -50,19 +61,21 @@ const Registration = () => {
               <input onChange={handleEmail} value={email}
                 type="email" placeholder='Email Address' 
                 className='w-full border-2 text-[#585D8E] font-second py-[20px] pl-[52px] pr-[66px] rounded-[9px] ' />
-              <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[25px]'>{emailError}</p>
+              <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[20px]'>{emailError}</p>
                 </div>
                 <div className='relative w-[368px] text-[#11175D] mt-10 '>
                   <p className='absolute top-[-10px] left-[42px] bg-white px-3 tracking-[2px] text-[#585D8E] font-semibold font-second text-[14px] '>Full Name</p>
               <input onChange={handleFullName}
                 type="text" placeholder='Full Name'
                 className='w-full border-2 text-[#585D8E] font-second py-[20px] pl-[52px] pr-[66px] rounded-[9px] ' />
-              <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[25px]'>{fullNameError}</p>
+              <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[20px]'>{fullNameError}</p>
                 </div>
                 <div className='relative w-[368px] text-[#11175D] mt-10 '>
                   <p className='absolute top-[-10px] left-[42px] bg-white px-3 tracking-[2px] text-[#585D8E] font-semibold font-second text-[14px] '>Password</p>
-                  <input className='w-full border-2 text-[#585D8E] font-second py-[20px] pl-[52px] pr-[66px] rounded-[9px] '
-                    type="text" placeholder='Password' />
+              <input onChange={handlePassword}
+                className='w-full border-2 text-[#585D8E] font-second py-[20px] pl-[52px] pr-[66px] rounded-[9px] '
+                type="text" placeholder='Password' />
+              <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[20px]'>{passwordError}</p>
                 </div>
                 <div className='w-[368px] text-[#11175D] mt-12'>
               <button
