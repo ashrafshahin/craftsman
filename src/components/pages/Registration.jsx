@@ -34,17 +34,51 @@ const Registration = () => {
     console.log(email, fullName, password);
     if (!email) {
       console.log('show email error');
-      setEmailError('bhai email de');  
-    } if (!fullName) {
-      console.log('show name error');
-      setFullNameError('bhai full name de')
+      setEmailError('Valid Email is Required');
       
-    } if (!password) {
+    } else {
+      if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+        setEmailError('Invalid Email Address');
+        
+      }
+    }
+    
+    if (!fullName) {
+      console.log('show name error');
+      setFullNameError('Your Full Name is Required')
+      
+    } else {
+      if (!/^(([A-Za-z]+[\-\']?)*([A-Za-z]+)?\s)+([A-Za-z]+[\-\']?)*([A-Za-z]+)?$/.test(fullName)) {
+        setFullNameError('Write Name in Correct Format')
+      }
+    }
+    
+    if (!password) {
       console.log('password error');
       setPasswordError('A valid Password is Required!')
       
+    } else {
+      if (!/^(?=.*[a-z])/.test(password)) {
+        setPasswordError('at least one lowercase letter required!')
+      } else if (!/(?=.*[A-Z])/.test(password)) {
+        setPasswordError('at least one uppercase letter required')
+      } else if (!/(?=.*\d)/.test(password)) {
+        setPasswordError('at least one digit (0-9) must present')
+      } else if (!/(?=.*[@$!%*?&])/.test(password)) {
+        setPasswordError('at least one special character required')
+      } else if (!/[A-Za-z\d@$!%*?&]{8,15}$/.test(password)) {
+        setPasswordError('password length must be between 8 and 15 characters')
+      }
     }
+  
+    // ...Password full validation process done here ...
+  //   else {
+  // if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/.test(password)) {
+  //   setPasswordError('password must be one lowercase, one uppercase, one digit, and one special character and length between 8 and 15 characters')
+  // }
+
     
+  
   }
 
   return (
@@ -61,21 +95,21 @@ const Registration = () => {
               <input onChange={handleEmail} value={email}
                 type="email" placeholder='Email Address' 
                 className='w-full border-2 text-[#585D8E] font-second py-[20px] pl-[52px] pr-[66px] rounded-[9px] ' />
-              <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[20px]'>{emailError}</p>
+              <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[15px]'>{emailError}</p>
                 </div>
                 <div className='relative w-[368px] text-[#11175D] mt-10 '>
                   <p className='absolute top-[-10px] left-[42px] bg-white px-3 tracking-[2px] text-[#585D8E] font-semibold font-second text-[14px] '>Full Name</p>
               <input onChange={handleFullName}
                 type="text" placeholder='Full Name'
                 className='w-full border-2 text-[#585D8E] font-second py-[20px] pl-[52px] pr-[66px] rounded-[9px] ' />
-              <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[20px]'>{fullNameError}</p>
+              <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[15px]'>{fullNameError}</p>
                 </div>
                 <div className='relative w-[368px] text-[#11175D] mt-10 '>
                   <p className='absolute top-[-10px] left-[42px] bg-white px-3 tracking-[2px] text-[#585D8E] font-semibold font-second text-[14px] '>Password</p>
               <input onChange={handlePassword}
                 className='w-full border-2 text-[#585D8E] font-second py-[20px] pl-[52px] pr-[66px] rounded-[9px] '
                 type="text" placeholder='Password' />
-              <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[20px]'>{passwordError}</p>
+              <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[15px]'>{passwordError}</p>
                 </div>
                 <div className='w-[368px] text-[#11175D] mt-12'>
               <button
