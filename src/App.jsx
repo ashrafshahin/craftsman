@@ -3,20 +3,34 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-import registration from "./components/images/registration.png"
-import Registration from './components/pages/Registration'
-import Login from './components/pages/Login'
+import { createBrowserRouter } from "react-router";
+import { RouterProvider } from "react-router/dom";
+
+import Registration from './components/pages/Registration';
+import Login from './components/pages/Login';
+
 
 function App() {
   
+  const router = createBrowserRouter([
+    {
+      path: "/registration",
+      element: <Registration />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+  ]);
+
+  
 
   return (
-    <div>
+    <>
       
-      <Registration />
-      <Login />
+      <RouterProvider router={router} />,
       
-    </div>
+    </>
   )
 }
 

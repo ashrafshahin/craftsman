@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import login from "../images/login.png"
 
+import { Route, Routes, Link } from 'react-router-dom';
+
 import { FcGoogle } from "react-icons/fc";
 
 
@@ -72,7 +74,11 @@ const Login = () => {
                 className='w-full bg-primary rounded-lg text-white py-5 font-third font-semibold text-[20px] relative cursor-pointer'>Login to Continue</button>
             </div>
             <div className='w-[368px] mt-8 '>
-              <p className='w-full pl-[52px] text-[#03014C] font-third text-[13px] '>Don’t have an account ? <span className='text-[#EA6C00] font-bold'>Sign up</span></p>
+              <p className='w-full pl-[52px] text-[#03014C] font-third text-[13px] '>Don’t have an account ? 
+                <Link to="/registration">
+                  <span className='text-[#EA6C00] font-bold'>Sign up</span>
+                </Link>
+              </p>
             </div>
           </div>
 

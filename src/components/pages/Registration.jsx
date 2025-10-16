@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import registration from "../images/registration.png"
 
+import { Route, Routes, Link } from 'react-router-dom'
+
 const Registration = () => {
 
   const [email, setEmail] = useState('')
@@ -64,10 +66,10 @@ const Registration = () => {
         setPasswordError('at least one uppercase letter required')
       } else if (!/(?=.*\d)/.test(password)) {
         setPasswordError('at least one digit (0-9) must present')
-      } else if (!/(?=.*[@$!%*?&])/.test(password)) {
+      } else if (!/(?=.*[@$!%*?&£√#=€])/.test(password)) {
         setPasswordError('at least one special character required')
-      } else if (!/[A-Za-z\d@$!%*?&]{8,15}$/.test(password)) {
-        setPasswordError('password length must be between 8 and 15 characters')
+      } else if (!/[A-Za-z\d@$!%*?&£√#=€]{8}$/.test(password)) {
+        setPasswordError('password length must be 8 characters')
       }
     }
   
@@ -77,8 +79,6 @@ const Registration = () => {
   //   setPasswordError('password must be one lowercase, one uppercase, one digit, and one special character and length between 8 and 15 characters')
   // }
 
-    
-  
   }
 
   return (
@@ -120,7 +120,11 @@ const Registration = () => {
                   </button>
                 </div>
                 <div className='w-[368px] mt-8 '>
-                  <p className='w-full pl-[52px] text-[#03014C] text-third text-[13px] '>Already  have an account ? <span className='text-[#EA6C00] font-bold'>Sign In</span></p>
+              <p className='w-full pl-[52px] text-[#03014C] text-third text-[13px] '>Already  have an account ?
+                <Link to="/login">
+                  <span className='text-[#EA6C00] font-bold'>Sign In</span>
+                </Link>
+              </p>
                 </div>
               </div>
               
