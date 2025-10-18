@@ -68,7 +68,7 @@ const Registration = () => {
         setPasswordError('at least one digit (0-9) must present')
       } else if (!/(?=.*[@$!%*?&£√#=€])/.test(password)) {
         setPasswordError('at least one special character required')
-      } else if (!/[A-Za-z\d@$!%*?&£√#=€]{8}$/.test(password)) {
+      } else if (!/[A-Za-z\d@$!%*?&£√#=€]{8,20}$/.test(password)) {
         setPasswordError('password length must be 8 characters')
       }
     }
@@ -92,8 +92,7 @@ const Registration = () => {
                 </div>
                 <div className='relative w-[368px] text-[#11175D] mt-10 '>
                   <p className='absolute top-[-10px] left-[42px] bg-white px-3 tracking-[2px] text-[#585D8E] font-semibold font-second text-[14px] '>Email Address</p>
-              <input onChange={handleEmail} value={email}
-                type="email" placeholder='Email Address' 
+              <input onChange={handleEmail} value={email} type="email" placeholder='Email Address' 
                 className='w-full border-2 text-[#585D8E] font-second py-[20px] pl-[52px] pr-[66px] rounded-[9px] ' />
               <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[15px]'>{emailError}</p>
                 </div>

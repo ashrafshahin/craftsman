@@ -28,13 +28,23 @@ const Login = () => {
   const handleLogIn = () => {
     console.log(email, password);
     if (!email) {
-      setEmailError('Please enter your correct email!')
+      setEmailError('Please enter a valid email!')
       
-    } if (!password) {
-      setPasswordError('Correct Password Required!')
+    } else {
+      if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+        setEmailError('Invalid Email Address')
+      }
     }
+    if (!password) {
+      setPasswordError('Correct Password Required!')
+    } else {
+      if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&^€#£√<>=+$_%-^])[A-Za-z\d@$!%*-?_&^€#£√<>=+$%^]{8,20}$/.test(password)) {
+        setPasswordError('password must have one lowercase, one uppercase, one digit, one special character and minimum length of 8 characters')
+      }
+    }
+
+      }
     
-  }
 
   return (
     <div>
@@ -58,7 +68,7 @@ const Login = () => {
               <p className='absolute top-[-10px] bg-white px-3 tracking-[2px] text-[#585D8E] font-semibold text-[14px] font-third '>Email Address</p>
               <input onChange={handleEmail}
                 className='w-full border-b-2 text-[#585D8E] font-third py-[20px] pl-[12px] pr-[66px] rounded-[9px] outline-0 '
-                type="email" placeholder='Enter Your Email Address' />
+                type="email" value={email} placeholder='Enter Your Email Address' />
               <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[20px]'>{emailError}</p>
             </div>
             
