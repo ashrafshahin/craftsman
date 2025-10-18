@@ -10,6 +10,9 @@ import Registration from './components/pages/Registration';
 import Login from './components/pages/Login';
 import Home from './components/pages/Home';
 
+// integrate firebase with this project //
+import firebaseConfig from './components/firebase/firebaseConfig';
+
 
 function App() {
   
