@@ -6,8 +6,13 @@ import { FaEyeSlash } from "react-icons/fa";
 
 import { Route, Routes, Link } from 'react-router-dom'
 
-const Registration = () => {
+// Create a form that allows new users to register with your firebase app//
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
+const Registration = () => {
+  // firebase channel
+  const auth = getAuth()
+  
   const [email, setEmail] = useState('')
   const [fullName, setFullName] = useState('')
   const [password, setPassword] = useState('')
@@ -37,7 +42,7 @@ const Registration = () => {
   }
 
   const handleSignUp = () => {
-    console.log(email, fullName, password);
+    // console.log(email, fullName, password);
     if (!email) {
       console.log('show email error');
       setEmailError('Valid Email is Required');
@@ -76,12 +81,35 @@ const Registration = () => {
         setPasswordError('password length must be 8 to 20 characters')
       }
     }
-  
-    // ...Password full validation process done here ...
-  //   else {
-  // if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/.test(password)) {
-  //   setPasswordError('password must be one lowercase, one uppercase, one digit, and one special character and length between 8 and 15 characters')
-  // }
+    console.log(email, fullName, password);
+    
+    // firebase database integration
+    if (email && fullName && password && (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+        
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        });
+
+    }
+    // if(email && fullName && password && (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
+    //   createUserWithEmailAndPassword(auth, email, password)
+    //     .then((user) => {
+    //       console.log(user);
+          
+          
+    //     })
+    //     .catch((error) => {
+    //       const errorCode = error.code;
+    //       const errorMessage = error.message;
+    //     });
+    // }
+    
 
   }
 
