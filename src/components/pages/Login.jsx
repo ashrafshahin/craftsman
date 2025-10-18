@@ -5,6 +5,9 @@ import { Route, Routes, Link } from 'react-router-dom';
 
 import { FcGoogle } from "react-icons/fc";
 
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+
 
 const Login = () => {
 
@@ -13,6 +16,8 @@ const Login = () => {
 
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
+
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleEmail = (e) => {
     setEmail(e.target.value)
@@ -38,8 +43,8 @@ const Login = () => {
     if (!password) {
       setPasswordError('Correct Password Required!')
     } else {
-      if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&^€#£√<>=+$_%-^])[A-Za-z\d@$!%*-?_&^€#£√<>=+$%^]{8,20}$/.test(password)) {
-        setPasswordError('password must have one lowercase, one uppercase, one digit, one special character and minimum length of 8 characters')
+      if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&^€#£√<>=+$_%-;:^])[A-Za-z\d@$!%*-?_&^€#£√<>=+$%^;:]{6,20}$/.test(password)) {
+        setPasswordError('password must have one lowercase, one uppercase, one digit, one special character and minimum length of 8 to 20 characters')
       }
     }
 
@@ -76,7 +81,16 @@ const Login = () => {
               <p className='absolute top-[-10px] bg-white px-3 tracking-[2px] text-[#585D8E] font-semibold font-second text-[14px] '>Password</p>
               <input onChange={hanglePassword}
                 className='w-full border-b-2 text-[#585D8E] font-second py-[20px] pl-[12px] pr-[66px] rounded-[9px] outline-0 '
-                type="text" placeholder='Enter your password' />
+                type={showPassword ? 'text' : 'password'}
+                placeholder='Enter your password' />
+            
+              <div onClick={() => setShowPassword(!showPassword)} className='absolute top-6 right-6'>
+                     {
+                       showPassword ? <FaEye /> : <FaEyeSlash />
+
+                     }
+                             
+                </div>
               <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[20px]'>{passwordError}</p>
             </div>
             <div className='w-[368px] text-[#11175D] mt-12'>

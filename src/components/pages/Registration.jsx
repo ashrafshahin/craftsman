@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import registration from "../images/registration.png"
 
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+
 import { Route, Routes, Link } from 'react-router-dom'
 
 const Registration = () => {
@@ -13,6 +16,7 @@ const Registration = () => {
   const [fullNameError, setFullNameError] = useState('')
   const [passwordError, setPasswordError] = useState('')
   
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleEmail = (e) => {
     console.log('email value check');
@@ -66,10 +70,10 @@ const Registration = () => {
         setPasswordError('at least one uppercase letter required')
       } else if (!/(?=.*\d)/.test(password)) {
         setPasswordError('at least one digit (0-9) must present')
-      } else if (!/(?=.*[@$!%*?&£√#=€])/.test(password)) {
+      } else if (!/(?=.*[@$!%*?&£√#=€#£√<>=+$_%-;:^])/.test(password)) {
         setPasswordError('at least one special character required')
-      } else if (!/[A-Za-z\d@$!%*?&£√#=€]{8,20}$/.test(password)) {
-        setPasswordError('password length must be 8 characters')
+      } else if (!/[A-Za-z\d@$!%*?&£√#=€#£√<>=+$_%-;:^]{6,20}$/.test(password)) {
+        setPasswordError('password length must be 8 to 20 characters')
       }
     }
   
@@ -107,7 +111,19 @@ const Registration = () => {
                   <p className='absolute top-[-10px] left-[42px] bg-white px-3 tracking-[2px] text-[#585D8E] font-semibold font-second text-[14px] '>Password</p>
               <input onChange={handlePassword}
                 className='w-full border-2 text-[#585D8E] font-second py-[20px] pl-[52px] pr-[66px] rounded-[9px] '
-                type="text" placeholder='Password' />
+                type={showPassword ? 'text' : 'password'}
+                placeholder='Password' />
+              
+              <div className='absolute top-6 right-6'>
+                {
+                  showPassword ? <FaEye onClick={() => setShowPassword(!showPassword)} />
+                    :
+                    <FaEyeSlash onClick={() => setShowPassword(!showPassword)} />
+
+                }
+               
+              </div>
+
               <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[15px]'>{passwordError}</p>
                 </div>
                 <div className='w-[368px] text-[#11175D] mt-12'>
