@@ -9,6 +9,12 @@ import { Route, Routes, Link, useNavigate } from 'react-router-dom'
 // Create a form that allows new users to register with your firebase app//
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
+// notification
+import { Slide, toast, ToastContainer, Zoom } from 'react-toastify';
+
+
+
+
 const Registration = () => {
   // firebase channel
   const auth = getAuth()
@@ -90,6 +96,7 @@ const Registration = () => {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userInfo) => {
           const user = userInfo.user;
+          const notify = toast.success('Registration Successfully Done!')
           setTimeout(() => {
             navigate("/login")
           } ,3000)
@@ -97,7 +104,10 @@ const Registration = () => {
         })
         .catch((error) => {
           const errorCode = error.code;
-          const errorMessage = error.message;
+          const errorMessage = error.message
+          // const toastError = toast.error(errorCode)
+          const toastError = toast.error('Email already in use !')
+          
           // ..
         });
 
@@ -106,18 +116,40 @@ const Registration = () => {
 
   return (
     <div>
+      {/* notification design */}
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Zoom}
+        toastStyle={{
+          fontSize: '13px',
+          padding: '20px',
+          minHeight: '60px'
+        }}
+      />
+      
           <div className='md:flex md:justify-between items-center'>
             <div className='md:w-1/2 flex justify-end mr-[70px]  '>
               <div>
                 <div>
                   <h3 className='md:w-[497px] font-bold font-second text-[25px] md:text-[34px] text-[#11175D] '>Get started with easily register</h3>
                   <p className='text-[#808080] font-second text-[20px] mt-[13px] '>Free register and you can enjoy it</p>
-                </div>
+            </div>
+            
                 <div className='relative w-[368px] text-[#11175D] mt-10 '>
                   <p className='absolute top-[-10px] left-[42px] bg-white px-3 tracking-[2px] text-[#585D8E] font-semibold font-second text-[14px] '>Email Address</p>
               <input onChange={handleEmail} value={email} type="email" placeholder='Email Address' 
                 className='w-full border-2 text-[#585D8E] font-second py-[20px] pl-[52px] pr-[66px] rounded-[9px] ' />
-              <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[15px]'>{emailError}</p>
+              <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[15px]'>{emailError} </p>
+            
                 </div>
                 <div className='relative w-[368px] text-[#11175D] mt-10 '>
                   <p className='absolute top-[-10px] left-[42px] bg-white px-3 tracking-[2px] text-[#585D8E] font-semibold font-second text-[14px] '>Full Name</p>
@@ -148,6 +180,7 @@ const Registration = () => {
                 <div className='w-[368px] text-[#11175D] mt-12'>
               <button
                 onClick={handleSignUp}
+                
                 className='w-full bg-primary rounded-full text-white py-5 font-second font-semibold text-[20px] relative z-[999999] cursor-pointer'>
                     <span className=''>Sign up</span>
                     <span className='absolute top-1/2 left-1/2 bg-[#5B36F5]/25 w-[78px] h-[30px] blur-[10px] -translate-1/2 -z-[999999] '></span>
