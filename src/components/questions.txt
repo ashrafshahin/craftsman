@@ -1,3 +1,0 @@
-
-1. in tostify, i tried this but not working, i got this from toastify website...
-const notify = () => { toast.success("Registration Successfully Done") }

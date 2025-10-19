@@ -11,6 +11,7 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 // notification
 import { Slide, toast, ToastContainer, Zoom } from 'react-toastify';
+import { DNA } from 'react-loader-spinner';
 
 
 
@@ -30,6 +31,9 @@ const Registration = () => {
   const [passwordError, setPasswordError] = useState('')
   
   const [showPassword, setShowPassword] = useState(false)
+  
+  // signup
+  const [loading, setLoading] = useState(false)
 
   const handleEmail = (e) => {
     console.log('email value check');
@@ -93,6 +97,7 @@ const Registration = () => {
     
     // firebase database integration
     if (email && fullName && password && (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
+      setLoading(true)
       createUserWithEmailAndPassword(auth, email, password)
         .then((userInfo) => {
           const user = userInfo.user;
@@ -100,7 +105,12 @@ const Registration = () => {
           setTimeout(() => {
             navigate("/login")
           } ,3000)
-         
+          setLoading(false)
+
+          // after signup fields will be empty bcoz of these codes ..
+          setEmail('')
+          setFullName('')
+          setPassword('')
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -154,7 +164,7 @@ const Registration = () => {
                 <div className='relative w-[368px] text-[#11175D] mt-10 '>
                   <p className='absolute top-[-10px] left-[42px] bg-white px-3 tracking-[2px] text-[#585D8E] font-semibold font-second text-[14px] '>Full Name</p>
               <input onChange={handleFullName}
-                type="text" placeholder='Full Name'
+                type="text" value={ fullName } placeholder='Full Name'
                 className='w-full border-2 text-[#585D8E] font-second py-[20px] pl-[52px] pr-[66px] rounded-[9px] ' />
               <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[15px]'>{fullNameError}</p>
                 </div>
@@ -163,7 +173,7 @@ const Registration = () => {
               <input onChange={handlePassword}
                 className='w-full border-2 text-[#585D8E] font-second py-[20px] pl-[52px] pr-[66px] rounded-[9px] '
                 type={showPassword ? 'text' : 'password'}
-                placeholder='Password' />
+                value={password} placeholder='Password' />
               
               <div className='absolute top-6 right-6'>
                 {
@@ -182,7 +192,21 @@ const Registration = () => {
                 onClick={handleSignUp}
                 
                 className='w-full bg-primary rounded-full text-white py-5 font-second font-semibold text-[20px] relative z-[999999] cursor-pointer'>
-                    <span className=''>Sign up</span>
+                
+                <div className='flex justify-center'>
+                  {
+                    loading ? <DNA
+                      visible={true}
+                      height="35"
+                      width="35"
+                      ariaLabel="dna-loading"
+                      wrapperStyle={{}}
+                      wrapperClass="dna-wrapper"
+                    /> :
+                      <span className=''>Sign up</span>
+                  }   
+                </div>
+                
                     <span className='absolute top-1/2 left-1/2 bg-[#5B36F5]/25 w-[78px] h-[30px] blur-[10px] -translate-1/2 -z-[999999] '></span>
                   </button>
                 </div>
