@@ -4,7 +4,7 @@ import registration from "../images/registration.png"
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 
-import { Route, Routes, Link } from 'react-router-dom'
+import { Route, Routes, Link, useNavigate } from 'react-router-dom'
 
 // Create a form that allows new users to register with your firebase app//
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
@@ -12,7 +12,9 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 const Registration = () => {
   // firebase channel
   const auth = getAuth()
-  
+  //navigate page 
+  const navigate = useNavigate()
+
   const [email, setEmail] = useState('')
   const [fullName, setFullName] = useState('')
   const [password, setPassword] = useState('')
@@ -86,9 +88,12 @@ const Registration = () => {
     // firebase database integration
     if (email && fullName && password && (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
       createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-        
+        .then((userInfo) => {
+          const user = userInfo.user;
+          setTimeout(() => {
+            navigate("/login")
+          } ,3000)
+         
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -97,20 +102,6 @@ const Registration = () => {
         });
 
     }
-    // if(email && fullName && password && (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
-    //   createUserWithEmailAndPassword(auth, email, password)
-    //     .then((user) => {
-    //       console.log(user);
-          
-          
-    //     })
-    //     .catch((error) => {
-    //       const errorCode = error.code;
-    //       const errorMessage = error.message;
-    //     });
-    // }
-    
-
   }
 
   return (
