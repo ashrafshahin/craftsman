@@ -1,7 +1,17 @@
 
-1. in tostify, i tried this but not working, i got this from toastify website...
+Question-1. in tostify, i tried this but not working, i got this from toastify website...
 const notify = () => { toast.success("Registration Successfully Done") }
+
+
+
+
+
+
+
 
 spinner link
 https://mhnpd.github.io/react-loader-spinner/
+
+firebase authentication link 
+https://firebase.google.com/docs/auth/web/start
 

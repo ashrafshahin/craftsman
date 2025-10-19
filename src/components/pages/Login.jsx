@@ -8,8 +8,16 @@ import { FcGoogle } from "react-icons/fc";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 
+// authentication 
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { Slide, toast, ToastContainer, Zoom } from 'react-toastify';
+import { DNA } from 'react-loader-spinner';
+
 
 const Login = () => {
+  // firebase channel
+  const auth = getAuth()
+
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -18,6 +26,9 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState('')
 
   const [showPassword, setShowPassword] = useState(false)
+
+  // login
+  const [loading, setLoading] = useState(false)
 
   const handleEmail = (e) => {
     setEmail(e.target.value)
@@ -47,12 +58,48 @@ const Login = () => {
         setPasswordError('password must have one lowercase, one uppercase, one digit, one special character and minimum length of 8 to 20 characters')
       }
     }
+    if (email && password && (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
+      setLoading(true)
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userInfo) => {
+          const user = userInfo.user
+          const notify = toast.success('Sign In successfully done!')
+        })
+        .catch((error) => {
+          const errorCode = error.code
+          const errorMessage = error.message
+          const toastError = toast.error('Your Email or Password is Incorrect !')
+
+          setLoading(false)
+          setEmail('')
+          setPassword('')
+      })
+    }
 
       }
     
 
   return (
     <div>
+      {/* notification design */}
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Slide}
+        toastStyle={{
+          fontSize: '13px',
+          padding: '20px',
+          minHeight: '60px'
+        }}
+      />
       <div className='md:flex md:justify-between items-center'>
         <div className='md:w-1/2 flex justify-end mr-[70px]  '>
           <div>
@@ -82,7 +129,7 @@ const Login = () => {
               <input onChange={hanglePassword}
                 className='w-full border-b-2 text-[#585D8E] font-second py-[20px] pl-[12px] pr-[66px] rounded-[9px] outline-0 '
                 type={showPassword ? 'text' : 'password'}
-                placeholder='Enter your password' />
+                value={password} placeholder='Enter your password' />
             
               <div onClick={() => setShowPassword(!showPassword)} className='absolute top-6 right-6'>
                      {
@@ -95,7 +142,23 @@ const Login = () => {
             </div>
             <div className='w-[368px] text-[#11175D] mt-12'>
               <button onClick={handleLogIn}
-                className='w-full bg-primary rounded-lg text-white py-5 font-third font-semibold text-[20px] relative cursor-pointer'>Login to Continue</button>
+                className='w-full bg-primary rounded-lg text-white py-5 font-third font-semibold text-[20px] relative cursor-pointer'>
+                <div className='flex justify-center'>
+                  {
+                    loading ? <DNA
+                      visible={true}
+                      height="35"
+                      width="35"
+                      ariaLabel="dna-loading"
+                      wrapperStyle={{}}
+                      wrapperClass="dna-wrapper"
+                    /> :
+                      <span className=''>Login to Continue</span>
+                  }
+                </div>
+                
+              
+              </button>
             </div>
             <div className='w-[368px] mt-8 '>
               <p className='w-full pl-[52px] text-[#03014C] font-third text-[13px] '>Don’t have an account ? 
