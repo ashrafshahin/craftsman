@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import login from "../images/login.png"
 
-import { Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes, Link, useNavigate } from 'react-router-dom';
 
 import { FcGoogle } from "react-icons/fc";
 
@@ -17,7 +17,8 @@ import { DNA } from 'react-loader-spinner';
 const Login = () => {
   // firebase channel
   const auth = getAuth()
-
+  //navigate page 
+    const navigate = useNavigate()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -64,15 +65,19 @@ const Login = () => {
         .then((userInfo) => {
           const user = userInfo.user
           const notify = toast.success('Sign In successfully done!')
+          setTimeout(() => {
+            navigate("/forgotpassword")
+          }, 3000)
+          setLoading(false)
+          setEmail('')
+          setPassword('')
         })
         .catch((error) => {
           const errorCode = error.code
           const errorMessage = error.message
           const toastError = toast.error('Your Email or Password is Incorrect !')
 
-          setLoading(false)
-          setEmail('')
-          setPassword('')
+          
       })
     }
 
@@ -157,13 +162,17 @@ const Login = () => {
                   }
                 </div>
                 
-              
               </button>
             </div>
-            <div className='w-[368px] mt-8 '>
+            <div className='w-[368px] mt-6 cursor-pointer '>
+              <p className='w-full pl-[52px] text-[#ff0000] font-bold font-third text-[13px] ml-12'>
+                <Link to="/forgotpassword">Forgot Password </Link>
+              </p>
+            </div>
+            <div className='w-[368px] mt-5 '>
               <p className='w-full pl-[52px] text-[#03014C] font-third text-[13px] '>Don’t have an account ? 
                 <Link to="/registration">
-                  <span className='text-[#EA6C00] font-bold'>Sign up</span>
+                  <span className='text-[#EA6C00] font-bold'> Sign up</span>
                 </Link>
               </p>
             </div>
@@ -171,7 +180,7 @@ const Login = () => {
 
         </div>
         <div className='md:w-1/2'>
-          <img className='w-100 md:w-full h-screen object-cover ml-10 md:ml-0' src={login} alt="" />
+          <img className='w-100 md:w-full h-screen object-cover ml-10 md:ml-0 mt-5 md:mt-0' src={login} alt="" />
         </div>
       </div>
     </div>

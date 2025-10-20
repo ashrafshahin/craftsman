@@ -3,7 +3,11 @@ Question-1. in tostify, i tried this but not working, i got this from toastify w
 const notify = () => { toast.success("Registration Successfully Done") }
 
 
-
+work left day-4
+email verification
+forgotpassword
+google signin
+facebook signin
 
 
 

@@ -9,14 +9,17 @@ import { RouterProvider } from "react-router/dom";
 import Registration from './components/pages/Registration';
 import Login from './components/pages/Login';
 import Home from './components/pages/Home';
+import ForgotPassword from './components/pages/ForgotPassword';
 
 // integrate firebase with this project //
 import firebaseConfig from './components/firebase/firebaseConfig';
 
 
+
 function App() {
   
-  const router = createBrowserRouter([
+  
+  const routerShahin = createBrowserRouter([
     {
       path: "/",
       element: <Home />,
@@ -29,6 +32,10 @@ function App() {
       path: "/login",
       element: <Login />,
     },
+    {
+      path: "/forgotpassword",
+      element: <ForgotPassword />,
+    },
   ]);
 
   
@@ -36,7 +43,8 @@ function App() {
   return (
     <>
       
-      <RouterProvider router={router} />,
+      
+      <RouterProvider router={routerShahin} />,
       
     </>
   )
