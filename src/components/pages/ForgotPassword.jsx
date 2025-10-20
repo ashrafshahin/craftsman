@@ -5,16 +5,24 @@ import { FaLock } from "react-icons/fa";
 import { FaUnlock } from "react-icons/fa";
 import { FaArrowCircleLeft } from "react-icons/fa";
 
-import { Link } from 'react-router';
+import { Route, Routes, Link, useNavigate } from 'react-router-dom';
 
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+
+import { Slide, toast, ToastContainer } from 'react-toastify';
 
 
 const ForgotPassword = () => {
+  const auth = getAuth()
+  //navigate page 
+  const navigate = useNavigate()
 
   const [email, setEmail] = useState('')
   const [emailError, setEmailError] = useState('')
 
   const [show, setShow] = useState(false)
+
+  const [loading, setLoading] = useState(false)
 
   const handleEmail = (e) => {
     console.log('email value check');
@@ -23,7 +31,7 @@ const ForgotPassword = () => {
 
   }
   const handResetPassword = ()=> {
-    console.log('ok cool');
+    console.log(email);
     if (!email) {
       setEmailError('Please enter a valid email!')
 
@@ -32,11 +40,55 @@ const ForgotPassword = () => {
         setEmailError('Invalid Email Address')
       }
     }
+    if (email && (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
+      
+      sendPasswordResetEmail(auth, email)
+      
+        .then((userInfo) => {
+          setLoading(true)
+          const user = userInfo.user
+          const notify = toast.success('Password reset email sent!')
+              setTimeout(() => {
+              navigate("/resetpassword")
+              }, 3000)
+          setLoading(false)
+          setEmail('')
+          
+          
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // const toastError = toast.error('Your Email or Password is Incorrect !')
+          // ..
+        });
+        }
   }
 
   return (
     <div>
+      {/* notification design */}
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick={false}
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+              transition={Slide}
+              toastStyle={{
+                fontSize: '13px',
+                padding: '20px',
+                minHeight: '60px'
+              }}
+            />
+      
       <div className='w-full h-screen bg-gray-600 flex justify-center items-center text-black font-primary  '>
+        
         <div className='bg-white py-10 px-30 rounded-2xl shadow-2xl shadow-black'>
           
           <div>

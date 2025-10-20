@@ -7,7 +7,7 @@ import { FaEyeSlash } from "react-icons/fa";
 import { Route, Routes, Link, useNavigate } from 'react-router-dom'
 
 // Create a form that allows new users to register with your firebase app//
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 
 // notification
 import { Slide, toast, ToastContainer, Zoom } from 'react-toastify';
@@ -99,13 +99,18 @@ const Registration = () => {
     if (email && fullName && password && (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
       setLoading(true)
       createUserWithEmailAndPassword(auth, email, password)
+      
         .then((userInfo) => {
+          //signup verification by email link
+          sendEmailVerification(auth.currentUser)
+          
           const user = userInfo.user;
-          const notify = toast.success('Registration Successfully Done!')
+          const notify = toast.success('Registration Successfully Done! Please check your Email to varify Account')
           setTimeout(() => {
             navigate("/login")
           } ,3000)
           setLoading(false)
+          
 
           // after signup fields will be empty bcoz of these codes ..
           setEmail('')
