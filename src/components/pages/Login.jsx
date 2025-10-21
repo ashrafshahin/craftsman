@@ -10,6 +10,10 @@ import { FaEyeSlash } from "react-icons/fa";
 
 // authentication 
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+
+// google sign in
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+
 import { Slide, toast, ToastContainer, Zoom } from 'react-toastify';
 import { DNA } from 'react-loader-spinner';
 
@@ -17,8 +21,12 @@ import { DNA } from 'react-loader-spinner';
 const Login = () => {
   // firebase channel
   const auth = getAuth()
-  //navigate page 
-    const navigate = useNavigate()
+  
+  //navigate page
+  const navigate = useNavigate()
+  
+  // google signin
+  const provider = new GoogleAuthProvider()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -81,7 +89,22 @@ const Login = () => {
       })
     }
 
-      }
+  }
+  
+  const handleGoogleSignIn = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user
+        
+        // ...
+      }).catch((error) => {
+       
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        
+        // ...
+      });
+  }
     
 
   return (
@@ -113,11 +136,9 @@ const Login = () => {
             
             </div>
             <div className='relative w-[220px] text-[#03014C] mt-12 cursor-pointer'>
-              {/* <div className=''>
-                <FcGoogle className='absolute top-[25px] left-[25px] border-2 border-[#B3B3C9] ' />
-              </div> */}
               <div>
-                <button className='w-full bg-transparent border-2 border-[#B3B3C9] rounded-lg py-5 font-third font-semibold text-[14px] cursor-pointer'><span><FcGoogle className='absolute top-[22px] left-[0px] w-1/3 h-1/3 cursor-pointer ' /></span>Login with Google</button>
+                <button onClick={handleGoogleSignIn} className='w-full bg-transparent border-2 border-[#B3B3C9] rounded-lg py-5 font-third font-semibold text-[14px] cursor-pointer'>
+                  <span><FcGoogle className='absolute top-[22px] left-[0px] w-1/3 h-1/3 cursor-pointer ' /></span> Login with Google</button>
                 </div>
               
             </div>

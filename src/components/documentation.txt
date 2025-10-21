@@ -4,18 +4,23 @@ const notify = () => { toast.success("Registration Successfully Done") }
 
 
 work left day-4
-email verification
+email verification - Done
 forgotpassword design - Done
 google signin
 facebook signin
 
 
 
-
+firebase console link
+https://console.firebase.google.com/
 
 spinner link
 https://mhnpd.github.io/react-loader-spinner/
 
 firebase authentication link 
 https://firebase.google.com/docs/auth/web/start
+
+email authentication and password reset link
+https://firebase.google.com/docs/auth/web/manage-users#web_12
+
 
