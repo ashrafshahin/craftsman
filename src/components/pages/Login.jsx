@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import login from "../images/login.png"
 
-import { Route, Routes, Link, useNavigate } from 'react-router-dom';
+import { Route, Routes, Link, useNavigate } from 'react-router';
 
 import { FcGoogle } from "react-icons/fc";
 

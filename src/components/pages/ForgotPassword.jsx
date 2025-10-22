@@ -5,11 +5,11 @@ import { FaLock } from "react-icons/fa";
 import { FaUnlock } from "react-icons/fa";
 import { FaArrowCircleLeft } from "react-icons/fa";
 
-import { Route, Routes, Link, useNavigate } from 'react-router-dom';
+import { Route, Routes, Link, useNavigate } from 'react-router';
 
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 
-import { Slide, toast, ToastContainer } from 'react-toastify';
+import { Slide, toast, ToastContainer, Zoom } from 'react-toastify';
 
 
 const ForgotPassword = () => {
@@ -40,29 +40,30 @@ const ForgotPassword = () => {
         setEmailError('Invalid Email Address')
       }
     }
+    
     if (email && (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
-      
+      setLoading(true)
       sendPasswordResetEmail(auth, email)
       
         .then((userInfo) => {
-          setLoading(true)
-          const user = userInfo.user
-          const notify = toast.success('Password reset email sent!')
-              setTimeout(() => {
-              navigate("/resetpassword")
-              }, 3000)
-          setLoading(false)
-          setEmail('')
-          
-          
+              const user = userInfo.user
+         
         })
+      
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          // const toastError = toast.error('Your Email or Password is Incorrect !')
+          const toastError = toast.success('Reset Password Link has been sent to your Email !')
+          setTimeout(() => {
+            navigate('/login')
+          }, 3000)
+          setLoading(false)
+          setEmail('')
           // ..
-        });
-        }
+        })
+      
+    }
+    
   }
 
   return (
@@ -79,11 +80,14 @@ const ForgotPassword = () => {
               draggable
               pauseOnHover
               theme="dark"
-              transition={Slide}
-              toastStyle={{
-                fontSize: '13px',
-                padding: '20px',
-                minHeight: '60px'
+              transition={Zoom}
+        toastStyle={{
+          fontSize: '14px',
+          padding: '20px',
+          minHeight: '80px',
+          lineHeight: '2.0',
+          
+          
               }}
             />
       
@@ -112,7 +116,10 @@ const ForgotPassword = () => {
                 <button onClick={handResetPassword}
                   className='w-full bg-primary rounded-lg text-white py-4 font-third font-semibold text-[16px] relative cursor-pointer'>
                   <div className='flex justify-center'>
-                    <span className='px-10'>Reset Password</span>
+                    {/* <Link to={'/login'}> */}
+                      <span className='px-10'>Reset Password</span>
+                    {/* </Link> */}
+                    
 
                   </div>
 

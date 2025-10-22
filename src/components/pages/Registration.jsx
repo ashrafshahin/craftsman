@@ -4,7 +4,7 @@ import registration from "../images/registration.png"
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 
-import { Route, Routes, Link, useNavigate } from 'react-router-dom'
+import { Route, Routes, Link, useNavigate } from 'react-router'
 
 // Create a form that allows new users to register with your firebase app//
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
