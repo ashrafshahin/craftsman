@@ -28,6 +28,9 @@ const Login = () => {
   // google signin
   const provider = new GoogleAuthProvider()
 
+  // login hole field empty hobe
+  const [loading, setLoading] = useState(false)
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -36,8 +39,7 @@ const Login = () => {
 
   const [showPassword, setShowPassword] = useState(false)
 
-  // login
-  const [loading, setLoading] = useState(false)
+  
 
   const handleEmail = (e) => {
     setEmail(e.target.value)
@@ -74,8 +76,8 @@ const Login = () => {
           const user = userInfo.user
           const notify = toast.success('Sign In successfully done!')
           setTimeout(() => {
-            navigate("/forgotpassword")
-          }, 3000)
+            navigate("/")
+          }, 2000)
           setLoading(false)
           setEmail('')
           setPassword('')
