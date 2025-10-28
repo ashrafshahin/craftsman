@@ -16,15 +16,20 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 import { Slide, toast, ToastContainer, Zoom } from 'react-toastify';
 import { DNA } from 'react-loader-spinner';
+import { useDispatch } from 'react-redux';
+import { userDetails } from '../slices/userSlice';
 
 
 const Login = () => {
+  // to send user info Redux
+  const dispatch = useDispatch()
+
   // firebase channel
   const auth = getAuth()
-  
+
   //navigate page
   const navigate = useNavigate()
-  
+
   // google signin
   const provider = new GoogleAuthProvider()
 
@@ -39,7 +44,7 @@ const Login = () => {
 
   const [showPassword, setShowPassword] = useState(false)
 
-  
+
 
   const handleEmail = (e) => {
     setEmail(e.target.value)
@@ -56,7 +61,7 @@ const Login = () => {
     console.log(email, password);
     if (!email) {
       setEmailError('Please enter a valid email!')
-      
+
     } else {
       if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
         setEmailError('Invalid Email Address')
@@ -75,6 +80,12 @@ const Login = () => {
         .then((userInfo) => {
           const user = userInfo.user
           const notify = toast.success('Sign In successfully done!')
+
+          // sending data using REDUX
+          dispatch(userDetails(user))
+          
+          localStorage.setItem("userDetails", JSON.stringify(user))
+
           setTimeout(() => {
             navigate("/")
           }, 2000)
@@ -87,27 +98,27 @@ const Login = () => {
           const errorMessage = error.message
           const toastError = toast.error('Your Email or Password is Incorrect !')
 
-          
-      })
+
+        })
     }
 
   }
-  
+
   const handleGoogleSignIn = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user
-        
+
         // ...
       }).catch((error) => {
-       
+
         const errorCode = error.code;
         const errorMessage = error.message;
-        
+
         // ...
       });
   }
-    
+
 
   return (
     <div>
@@ -135,14 +146,14 @@ const Login = () => {
           <div>
             <div>
               <h3 className='md:w-[497px] font-bold font-third text-[25px] md:text-[34px] text-[#03014C] '>Login to your account!</h3>
-            
+
             </div>
             <div className='relative w-[220px] text-[#03014C] mt-12 cursor-pointer'>
               <div>
                 <button onClick={handleGoogleSignIn} className='w-full bg-transparent border-2 border-[#B3B3C9] rounded-lg py-5 font-third font-semibold text-[14px] cursor-pointer'>
                   <span><FcGoogle className='absolute top-[22px] left-[0px] w-1/3 h-1/3 cursor-pointer ' /></span> Login with Google</button>
-                </div>
-              
+              </div>
+
             </div>
             <div className='relative w-[368px] text-[#11175D] mt-12 '>
               <p className='absolute top-[-10px] bg-white px-3 tracking-[2px] text-[#585D8E] font-semibold text-[14px] font-third '>Email Address</p>
@@ -151,21 +162,21 @@ const Login = () => {
                 type="email" value={email} placeholder='Enter Your Email Address' />
               <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[20px]'>{emailError}</p>
             </div>
-            
+
             <div className='relative w-[368px] text-[#11175D] mt-10 '>
               <p className='absolute top-[-10px] bg-white px-3 tracking-[2px] text-[#585D8E] font-semibold font-second text-[14px] '>Password</p>
               <input onChange={hanglePassword}
                 className='w-full border-b-2 text-[#585D8E] font-second py-[20px] pl-[12px] pr-[66px] rounded-[9px] outline-0 '
                 type={showPassword ? 'text' : 'password'}
                 value={password} placeholder='Enter your password' />
-            
-              <div onClick={() => setShowPassword(!showPassword)} className='absolute top-6 right-6'>
-                     {
-                       showPassword ? <FaEye /> : <FaEyeSlash />
 
-                     }
-                             
-                </div>
+              <div onClick={() => setShowPassword(!showPassword)} className='absolute top-6 right-6'>
+                {
+                  showPassword ? <FaEye /> : <FaEyeSlash />
+
+                }
+
+              </div>
               <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[20px]'>{passwordError}</p>
             </div>
             <div className='w-[368px] text-[#11175D] mt-12'>
@@ -184,7 +195,7 @@ const Login = () => {
                       <span className=''>Login to Continue</span>
                   }
                 </div>
-                
+
               </button>
             </div>
             <div className='w-[368px] mt-6 cursor-pointer '>
@@ -193,7 +204,7 @@ const Login = () => {
               </p>
             </div>
             <div className='w-[368px] mt-5 '>
-              <p className='w-full pl-[52px] text-[#03014C] font-third text-[13px] '>Don’t have an account ? 
+              <p className='w-full pl-[52px] text-[#03014C] font-third text-[13px] '>Don’t have an account ?
                 <Link to="/registration">
                   <span className='text-[#EA6C00] font-bold'> Sign up</span>
                 </Link>

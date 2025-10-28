@@ -1,0 +1,2 @@
+28 october 2025
+email verified got true and local storage working, but no email has been sent to understand whether correct email goes on or not ?

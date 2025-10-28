@@ -2,23 +2,32 @@ import { createSlice } from '@reduxjs/toolkit'
 
 
 const initialState = {
-    value: 0,
-}
+    value: localStorage.getItem('userDetails') ? JSON.parse(localStorage.getItem('userDetails')) : null,
+
+    
+ }
 
 export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        userInfo: (state, action) => {
-            console.log(state);
-            console.log(action);
+        userDetails: (state, action) => {
+            console.log(state.value, 'before')
+            console.log(action.payload, 'Payload')
+            
+            state.value = action.payload
+            
+            console.log(state.value, 'after');
             
             
+            
+            
+          
         },
     },
 
 });
 
-export const { userInfo } = userSlice.actions;
+export const { userDetails } = userSlice.actions;
 
 export default userSlice.reducer;

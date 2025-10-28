@@ -1,13 +1,12 @@
 
-Question-1. in tostify, i tried this but not working, i got this from toastify website...
-const notify = () => { toast.success("Registration Successfully Done") }
+
 
 
 work left day-4
 email verification - Done
 forgotpassword design - Done
-google signin
-facebook signin
+google signin Done
+
 
 
 
@@ -23,4 +22,20 @@ https://firebase.google.com/docs/auth/web/start
 email authentication and password reset link
 https://firebase.google.com/docs/auth/web/manage-users#web_12
 
+redux toolkit setup link
+https://redux-toolkit.js.org/tutorials/quick-start
 
+
+
+27 october 2025
+1. dispatch user variable, i took it as a variable so dont need to write user.user or something else, only 
+dispatch(userDetails(user))
+thats it
+
+2. in store.js -
+ userSlice is an OBJECT so NO {} BRACKETS
+import userSlice from './slices/userSlice'
+
+3. in main.jsx - 
+this store is our main store we created, so it will be in {} brackets  but other store is a property from react
+import { store } from './components/store.js'
