@@ -111,7 +111,6 @@ const Registration = () => {
           } ,3000)
           setLoading(false)
           
-
           // after signup fields will be empty bcoz of these codes ..
           setEmail('')
           setFullName('')
