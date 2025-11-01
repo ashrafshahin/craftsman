@@ -120,12 +120,17 @@ const Registration = () => {
           const errorCode = error.code;
           const errorMessage = error.message
           // const toastError = toast.error(errorCode)
-          const toastError = toast.error('Email already in use !')
+          const toastError = toast.error('Email already in use ∫ Please Sign-In √ New User use New Email Address!')
+          setTimeout(() => {
+            window.location.reload()
+          }, 5000)
           
           // ..
         });
 
     }
+
+
   }
 
   return (
@@ -217,7 +222,7 @@ const Registration = () => {
                 <div className='w-[368px] mt-8 '>
               <p className='w-full pl-[52px] text-[#03014C] text-third text-[13px] '>Already  have an account ?
                 <Link to="/login">
-                  <span className='text-[#EA6C00] font-bold'>Sign In</span>
+                  <span className='text-[#EA6C00] font-bold'> Sign In</span>
                 </Link>
               </p>
                 </div>

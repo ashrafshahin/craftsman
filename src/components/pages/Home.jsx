@@ -37,7 +37,8 @@ const Home = () => {
     <div>
       
       {verify ?
-        <h1>Home</h1>
+        <div className='bg-primary w-full h-screen'><h1>Home</h1></div>
+        
         :
         <div className='bg-primary w-full h-screen flex justify-center items-center text-white font-primary font-bold '>
           <div className='text-center'>

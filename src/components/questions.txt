@@ -1,2 +1,7 @@
-28 october 2025
+November 2025
+1. when signup with used email, it should do something to use another email...
+
+
+
+28 october 2025 GOT IT...◊
 email verified got true and local storage working, but no email has been sent to understand whether correct email goes on or not ?
