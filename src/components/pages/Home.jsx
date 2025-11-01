@@ -1,10 +1,10 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useSelector } from 'react-redux'
 
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { FaArrowCircleLeft } from "react-icons/fa";
 
 
@@ -12,13 +12,20 @@ import { FaArrowCircleLeft } from "react-icons/fa";
 
 const Home = () => {
   const auth = getAuth()
-  
+  const navigate = useNavigate()
   const data = useSelector(state => (state.userDetails.value))
   console.log(data);
   
   const [verify, setVerify] = useState(false)
   const [loading, setLoading] = useState(true)
   
+  useEffect(() => {
+    if (!data) {
+      navigate("/login")
+    }
+  })
+
+  // email verification part
   onAuthStateChanged(auth, (user) => {
     if (user.emailVerified) {
       setVerify(true) 
@@ -27,7 +34,7 @@ const Home = () => {
     }
     setLoading(false)
   })
-  
+  // email verified no more bounces to another page...
   if (loading) {
     return null
   }
