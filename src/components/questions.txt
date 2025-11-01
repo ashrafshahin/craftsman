@@ -1,5 +1,6 @@
 November 2025
-1. when signup with used email, it should do something to use another email...
+1. when signup with used email, it should do something to use another email...Solved
+2. i want to make component of every work and call to exact place... 
 
 
 
