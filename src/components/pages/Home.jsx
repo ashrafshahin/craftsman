@@ -6,13 +6,11 @@ import { useSelector } from 'react-redux'
 
 import { Link, useNavigate } from 'react-router'
 
-import { FaArrowCircleLeft } from "react-icons/fa";
-
 import EmailVerifyPage from './EmailVerifyPage';
-
-
-
-
+import Sidebar from '../sidebar/Sidebar';
+import Grouplist from '../groupList/Grouplist';
+import Friends from '../friends/Friends';
+import Userlist from '../userList/Userlist';
 
 
 
@@ -50,15 +48,28 @@ const Home = () => {
     <div>
       
       {verify ?
-        <div className='bg-primary w-full h-screen text-white'><h1>Home</h1></div>
-        
+        <div className='flex justify-between m-10 '>
+          <div className=' '>
+            <Sidebar />
+          </div>
+          <div>
+            <Grouplist />
+          
+          </div>
+          <div>
+            <Friends />
+            
+
+          </div>
+          <div>
+            <Userlist />
+
+          </div>
+        </div>
         :
         <EmailVerifyPage />
-        
-        
+  
         }
-
-      
     </div>
   )
 }
