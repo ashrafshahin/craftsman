@@ -4,12 +4,12 @@ import friends from "../images/friends.png"
 import { HiDotsVertical } from "react-icons/hi";
 
 
-const Grouplist = () => {
+const FriendRequest = () => {
   return (
       <div>
-          <div className='rounded-xl px-5 py-3 font-primary shadow shadow-black/40 scrollbar-thin mb-10  '>
+          <div className='rounded-xl px-5 py-3 font-primary shadow shadow-black/40 scrollbar-thin  '>
               <div className='flex justify-between items-center pb-3 '>
-                  <h2 className='font-semibold text-lg  '>Groups List</h2>
+                  <h2 className='font-semibold text-lg  '>Friend Request</h2>
                   <HiDotsVertical className='font-semibold text-xl' />
                   
               </div>
@@ -20,7 +20,7 @@ const Grouplist = () => {
                           <p className='font-semibold text-lg'>Ashraf Shahin</p>
                           <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>Hi Guys, Wassup!</p>
                       </div>
-                      <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Join</button>
+                      <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Accept</button>
                   </div>
                   <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>
                       <img className='pr-3 mb-4' src={friends} alt="" />
@@ -28,7 +28,7 @@ const Grouplist = () => {
                           <p className='font-semibold text-lg'>Ashraf Shahin</p>
                           <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>Hi Guys, Wassup!</p>
                       </div>
-                      <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Join</button>
+                      <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Accept</button>
                   </div>
                   <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>
                       <img className='pr-3 mb-4' src={friends} alt="" />
@@ -36,7 +36,7 @@ const Grouplist = () => {
                           <p className='font-semibold text-lg'>Ashraf Shahin</p>
                           <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>Hi Guys, Wassup!</p>
                       </div>
-                      <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Join</button>
+                      <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Accept</button>
                   </div>
                   <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>
                       <img className='pr-3 mb-4' src={friends} alt="" />
@@ -44,7 +44,7 @@ const Grouplist = () => {
                           <p className='font-semibold text-lg'>Ashraf Shahin</p>
                           <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>Hi Guys, Wassup!</p>
                       </div>
-                      <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Join</button>
+                      <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Accept</button>
                   </div>
                   <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>
                       <img className='pr-3 mb-4' src={friends} alt="" />
@@ -52,7 +52,7 @@ const Grouplist = () => {
                           <p className='font-semibold text-lg'>Ashraf Shahin</p>
                           <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>Hi Guys, Wassup!</p>
                       </div>
-                      <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Join</button>
+                      <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Accept</button>
                   </div>
                   <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>
                       <img className='pr-3 mb-4' src={friends} alt="" />
@@ -60,7 +60,7 @@ const Grouplist = () => {
                           <p className='font-semibold text-lg'>Ashraf Shahin</p>
                           <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>Hi Guys, Wassup!</p>
                       </div>
-                      <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Join</button>
+                      <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Accept</button>
                   </div>
                   <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>
                       <img className='pr-3 mb-4' src={friends} alt="" />
@@ -68,7 +68,7 @@ const Grouplist = () => {
                           <p className='font-semibold text-lg'>Ashraf Shahin</p>
                           <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>Hi Guys, Wassup!</p>
                       </div>
-                      <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Join</button>
+                      <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Accept</button>
                   </div>
               </div>
           </div>
@@ -76,4 +76,4 @@ const Grouplist = () => {
   )
 }
 
-export default Grouplist
+export default FriendRequest

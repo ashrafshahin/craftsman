@@ -11,6 +11,9 @@ import Sidebar from '../sidebar/Sidebar';
 import Grouplist from '../groupList/Grouplist';
 import Friends from '../friends/Friends';
 import Userlist from '../userList/Userlist';
+import FriendRequest from '../friendRequest/FriendRequest';
+import MyGroups from '../myGroups/MyGroups';
+import BlockedUsers from '../blockedUsers/BlockedUsers';
 
 
 
@@ -48,22 +51,24 @@ const Home = () => {
     <div>
       
       {verify ?
-        <div className='flex justify-between m-10 '>
+        <div className='flex justify-between my-10 m-5 '>
           <div className=' '>
             <Sidebar />
           </div>
-          <div>
+          <div className='mx-2'>
             <Grouplist />
+            <FriendRequest />
           
           </div>
-          <div>
+          <div className='mx-2'>
             <Friends />
-            
-
+            <MyGroups />
+          
           </div>
-          <div>
+          <div className='mx-2'>
             <Userlist />
-
+            <BlockedUsers />
+            
           </div>
         </div>
         :

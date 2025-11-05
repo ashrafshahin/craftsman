@@ -10,5 +10,25 @@
 
 
 
-
 @import "tailwindcss";
+
+/* scrollbar design starts  */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(140, 176, 248, 0.612);
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(109, 157, 241, 0.632);
+    border-radius: 10px;
+    
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(249, 38, 1, 0.605);
+}
+/* scrollbar design ends  */
