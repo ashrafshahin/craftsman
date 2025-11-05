@@ -7,6 +7,7 @@ import { initializeApp } from "firebase/app";
 const firebaseConfig = {
     apiKey: "AIzaSyAiR-jzShF1_1DWfZBxy89HdSjjJwcOCs0",
     authDomain: "craftsman-shahin.firebaseapp.com",
+    databaseURL: "https://craftsman-shahin-default-rtdb.firebaseio.com",
     projectId: "craftsman-shahin",
     storageBucket: "craftsman-shahin.firebasestorage.app",
     messagingSenderId: "287451017943",

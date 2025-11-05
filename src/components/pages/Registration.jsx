@@ -13,12 +13,18 @@ import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from '
 import { Slide, toast, ToastContainer, Zoom } from 'react-toastify';
 import { DNA } from 'react-loader-spinner';
 
+// database setup
+import {getDatabase, ref, set} from "firebase/database"
 
 
 
 const Registration = () => {
   // firebase channel
   const auth = getAuth()
+
+  // database setup
+  const db = getDatabase()
+
   //navigate page 
   const navigate = useNavigate()
 
@@ -106,11 +112,18 @@ const Registration = () => {
           
           const user = userInfo.user;
           const notify = toast.success('Registration Successfully Done! Please check your Email to varify Account')
+          setLoading(false)
+          // database setup work cls-8
+          set(ref(db, 'users/' + user.uid), {
+            username: fullName,
+            email: email,
+            password: password,
+            
+          });
+          
           setTimeout(() => {
             navigate("/login")
           } ,3000)
-          setLoading(false)
-          
           // after signup fields will be empty bcoz of these codes ..
           setEmail('')
           setFullName('')
@@ -121,6 +134,7 @@ const Registration = () => {
           const errorMessage = error.message
           // const toastError = toast.error(errorCode)
           const toastError = toast.error('Email already in use ∫ Please Sign-In √ New User use New Email Address!')
+          
           setTimeout(() => {
             window.location.reload()
           }, 5000)

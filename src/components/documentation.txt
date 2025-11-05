@@ -25,6 +25,9 @@ https://firebase.google.com/docs/auth/web/manage-users#web_12
 redux toolkit setup link
 https://redux-toolkit.js.org/tutorials/quick-start
 
+firebase database setup link
+https://firebase.google.com/docs/database/web/read-and-write
+ 
 
 
 27 october 2025

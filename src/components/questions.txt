@@ -1,6 +1,9 @@
 November 2025
-1. when signup with used email, it should do something to use another email...Solved
-2. i want to make component of every work and call to exact place... 
+1. when registerring with an used email address, it should do something to use another email...√ Solved √ see registration.jsx
+
+2. i want to make component of every work and call to exact place... √ done
+
+3. 
 
 
 
