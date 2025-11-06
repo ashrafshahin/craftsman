@@ -3,7 +3,8 @@ November 2025
 
 2. i want to make component of every work and call to exact place... √ done
 
-3. 
+6/November
+3. if 2/3 users register kora hoi, current user log-out hoise, previous user der ki hoitese? they are still somewhere in cache...? --- akta browser ki aktai login thakbe, otherwise auto cancel hobe previous taa...
 
 
 

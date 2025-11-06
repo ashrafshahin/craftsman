@@ -31,6 +31,9 @@ https://firebase.google.com/docs/database/web/read-and-write
 firebase log out or signout setup link
 https://firebase.google.com/docs/auth/web/password-auth
 
+firebase READ data from database link
+https://firebase.google.com/docs/database/web/read-and-write
+
 
 27 october 2025
 1. dispatch user variable, i took it as a variable so dont need to write user.user or something else, only 
