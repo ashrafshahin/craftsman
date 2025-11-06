@@ -8,7 +8,31 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { ImExit } from "react-icons/im";
 
 
+import { useNavigate } from 'react-router';
+import { getAuth, signOut } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+
+
 const Sidebar = () => {
+    const auth = getAuth();
+    
+    const dispatch = useDispatch()
+    
+    const navigate = useNavigate()
+
+    const handleSignout = () => {
+        signOut(auth).then(() => {
+            dispatch(() => {
+                localStorage.removeItem('userDetails')
+            })
+            setTimeout(() => {
+                navigate('/login')
+            },1000)
+        }).catch((error) => {
+         
+        });
+        
+    }
   return (
       <div>
           <div className='bg-primary w-[186px] text-white font-primary rounded-xl'>
@@ -42,7 +66,10 @@ const Sidebar = () => {
               <div className=''>
                   <div className='flex justify-center mt-[334px] pb-[47px] py-5   '>
 
-                      <ImExit className='text-white text-5xl shadow-2xs/90 shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)] ' />
+                      <ImExit className='text-white text-5xl  hover:text-red-600 hover:p-[1px] 
+                      shadow-2xs/90 shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)] cursor-pointer' onClick={handleSignout}
+                      />
+                      
 
                   </div>
               </div>

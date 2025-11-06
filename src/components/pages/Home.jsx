@@ -34,7 +34,7 @@ const Home = () => {
 
   // email verification part
   onAuthStateChanged(auth, (user) => {
-    if (user.emailVerified) {
+    if (user?.emailVerified) {
       setVerify(true) 
     } else {
       

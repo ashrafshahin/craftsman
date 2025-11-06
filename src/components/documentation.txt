@@ -28,6 +28,8 @@ https://redux-toolkit.js.org/tutorials/quick-start
 firebase database setup link
 https://firebase.google.com/docs/database/web/read-and-write
  
+firebase log out or signout setup link
+https://firebase.google.com/docs/auth/web/password-auth
 
 
 27 october 2025
