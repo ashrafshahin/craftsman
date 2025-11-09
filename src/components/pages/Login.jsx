@@ -97,7 +97,7 @@ const Login = () => {
           const errorCode = error.code
           const errorMessage = error.message
           const toastError = toast.error('Your Email or Password is Incorrect !')
-
+          setLoading(false)
 
         })
     }

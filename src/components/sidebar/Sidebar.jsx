@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router';
 import { getAuth, signOut } from 'firebase/auth';
 
 import { useDispatch } from 'react-redux';
+import { userDetails } from '../slices/userSlice';
 
 
 
@@ -24,12 +25,12 @@ const Sidebar = () => {
 
     const handleSignout = () => {
         signOut(auth).then(() => {
-            // localStorage.removeItem("userDetails")
-            // dispatch(userDetails(null))
-            dispatch(() => {
-                localStorage.removeItem("userDetails")
-            })
-            window.location.reload()
+            
+            // remove data from localhost
+                localStorage.removeItem('userDetails')
+                
+            // remove data from redux, use any of these
+                dispatch(userDetails(null))
             
             setTimeout(() => {
                 navigate('/login')

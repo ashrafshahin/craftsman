@@ -4,8 +4,9 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     value: localStorage.getItem('userDetails') ? JSON.parse(localStorage.getItem('userDetails')) : null,
 
-    
- }
+}
+ console.log(initialState);
+ 
 
 export const userSlice = createSlice({
     name: 'user',
