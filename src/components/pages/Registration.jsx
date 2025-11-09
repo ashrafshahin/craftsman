@@ -7,7 +7,7 @@ import { FaEyeSlash } from "react-icons/fa";
 import { Route, Routes, Link, useNavigate } from 'react-router'
 
 // Create a form that allows new users to register with your firebase app//
-import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
 
 // notification
 import { Slide, toast, ToastContainer, Zoom } from 'react-toastify';
@@ -109,9 +109,14 @@ const Registration = () => {
         .then((userInfo) => {
           //signup verification by email link
           sendEmailVerification(auth.currentUser)
-          
           const user = userInfo.user;
           const notify = toast.success('Registration Successfully Done! Please check your Email to varify Account')
+
+          // update profile information...chat-10 video
+          updateProfile(auth.currentUser, {
+            displayName: fullName,
+            
+          })
           
           // database setup work cls-8
           set(ref(db, 'users/' + user.uid), {

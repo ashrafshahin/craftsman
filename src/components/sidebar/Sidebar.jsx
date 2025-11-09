@@ -11,12 +11,15 @@ import { ImExit } from "react-icons/im";
 import { useNavigate } from 'react-router';
 import { getAuth, signOut } from 'firebase/auth';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userDetails } from '../slices/userSlice';
 
 
 
 const Sidebar = () => {
+    //Bring Data from Database - profile update part 
+    const data = useSelector((shahin) => (shahin.userDetails.value))
+    
     const auth = getAuth();
     
     const dispatch = useDispatch()
@@ -44,7 +47,13 @@ const Sidebar = () => {
       <div>
           <div className='bg-primary w-[186px] text-white font-primary rounded-xl'>
               <div className='flex justify-center pt-6'>
-                  <img src={profile} alt="Profile" className='h-25 w-25 rounded-full border-white/65 border-2 mt-10' />
+                  <img src={profile} alt="Profile" className='h-25 w-25 rounded-full border-white/65 border-4 mt-10' />
+              </div>
+              <div className='flex justify-center pt-6'>
+                  <div>
+                      <h1 className='font-semibold '>{data?.displayName}</h1>
+                      <h1 className='font-semibold text-xs '>{data?.email}</h1>
+                  </div>
               </div>
               <div className=''>
                   <div className='flex justify-center mt-[78px] py-5 bg-white rounded-l-2xl ml-6 relative 
