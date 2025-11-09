@@ -10,7 +10,9 @@ import { ImExit } from "react-icons/im";
 
 import { useNavigate } from 'react-router';
 import { getAuth, signOut } from 'firebase/auth';
+
 import { useDispatch } from 'react-redux';
+
 
 
 const Sidebar = () => {
@@ -22,9 +24,13 @@ const Sidebar = () => {
 
     const handleSignout = () => {
         signOut(auth).then(() => {
+            // localStorage.removeItem("userDetails")
+            // dispatch(userDetails(null))
             dispatch(() => {
-                localStorage.removeItem('userDetails')
+                localStorage.removeItem("userDetails")
             })
+            window.location.reload()
+            
             setTimeout(() => {
                 navigate('/login')
             },1000)
