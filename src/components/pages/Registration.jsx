@@ -112,7 +112,7 @@ const Registration = () => {
           
           const user = userInfo.user;
           const notify = toast.success('Registration Successfully Done! Please check your Email to varify Account')
-          setLoading(false)
+          
           // database setup work cls-8
           set(ref(db, 'users/' + user.uid), {
             username: fullName,
@@ -123,7 +123,8 @@ const Registration = () => {
           
           setTimeout(() => {
             navigate("/login")
-          } ,3000)
+          }, 3000)
+          setLoading(false)
           // after signup fields will be empty bcoz of these codes ..
           setEmail('')
           setFullName('')
@@ -135,11 +136,11 @@ const Registration = () => {
           // const toastError = toast.error(errorCode)
           const toastError = toast.error('Email already in use ∫ Please Sign-In √ New User use New Email Address!')
           
+          // setLoading(false)
           setTimeout(() => {
             window.location.reload()
           }, 5000)
           
-          // ..
         });
 
     }

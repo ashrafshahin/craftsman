@@ -2,10 +2,16 @@ import React, { useEffect, useState } from 'react'
 
 import friends from "../images/friends.png"
 import { HiDotsVertical } from "react-icons/hi";
+
+// database setup
 import { getDatabase, onValue, ref } from 'firebase/database';
 
 
+
+
+
 const Userlist = () => {
+    
     const db = getDatabase()
     const [userList, setUserList] = useState([])
 
@@ -15,13 +21,13 @@ const Userlist = () => {
         const userRef = ref(db, "users/")
         onValue(userRef, (snapshot) => {
             const arr = []
-            // console.log(snapshot.val(), 'ldbdjbbgb');
+            // console.log(snapshot.val(), 'TEST LOG ...');
             // const data = snapshot.val(); // full data snapshot asbe
             // full snapshot of data nibo na only ITEM ta nibo
             snapshot.forEach((item) => {
                 arr.push(item.val())
             })
-            // console.log(arr); // pore useState niye setUserList neya hoise
+            // console.log(arr); // pore useState niye setUserList neya hoise // sob data userList e chole asche...
             setUserList(arr)
 
         })
@@ -39,13 +45,14 @@ const Userlist = () => {
 
                 </div>
                 <div className='h-[400px] overflow-y-scroll custom-scrollbar pr-1 '>
+                    {/* map kora hoise uporer userList Arrar sob data dynamically show korar jonno */}
                     {
-                        userList.map((user) => (
+                        userList.map((usershahin) => (
                             <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>
                                 <img className='pr-2 mb-3' src={friends} alt="" />
                                 <div className='pr-12'>
-                                    <p className='font-semibold text-lg'>{user.username}</p>
-                                    <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>{ user.email }</p>
+                                    <p className='font-semibold text-lg'>{usershahin.username}</p>
+                                    <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>{ usershahin.email }</p>
                                 </div>
                                 <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>+</button>
                             </div> 
