@@ -16,6 +16,7 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 import { Slide, toast, ToastContainer, Zoom } from 'react-toastify';
 import { DNA } from 'react-loader-spinner';
+
 import { useDispatch } from 'react-redux';
 import { userDetails } from '../slices/userSlice';
 

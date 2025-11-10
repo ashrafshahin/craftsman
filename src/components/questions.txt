@@ -6,6 +6,8 @@ November 2025
 6/November
 3. if 2/3 users register kora hoi, current user log-out hoise, previous user der ki hoitese? they are still somewhere in cache...? --- akta browser ki aktai login thakbe, otherwise auto cancel hobe previous taa...
 
+10/November
+4. google theke login korle database e users add hoi na..?
 
 
 28 october 2025 GOT IT...◊

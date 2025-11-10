@@ -19,11 +19,7 @@ export const userSlice = createSlice({
             state.value = action.payload
             
             console.log(state.value, 'after');
-            
-            
-            
-            
-          
+         
         },
     },
 

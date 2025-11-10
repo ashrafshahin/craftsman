@@ -6,11 +6,18 @@ import { HiDotsVertical } from "react-icons/hi";
 // database setup
 import { getDatabase, onValue, ref } from 'firebase/database';
 
+//Get data from Redux
+import { useSelector } from 'react-redux';
+
 
 
 
 
 const Userlist = () => {
+    //Get data from Redux
+    const data = useSelector((selector) => (selector.userDetails.value))
+    console.log(data?.uid , data?.email,  "login info check...");
+    
     
     const db = getDatabase()
     const [userList, setUserList] = useState([])
@@ -25,7 +32,12 @@ const Userlist = () => {
             // const data = snapshot.val(); // full data snapshot asbe
             // full snapshot of data nibo na only ITEM ta nibo
             snapshot.forEach((item) => {
-                arr.push(item.val())
+                // console.log(item.key , "item info check...");
+                // item.key used to specify data and Not sign "!" to ignore loggedin user/person here... rest user data will show as usual item.val() on arr.push working...
+                if (data.uid !== item.key) {
+                    arr.push(item.val())  
+                }
+             
             })
             // console.log(arr); // pore useState niye setUserList neya hoise // sob data userList e chole asche...
             setUserList(arr)
