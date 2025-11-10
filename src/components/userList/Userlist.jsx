@@ -4,7 +4,7 @@ import friends from "../images/friends.png"
 import { HiDotsVertical } from "react-icons/hi";
 
 // database setup
-import { getDatabase, onValue, ref } from 'firebase/database';
+import { getDatabase, onValue, ref, set } from 'firebase/database';
 
 //Get data from Redux
 import { useSelector } from 'react-redux';
@@ -16,10 +16,11 @@ import { useSelector } from 'react-redux';
 const Userlist = () => {
     //Get data from Redux
     const data = useSelector((selector) => (selector.userDetails.value))
-    console.log(data?.uid , data?.email,  "login info check...");
-    
+        console.log(data?.uid , data?.email,  "login info check...");
     
     const db = getDatabase()
+    
+    // this is array, single objects ase, as users...
     const [userList, setUserList] = useState([])
 
     // third-party api or kono database theke data Read korte
@@ -47,6 +48,16 @@ const Userlist = () => {
     }, [])
     console.log(userList);
     
+    const handleFriendRequest = (item) => {
+        console.log(item , "friend request information...");
+                    // database new parametre data collection work cls-10
+        set(ref(db, 'friendRequest/'), {
+                      senderName: data.displayName,
+                      receiverName: item.username,
+                    
+                  });
+        
+    }
 
     return (
         <div>
@@ -59,14 +70,15 @@ const Userlist = () => {
                 <div className='h-[400px] overflow-y-scroll custom-scrollbar pr-1 '>
                     {/* map kora hoise uporer userList Arrar sob data dynamically show korar jonno */}
                     {
-                        userList.map((usershahin) => (
+                        userList.map((user) => (
                             <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>
                                 <img className='pr-2 mb-3' src={friends} alt="" />
                                 <div className='pr-12'>
-                                    <p className='font-semibold text-lg'>{usershahin.username}</p>
-                                    <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>{ usershahin.email }</p>
+                                    <p className='font-semibold text-lg'>{user.username}</p>
+                                    <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>{ user.email }</p>
                                 </div>
-                                <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>+</button>
+                                <button onClick={()=>handleFriendRequest(user)}
+                                    className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>+</button>
                             </div> 
                         ))
                     }
