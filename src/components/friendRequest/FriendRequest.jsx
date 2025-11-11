@@ -2,10 +2,28 @@ import React from 'react'
 
 import friends from "../images/friends.png"
 import { HiDotsVertical } from "react-icons/hi";
+//experiment
+// database setup
+import { getDatabase } from 'firebase/database';
+
+//Get data from Redux
+import { useSelector } from 'react-redux';
+import { getAuth } from 'firebase/auth';
+//experiment
 
 
 const FriendRequest = () => {
-  return (
+    //experiment
+    const auth = getAuth()
+    const user = auth.currentUser
+    
+    //Get data from Redux
+    const data = useSelector((selector) => (selector.userDetails.value))
+    // console.log(data?.uid, data?.email, "login info check...");
+
+    const db = getDatabase()
+    //experiment
+    return (
       <div>
           <div className='rounded-xl px-5 py-3 font-primary shadow shadow-black/40 scrollbar-thin  '>
               <div className='flex justify-between items-center pb-3 '>
@@ -19,8 +37,10 @@ const FriendRequest = () => {
                       <div className='pr-12'>
                           <p className='font-semibold text-lg'>Ashraf Shahin</p>
                           <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>Hi Guys, Wassup!</p>
-                      </div>
-                      <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Accept</button>
+                        </div>
+                        {/* experiment */}
+                        <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>{data?.email}</button>
+                        {/* //experiment */}
                   </div>
                   <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>
                       <img className='pr-3 mb-4' src={friends} alt="" />
@@ -28,7 +48,7 @@ const FriendRequest = () => {
                           <p className='font-semibold text-lg'>Ashraf Shahin</p>
                           <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>Hi Guys, Wassup!</p>
                       </div>
-                      <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Accept</button>
+                        <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Accept</button>
                   </div>
                   <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>
                       <img className='pr-3 mb-4' src={friends} alt="" />

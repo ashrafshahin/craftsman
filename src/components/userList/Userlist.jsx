@@ -9,17 +9,24 @@ import { getDatabase, onValue, ref, set } from 'firebase/database';
 //Get data from Redux
 import { useSelector } from 'react-redux';
 
+import { getAuth } from 'firebase/auth';
+
+
 
 
 
 
 const Userlist = () => {
+    
+    const auth = getAuth()
+    const user = auth.currentUser
+
     //Get data from Redux
     const data = useSelector((selector) => (selector.userDetails.value))
-        console.log(data?.uid , data?.email,  "login info check...");
-    
+    console.log(data?.uid, data?.email, "login info check...");
+
     const db = getDatabase()
-    
+
     // this is array, single objects ase, as users...
     const [userList, setUserList] = useState([])
 
@@ -29,34 +36,37 @@ const Userlist = () => {
         const userRef = ref(db, "users/")
         onValue(userRef, (snapshot) => {
             const arr = []
-            // console.log(snapshot.val(), 'TEST LOG ...');
-            // const data = snapshot.val(); // full data snapshot asbe
             // full snapshot of data nibo na only ITEM ta nibo
             snapshot.forEach((item) => {
-                // console.log(item.key , "item info check...");
-                // item.key used to specify data and Not sign "!" to ignore loggedin user/person here... rest user data will show as usual item.val() on arr.push working...
-                if (data.uid !== item.key) {
-                    arr.push(item.val())  
+                // item.key used to specify data and Not sign "!" to ignore loggedin user/person here... 
+                if (data?.uid !== item.key) {
+                    arr.push(item.val())
                 }
-             
+
             })
-            // console.log(arr); // pore useState niye setUserList neya hoise // sob data userList e chole asche...
+            // sob data userList e chole asche...
             setUserList(arr)
 
         })
 
     }, [])
     console.log(userList);
-    
-    const handleFriendRequest = (item) => {
-        console.log(item , "friend request information...");
-                    // database new parametre data collection work cls-10
-        set(ref(db, 'friendRequest/'), {
-                      senderName: data.displayName,
-                      receiverName: item.username,
-                    
-                  });
+
+    const handleFriendRequest = (item, uid) => {
+        console.log(item, "friend request information...");
+        // database new parametre CREATE data collection work cls-10
+        set(ref(db, 'friendRequest/' ), {
+            senderName: data?.displayName,
+            senderID: data?.uid,
+            receiverName: item.username,
+            // receiverID: item.email,
+
+        });
+        console.log(user.uid);
+        console.log(item, uid);
+        // experiment
         
+
     }
 
     return (
@@ -75,14 +85,14 @@ const Userlist = () => {
                                 <img className='pr-2 mb-3' src={friends} alt="" />
                                 <div className='pr-12'>
                                     <p className='font-semibold text-lg'>{user.username}</p>
-                                    <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>{ user.email }</p>
+                                    <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>{user.email}</p>
                                 </div>
-                                <button onClick={()=>handleFriendRequest(user)}
+                                <button onClick={() => handleFriendRequest(user)}
                                     className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>+</button>
-                            </div> 
+                            </div>
                         ))
                     }
-                    
+
                 </div>
             </div>
         </div>

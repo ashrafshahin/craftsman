@@ -18,7 +18,7 @@ import { userDetails } from '../slices/userSlice';
 
 const Sidebar = () => {
     //Bring Data from Database - profile update part 
-    const data = useSelector((shahin) => (shahin.userDetails.value))
+    const data = useSelector((selector) => (selector.userDetails.value))
     
     const auth = getAuth();
     

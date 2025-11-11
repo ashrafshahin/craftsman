@@ -124,7 +124,9 @@ const Registration = () => {
             email: email,
             password: password,
             
+            
           });
+          
           
           setTimeout(() => {
             navigate("/login")
