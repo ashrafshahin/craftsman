@@ -30,7 +30,7 @@ const Home = () => {
     if (!data) {
       navigate("/login")
     }
-  })
+  }, [])
 
   // email verification part
   onAuthStateChanged(auth, (user) => {

@@ -4,7 +4,7 @@ import friends from "../images/friends.png"
 import { HiDotsVertical } from "react-icons/hi";
 
 // database setup
-import { getDatabase, onValue, ref, set } from 'firebase/database';
+import { getDatabase, onValue, push, ref, set } from 'firebase/database';
 
 //Get data from Redux
 import { useSelector } from 'react-redux';
@@ -40,7 +40,7 @@ const Userlist = () => {
             snapshot.forEach((item) => {
                 // item.key used to specify data and Not sign "!" to ignore loggedin user/person here... 
                 if (data?.uid !== item.key) {
-                    arr.push(item.val())
+                    arr.push({...item.val(), userId: item.key })
                 }
 
             })
@@ -53,18 +53,16 @@ const Userlist = () => {
     console.log(userList);
 
     const handleFriendRequest = (item, uid) => {
-        console.log(item, "friend request information...");
+        console.log(item, "friend request information (receiver info)...");
         // database new parametre CREATE data collection work cls-10
-        set(ref(db, 'friendRequest/' ), {
+        set(push(ref(db, 'friendRequest/') ), {
             senderName: data?.displayName,
             senderID: data?.uid,
             receiverName: item.username,
-            // receiverID: item.email,
-
+            receiverID: item.userId
+            
         });
-        console.log(user.uid);
-        console.log(item, uid);
-        // experiment
+        
         
 
     }
