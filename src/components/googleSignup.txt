@@ -1,0 +1,56 @@
+import { useState, useEffect } from 'react';
+import { auth, googleProvider, database } from './firebase';
+import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
+import { ref, set, get } from 'firebase/database';
+
+export default function GoogleAuth() {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const signInWithGoogle = async () => {
+    try {
+      setError('');
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+
+      const userRef = ref(database, `users/${user.uid}`);
+      const snapshot = await get(userRef);
+      
+      if (!snapshot.exists()) {
+        await set(userRef, {
+          uid: user.uid,
+          displayName: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+          createdAt: new Date().toISOString(),
+          lastLogin: new Date().toISOString()
+        });
+      } else {
+        await set(ref(database, `users/${user.uid}/lastLogin`), 
+          new Date().toISOString()
+        );
+      }
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  // Use the JSX from the artifact above with your authentication logic
+}

@@ -20,8 +20,13 @@ import { DNA } from 'react-loader-spinner';
 import { useDispatch } from 'react-redux';
 import { userDetails } from '../slices/userSlice';
 
+import { getDatabase, ref, set } from 'firebase/database';
+
 
 const Login = () => {
+  // database setup
+  const db = getDatabase()
+  
   // to send user info Redux
   const dispatch = useDispatch()
 
@@ -109,6 +114,11 @@ const Login = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user
+        // set(ref(db, 'googleUsers/' + user.uid), {
+        //   uid: user.uid,
+        //   name: user.displayName,
+        //   email: user.email
+          
 
         // ...
       }).catch((error) => {

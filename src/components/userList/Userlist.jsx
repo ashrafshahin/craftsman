@@ -12,10 +12,6 @@ import { useSelector } from 'react-redux';
 import { getAuth } from 'firebase/auth';
 
 
-
-
-
-
 const Userlist = () => {
     
     const auth = getAuth()
@@ -83,19 +79,20 @@ const Userlist = () => {
 
     }, [])
     console.log(friendRequestList, "One will happen 12 or 21 - uid get merged");
-    console.log(userList, "receiver info");
+    console.log(userList, "receiver info dekbo");
 
 
     return (
         <div>
             <div className='rounded-xl px-5 py-3 font-primary shadow shadow-black/40 mb-10 '>
                 <div className='flex justify-between items-center pb-3'>
-                    <h2 className='font-semibold text-lg text-blue-800 mr-[200px]  '>User List - sender can see this</h2>
+                    <h2 className='font-semibold text-lg text-blue-800 mr-[150px]  '>User List - sender can see this</h2>
                     <HiDotsVertical className='font-semibold text-xl' />
 
                 </div>
                 <div className='h-[400px] overflow-y-scroll custom-scrollbar pr-1 '>
                     {/* map kora hoise uporer userList Arrar sob data dynamically show korar jonno */}
+                    
                     {
                         userList.map((item) => (
                             <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>

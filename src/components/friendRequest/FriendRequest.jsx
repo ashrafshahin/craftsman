@@ -4,7 +4,7 @@ import friends from "../images/friends.png"
 import { HiDotsVertical } from "react-icons/hi";
 
 // database setup
-import { getDatabase, onValue, ref } from 'firebase/database';
+import { getDatabase, onValue, push, ref, set } from 'firebase/database';
 
 //Get data from Redux
 import { useSelector } from 'react-redux';
@@ -37,14 +37,26 @@ const FriendRequest = () => {
         });
 
     }, [])
-    console.log(friendRequest);
+    console.log(friendRequest, 'Database information, sender + receiver');
+    
+    const handleFriend = (item) => {
+        console.log(item);
+        // collection create korlam in Database 
+        set(push(ref(db, "friend")), {
+            receiverName: item.receiverName,
+            receiverID: item.receiverID,
+            senderName: item.senderName,
+            senderID: item.senderID,
+        })
+    }
+    
     
     
     return (
       <div>
           <div className='rounded-xl px-5 py-3 font-primary shadow shadow-black/40 scrollbar-thin  '>
               <div className='flex justify-between items-center pb-3 '>
-                  <h2 className='font-semibold text-lg text-blue-800  '>Friend Request - receiver can see this</h2>
+                  <h2 className='font-semibold text-lg text-blue-800   '>Friend Request - receiver can see this</h2>
                   <HiDotsVertical className='font-semibold text-xl' />
                   
               </div>
@@ -57,8 +69,11 @@ const FriendRequest = () => {
                                     <p className='font-semibold text-lg'>{ item?.senderName }</p>
                                     <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>Hi Guys, Wassup!</p>
                                 </div>
-
-                                <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Accept</button>
+                            
+                                {/* Accept / Reject friend request  */}
+                                
+                                <button onClick={() => handleFriend(item)}
+                                    className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Accept</button>
 
                             </div>
                         ))
