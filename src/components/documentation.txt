@@ -8,7 +8,8 @@ forgotpassword design - Done
 google signin Done
 
 
-
+firebase setup and everything here link
+https://firebase.google.com/docs/web/setup#available-libraries
 
 firebase console link
 https://console.firebase.google.com/

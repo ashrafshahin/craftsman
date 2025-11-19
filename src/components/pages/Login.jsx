@@ -20,7 +20,7 @@ import { DNA } from 'react-loader-spinner';
 import { useDispatch } from 'react-redux';
 import { userDetails } from '../slices/userSlice';
 
-import { getDatabase, ref, set } from 'firebase/database';
+import { getDatabase, push, ref, set } from 'firebase/database';
 
 
 const Login = () => {
@@ -129,6 +129,7 @@ const Login = () => {
         // ...
       });
   }
+  
 
 
   return (

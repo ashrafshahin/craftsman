@@ -43,7 +43,7 @@ const Home = () => {
   })
   // email verified no more bounces to another page...
   if (loading) {
-    return null
+    return " "
   }
 
 
