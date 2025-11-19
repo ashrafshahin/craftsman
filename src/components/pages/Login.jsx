@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import login from "../images/login.png"
 
-import { Route, Routes, Link, useNavigate } from 'react-router';
+import { Route, Routes, Link, useNavigate, data } from 'react-router';
 
 import { FcGoogle } from "react-icons/fc";
 
@@ -17,7 +17,7 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { Slide, toast, ToastContainer, Zoom } from 'react-toastify';
 import { DNA } from 'react-loader-spinner';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userDetails } from '../slices/userSlice';
 
 import { getDatabase, push, ref, set } from 'firebase/database';
@@ -26,6 +26,9 @@ import { getDatabase, push, ref, set } from 'firebase/database';
 const Login = () => {
   // database setup
   const db = getDatabase()
+  
+  //Get data from Redux
+  const data = useSelector((selector) => (selector.userDetails.value))
   
   // to send user info Redux
   const dispatch = useDispatch()
@@ -111,13 +114,20 @@ const Login = () => {
   }
 
   const handleGoogleSignIn = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
+    const result = signInWithPopup(auth, provider)
+      .then(() => {
         const user = result.user
-        // set(ref(db, 'googleUsers/' + user.uid), {
-        //   uid: user.uid,
-        //   name: user.displayName,
-        //   email: user.email
+        // database setup work 
+            set(push(ref(db, 'googleUsers/' + user.uid)), {
+                user: user.uid,
+                email: user.email,
+                
+            });
+        
+        
+        // sending data using REDUX
+        dispatch(userDetails(user))
+        localStorage.setItem("userDetails", JSON.stringify(user))
           
 
         // ...
@@ -162,7 +172,8 @@ const Login = () => {
             </div>
             <div className='relative w-[220px] text-[#03014C] mt-12 cursor-pointer'>
               <div>
-                <button onClick={handleGoogleSignIn} className='w-full bg-transparent border-2 border-[#B3B3C9] rounded-lg py-5 font-third font-semibold text-[14px] cursor-pointer'>
+                <button onClick={handleGoogleSignIn}
+                  className='w-full bg-transparent border-2 border-[#B3B3C9] rounded-lg py-5 font-third font-semibold text-[14px] cursor-pointer'>
                   <span><FcGoogle className='absolute top-[22px] left-[0px] w-1/3 h-1/3 cursor-pointer ' /></span> Login with Google</button>
               </div>
 
