@@ -50,9 +50,7 @@ const FriendRequest = () => {
         }).then(() => {
             remove(ref(db, 'friendRequest/' + item.removalId))
             
-        }).catch((error) => {
-            const errorCode = error.code
-        });
+        })
     }
     
     
