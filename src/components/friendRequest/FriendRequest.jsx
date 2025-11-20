@@ -4,7 +4,7 @@ import friends from "../images/friends.png"
 import { HiDotsVertical } from "react-icons/hi";
 
 // database setup
-import { getDatabase, onValue, push, ref, set } from 'firebase/database';
+import { getDatabase, onValue, push, ref, remove, set } from 'firebase/database';
 
 //Get data from Redux
 import { useSelector } from 'react-redux';
@@ -27,7 +27,7 @@ const FriendRequest = () => {
             const arr = []
             snapshot.forEach((item) => {
                 if (data?.uid === item?.val()?.receiverID) {
-                    arr.push(item?.val()); 
+                    arr.push({...item?.val(), removalId: item?.key}); 
                 }
                 
             });
@@ -47,6 +47,8 @@ const FriendRequest = () => {
             receiverID: item.receiverID,
             senderName: item.senderName,
             senderID: item.senderID,
+        }).then(() => {
+            remove(ref(db, 'friendRequest/' + item.removalId))
         })
     }
     
