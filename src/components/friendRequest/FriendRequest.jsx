@@ -49,7 +49,10 @@ const FriendRequest = () => {
             senderID: item.senderID,
         }).then(() => {
             remove(ref(db, 'friendRequest/' + item.removalId))
-        })
+            
+        }).catch((error) => {
+            const errorCode = error.code
+        });
     }
     
     
