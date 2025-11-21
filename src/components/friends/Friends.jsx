@@ -3,12 +3,15 @@ import React, { useEffect, useState } from 'react'
 import friends from "../images/friends.png"
 import { HiDotsVertical } from "react-icons/hi";
 
-import { getDatabase, onValue, ref } from 'firebase/database';
+import { getDatabase, onValue, push, ref, remove, set } from 'firebase/database';
 
 import { useSelector } from 'react-redux';
+import { getAuth } from 'firebase/auth';
 
 
 const Friends = () => {
+    const auth = getAuth()
+
     const db = getDatabase()
     const data = useSelector((selector) => (selector.userDetails.value))
     
@@ -21,7 +24,7 @@ const Friends = () => {
             snapshot.forEach((item) => {
                 // data.uid mane je login ase hoi receiverID hobe or senderID hobe...
                 if (data.uid == item.val().receiverID || data.uid == item.val().senderID) {
-                    arr.push(item?.val())  
+                    arr.push({...item?.val(), removalId: item.key})  
                 }        
                 
                         
@@ -33,6 +36,19 @@ const Friends = () => {
     }, [])
     console.log(friendList, "friend request Accept information");
     
+    const handleBlock = (item) => {
+                
+                // collection create korlam in Database 
+                set(push(ref(db, "blockUsers")), {
+                    receiverName: item.receiverName,
+                    receiverID: item.receiverID,
+                    senderName: item.senderName,
+                    senderID: item.senderID,
+                }).then(() => {
+                    remove(ref(db, 'friend/' + item.removalId))
+                    
+                })
+        }
         
     return (
         <div>
@@ -60,7 +76,8 @@ const Friends = () => {
                                         }
                                     </p>
                                 </div>
-                                <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>unfriend/Block</button>
+                                <button onClick={() => handleBlock(item)}
+                                    className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Block</button>
                             </div> 
                         ))
                     }

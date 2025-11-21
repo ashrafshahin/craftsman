@@ -13,7 +13,7 @@ import { getAuth } from 'firebase/auth';
 
 const FriendRequest = () => {
     const auth = getAuth()
-    const user = auth.currentUser
+    // const user = auth.currentUser
     
     //Get data from Redux
     const data = useSelector((selector) => (selector.userDetails.value))
