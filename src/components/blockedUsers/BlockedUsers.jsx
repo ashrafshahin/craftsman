@@ -43,6 +43,20 @@ const BlockedUsers = () => {
 
     }, [])
 
+    const handleUnblock = (item) => {
+        console.log(item);
+        // collection create korlam in Database 
+                        set(push(ref(db, "unblock")), {
+                            receiverName: item.receiverName,
+                            receiverID: item.receiverID,
+                            senderName: item.senderName,
+                            senderID: item.senderID,
+                        }).then(() => {
+                            remove(ref(db, 'blockUsers/' + item.removalId))
+                            
+                        })
+        
+    }
     
 
     
@@ -72,7 +86,7 @@ const BlockedUsers = () => {
                                         }
                                     </p>
                                 </div>
-                                <button
+                                <button onClick={()=>handleUnblock(item)}
                                     
                                     className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Unblock</button>
                             </div> 

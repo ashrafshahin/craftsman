@@ -116,7 +116,7 @@ const Userlist = () => {
                                     <p className='font-semibold text-lg'>{item?.username}</p>
                                     <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>{item?.email}</p>
                                 </div>
-                                {/* update- friendList either 12 or 21 hoi, tahole Friend otherwise ':' agar moto add friend or request sent dekhabe */}
+             {/* update- friendList either 12 or 21 hoi, tahole Friend otherwise ':' agar moto add friend or request sent dekhabe */}
                                 {
                                     friendList.includes(data?.uid + item?.userId) ||
                                         friendList.includes(item?.userId + data?.uid)
@@ -134,6 +134,8 @@ const Userlist = () => {
                                             <button onClick={() => handleFriendRequest(item)}
                                                 className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'> Add Friend </button>
                                 }
+         {/* already condition written here for 'add friend' system */}
+                                
                                 {/* friend request sending system
                                 {
                                     friendRequestList.includes(data?.uid + item?.userId) || 
