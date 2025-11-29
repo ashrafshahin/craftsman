@@ -96,6 +96,21 @@ const Userlist = () => {
             })
     
         }, [])
+    
+    // const [blockList, setBlockList] = useState([])
+    // useEffect(() => {
+    //     const blockRef = ref(db, "blockUsers/")
+    //     onValue(blockRef, (snapshot) => {
+    //         const arr = []
+    //         snapshot.forEach((item) => {
+    //             // "je kon akjon thakbe-  either 12 or 21 - uid get merged"
+    //             arr.push(item?.val().receiverID + item?.val().senderID)
+    //         });
+    //         // sob data aikhane chole asche...
+    //         setBlockList(arr);
+    //     })
+
+    // }, [])
 
     return (
         <div>
@@ -116,6 +131,38 @@ const Userlist = () => {
                                     <p className='font-semibold text-lg'>{item?.username}</p>
                                     <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>{item?.email}</p>
                                 </div>
+                                {/* {
+                                    blockList.includes(data?.uid + item?.userId) ||
+                                        blockList.includes(item?.userId + data?.uid)
+
+                                        ?
+                                        <button
+                                            className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Add Friend</button>
+                                        :
+                                        blockList.includes(data?.uid + item?.userId) ||
+                                            blockList.includes(item?.userId + data?.uid)
+
+                                            ?
+                                            <button
+                                                className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'> Block </button>
+                                        :
+                                        friendList.includes(data?.uid + item?.userId) ||
+                                            friendList.includes(item?.userId + data?.uid)
+
+                                            ?
+                                            <button
+                                                className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Friend</button>
+                                            :
+                                            friendRequestList.includes(data?.uid + item?.userId) ||
+                                                friendRequestList.includes(item?.userId + data?.uid)
+                                                ?
+                                                <button
+                                                    className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Request Sent </button>
+                                                :
+                                                <button onClick={() => handleFriendRequest(item)}
+                                                    className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'> Add Friend </button>
+
+                                } */}
              {/* update- friendList either 12 or 21 hoi, tahole Friend otherwise ':' agar moto add friend or request sent dekhabe */}
                                 {
                                     friendList.includes(data?.uid + item?.userId) ||
