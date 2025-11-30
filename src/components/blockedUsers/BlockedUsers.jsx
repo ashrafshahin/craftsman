@@ -14,16 +14,13 @@ import { getAuth } from 'firebase/auth';
 
 const BlockedUsers = () => {
     const auth = getAuth()
-     // const user = auth.currentUser
-        
+     
      //Get data from Redux
     const data = useSelector((selector) => (selector.userDetails.value))
     
     const db = getDatabase()
     
-    
     const [blockUser, setBlockUser] = useState([])
-    
     useEffect(() => {
         const blockUserRef = ref(db, "blockUsers/")
         onValue(blockUserRef, (snapshot) => {
@@ -32,11 +29,9 @@ const BlockedUsers = () => {
                 if (data?.uid == item?.val()?.receiverID) {
                     arr.push({ ...item?.val(), removalId: item?.key });
                 }
-                console.log(item);
                 
-
             });
-            // sob data aikhane chole asche...
+            
             setBlockUser(arr);
 
         });
@@ -45,20 +40,20 @@ const BlockedUsers = () => {
 
     const handleUnblock = (item) => {
         console.log(item);
-        // collection create korlam in Database 
-                        set(push(ref(db, "unblock")), {
-                            receiverName: item.receiverName,
-                            receiverID: item.receiverID,
-                            senderName: item.senderName,
-                            senderID: item.senderID,
-                        }).then(() => {
-                            remove(ref(db, 'blockUsers/' + item.removalId))
+    
+            set(push(ref(db, "unblock")), {
+                receiverName: item.receiverName,
+                receiverID: item.receiverID,
+                senderName: item.senderName,
+                senderID: item.senderID,
+             }).then(() => {
+                  remove(ref(db, 'blockUsers/' + item.removalId))
                             
-                        })
+           })
         
     }
     
-
+    
     
     
     return (
@@ -92,56 +87,7 @@ const BlockedUsers = () => {
                             </div> 
                         ))
                     }
-                    
-
-                    {/* <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>
-                        <img className='pr-3 mb-4' src={friends} alt="" />
-                        <div className='pr-12'>
-                            <p className='font-semibold text-lg'>Ashraf Shahin</p>
-                            <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>Hi Guys, Wassup!</p>
-                        </div>
-                        <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Date</button>
-                    </div>
-                    <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>
-                        <img className='pr-3 mb-4' src={friends} alt="" />
-                        <div className='pr-12'>
-                            <p className='font-semibold text-lg'>Ashraf Shahin</p>
-                            <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>Hi Guys, Wassup!</p>
-                        </div>
-                        <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Date</button>
-                    </div>
-                    <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>
-                        <img className='pr-3 mb-4' src={friends} alt="" />
-                        <div className='pr-12'>
-                            <p className='font-semibold text-lg'>Ashraf Shahin</p>
-                            <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>Hi Guys, Wassup!</p>
-                        </div>
-                        <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Date</button>
-                    </div>
-                    <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>
-                        <img className='pr-3 mb-4' src={friends} alt="" />
-                        <div className='pr-12'>
-                            <p className='font-semibold text-lg'>Ashraf Shahin</p>
-                            <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>Hi Guys, Wassup!</p>
-                        </div>
-                        <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Date</button>
-                    </div>
-                    <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>
-                        <img className='pr-3 mb-4' src={friends} alt="" />
-                        <div className='pr-12'>
-                            <p className='font-semibold text-lg'>Ashraf Shahin</p>
-                            <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>Hi Guys, Wassup!</p>
-                        </div>
-                        <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Date</button>
-                    </div>
-                    <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>
-                        <img className='pr-3 mb-4' src={friends} alt="" />
-                        <div className='pr-12'>
-                            <p className='font-semibold text-lg'>Ashraf Shahin</p>
-                            <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>Hi Guys, Wassup!</p>
-                        </div>
-                        <button className='bg-primary py-1 px-5 rounded-lg text-white font-semibold text-xl'>Date</button>
-                    </div> */}
+                   
 
                 </div>
             </div>

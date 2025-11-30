@@ -97,20 +97,21 @@ const Userlist = () => {
     
         }, [])
     
-    // const [blockList, setBlockList] = useState([])
-    // useEffect(() => {
-    //     const blockRef = ref(db, "blockUsers/")
-    //     onValue(blockRef, (snapshot) => {
-    //         const arr = []
-    //         snapshot.forEach((item) => {
-    //             // "je kon akjon thakbe-  either 12 or 21 - uid get merged"
-    //             arr.push(item?.val().receiverID + item?.val().senderID)
-    //         });
-    //         // sob data aikhane chole asche...
-    //         setBlockList(arr);
-    //     })
+    // data read kore niye aslam...3rd condition block korse
+    const [blockList, setBlockList] = useState([])
+    useEffect(() => {
+        const blockRef = ref(db, "blockUsers/")
+        onValue(blockRef, (snapshot) => {
+            const arr = []
+            snapshot.forEach((item) => {
+                // "je kon akjon thakbe-  either 12 or 21 - uid get merged"
+                arr.push(item?.val().receiverID + item?.val().senderID)
+            });
+            // sob data aikhane chole asche...
+            setBlockList(arr);
+        })
 
-    // }, [])
+    }, [])
 
     return (
         <div>
@@ -131,20 +132,15 @@ const Userlist = () => {
                                     <p className='font-semibold text-lg'>{item?.username}</p>
                                     <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>{item?.email}</p>
                                 </div>
-                                {/* {
-                                    blockList.includes(data?.uid + item?.userId) ||
-                                        blockList.includes(item?.userId + data?.uid)
-
-                                        ?
-                                        <button
-                                            className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Add Friend</button>
-                                        :
+                                {/* *update - 3rd condition - block korle userList e blocked hoye jabe, je block kora person unblock korte parbe... */}
+                                {
+                                    
                                         blockList.includes(data?.uid + item?.userId) ||
                                             blockList.includes(item?.userId + data?.uid)
 
                                             ?
                                             <button
-                                                className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'> Block </button>
+                                                className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'> Blocked </button>
                                         :
                                         friendList.includes(data?.uid + item?.userId) ||
                                             friendList.includes(item?.userId + data?.uid)
@@ -162,9 +158,9 @@ const Userlist = () => {
                                                 <button onClick={() => handleFriendRequest(item)}
                                                     className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'> Add Friend </button>
 
-                                } */}
+                                }
              {/* update- friendList either 12 or 21 hoi, tahole Friend otherwise ':' agar moto add friend or request sent dekhabe */}
-                                {
+                                {/* {
                                     friendList.includes(data?.uid + item?.userId) ||
                                         friendList.includes(item?.userId + data?.uid)
                                         
@@ -180,7 +176,7 @@ const Userlist = () => {
                                             :
                                             <button onClick={() => handleFriendRequest(item)}
                                                 className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'> Add Friend </button>
-                                }
+                                } */}
          {/* already condition written here for 'add friend' system */}
                                 
                                 {/* friend request sending system
