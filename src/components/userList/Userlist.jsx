@@ -140,8 +140,10 @@ const Userlist = () => {
 
                                             ?
                                             <button
-                                                className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'> Blocked </button>
+                                            className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'> Blocked </button>
+                                        
                                         :
+                                        
                                         friendList.includes(data?.uid + item?.userId) ||
                                             friendList.includes(item?.userId + data?.uid)
 
