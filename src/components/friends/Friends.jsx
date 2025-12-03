@@ -44,6 +44,7 @@ const Friends = () => {
                     receiverID: item.receiverID,
                     senderName: item.senderName,
                     senderID: item.senderID,
+                    
                 }).then(() => {
                     remove(ref(db, 'friend/' + item.removalId))
                     

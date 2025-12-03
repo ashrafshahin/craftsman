@@ -73,28 +73,9 @@ const GroupCreateForm = () => {
       
     }
 
-    // // Retriving/ Get data towards -> Group List section ... no Repeat data Reading.
-    //     const [groupList, setGroupList] = useState([])
-    //     useEffect(() => {
-    //         const groupListRef = ref(db, "groupList/")
-    //         onValue(groupListRef, (snapshot) => {
-    //             const arr = []
-    //             snapshot.forEach((item) => {
-    //                 arr.push(item?.val())
-    
-    //             });
-    //             // sob data aikhane chole asche...
-    //             setGroupList(arr);
-    
-    //         });
-    
-    //     }, [])
-    // console.log(groupList);
-    
-
     const handleGoBack = () => {
         setTimeout(() => {
-            navigate("/allGroups")
+            navigate("/")
         }, 3000)
     }
 
