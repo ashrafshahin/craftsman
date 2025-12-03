@@ -57,18 +57,18 @@ const GroupCreateForm = () => {
                 groupTagline: groupTagline,
                 groupAdmin: data?.uid,
             });
-            // setTimeout(() => {
-            //     // navigate("/")
-            // }, 3000)
+            setTimeout(() => {
+                navigate("/groupList")
+            }, 2000)
             setLoading(false)
             // after group create fields will be empty bcoz of these codes ..
             setGroupName('')
             setGroupCreator('')
             setGroupTagline('')
             /// windows reload...
-            setTimeout(() => {
-                window.location.reload()
-            }, 5000)
+            // setTimeout(() => {
+            //     window.location.reload()
+            // }, 5000)
         }
       
     }
@@ -76,7 +76,7 @@ const GroupCreateForm = () => {
     const handleGoBack = () => {
         setTimeout(() => {
             navigate("/")
-        }, 3000)
+        }, 2000)
     }
 
     return (

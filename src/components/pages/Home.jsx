@@ -14,6 +14,7 @@ import Userlist from '../userList/Userlist';
 import FriendRequest from '../friendRequest/FriendRequest';
 import MyGroups from '../myGroups/MyGroups';
 import BlockedUsers from '../blockedUsers/BlockedUsers';
+import GroupList from '../groupList/Grouplist';
 
 
 
@@ -53,10 +54,10 @@ const Home = () => {
       {verify ?
         <div className='flex justify-between my-10 m-5 '>
           <div className=' '>
-            <Sidebar />
+            <Sidebar active = "home" />
           </div>
           <div className='mx-2'>
-            <Grouplist />
+            <GroupList />
             <FriendRequest />
           
           </div>

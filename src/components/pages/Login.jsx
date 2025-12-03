@@ -118,6 +118,7 @@ const Login = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user
+        
         console.log(user, "google user information");
         // google log-in data will go to database
             set(ref(db, 'users/' + user.uid), {

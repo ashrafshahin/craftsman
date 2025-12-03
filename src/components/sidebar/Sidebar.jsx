@@ -6,9 +6,11 @@ import { SlHome } from "react-icons/sl";
 import { LuMessageCircleMore } from "react-icons/lu";
 import { IoSettingsOutline } from "react-icons/io5";
 import { ImExit } from "react-icons/im";
+import { FaDollarSign } from "react-icons/fa";
 
 
-import { useNavigate } from 'react-router';
+
+import { Link, useNavigate } from 'react-router';
 import { getAuth, signOut } from 'firebase/auth';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +18,7 @@ import { userDetails } from '../slices/userSlice';
 
 
 
-const Sidebar = () => {
+const Sidebar = (active) => {
     //Bring Data from Database - profile update part 
     const data = useSelector((selector) => (selector.userDetails.value))
     
@@ -56,19 +58,41 @@ const Sidebar = () => {
                   </div>
               </div>
               <div className=''>
-                  <div className='flex justify-center mt-[78px] py-5 bg-white rounded-l-2xl ml-6 relative 
+                  <div className='flex justify-center mt-[57px] py-5 hover:bg-gray-700   '>
+                      
+                      <Link to="/portfolio">My Portfolio
+                          <FaDollarSign className='text-[#bebaba] text-7xl hover:text-amber-400 shadow-2xs/90 shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)] ' />
+                      </Link>
+                        
+                  </div>
+              </div>
+              <div className=''>
+                  <div className={`flex justify-center mt-[78px] py-5 
+                  ${active === "home" ? "bg-gray-300" : "bg-red-500"} rounded-l-2xl ml-6 relative 
                   after:absolute after:top-0 after:left-0 after:content-[" "] after:w-[167px] after:h-full after:ml-5 
 
-                  before:absolute before:top-0 before:right-0 before:content-[" "] before:w-[15px] before:h-full before:bg-primary before:rounded-l-lg before:shadow-2xs/90 before:shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)] '>
+                  before:absolute before:top-0 before:right-0 before:content-[" "] before:w-[15px] before:h-full before:bg-primary before:rounded-l-lg before:shadow-2xs/90 before:shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)]`}>
                       
-                      <SlHome className='text-[#1E1E1E] text-5xl ' />
+                      {/* message work day 14... */}
+                    
+                      <Link to="/">
+                          <SlHome className='text-[#1E1E1E] text-5xl ' />
+                      </Link>
+                      
 
                   </div>
               </div>
               <div className=''>
-                  <div className='flex justify-center mt-[57px] py-5   '>
+                  <div className={`flex justify-center mt-[78px] py-5 
+                  ${active == "message" ? "bg-gray-300" : "bg-red-500"} rounded-l-2xl ml-6 relative 
+                  after:absolute after:top-0 after:left-0 after:content-[" "] after:w-[167px] after:h-full after:ml-5 
+
+                  before:absolute before:top-0 before:right-0 before:content-[" "] before:w-[15px] before:h-full before:bg-primary before:rounded-l-lg before:shadow-2xs/90 before:shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)]`}>
                       
-                      <LuMessageCircleMore className='text-[#C3C3C3] text-5xl shadow-2xs/90 shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)] ' />
+                      <Link to="/message">
+                          <LuMessageCircleMore className='text-[#C3C3C3] text-5xl shadow-2xs/90 shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)] ' />
+                      </Link>
+                      
 
                   </div>
               </div>

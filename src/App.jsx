@@ -13,6 +13,8 @@ import ForgotPassword from './components/pages/ForgotPassword';
 
 // integrate firebase with this project //
 import firebaseConfig from './components/firebase/firebaseConfig';
+import Message from './components/message/Message';
+import Portfolio from './components/portfolio/Portfolio';
 
 
 
@@ -35,6 +37,14 @@ function App() {
     {
       path: "/forgotpassword",
       element: <ForgotPassword />,
+    },
+    {
+      path: "/message",
+      element: <Message />,
+    },
+    {
+      path: "/portfolio",
+      element: <Portfolio />,
     },
   ]);
 

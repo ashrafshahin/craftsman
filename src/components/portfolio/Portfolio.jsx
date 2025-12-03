@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Sidebar from '../sidebar/Sidebar';
 
 export default function Portfolio() {
     const [activeTab, setActiveTab] = useState('about');
@@ -84,7 +85,9 @@ export default function Portfolio() {
 
 
     return (
+        
         <div className="min-h-screen bg-gray-900 text-white">
+            
             {/* Header */}
             <header className="bg-gray-800 border-b border-gray-700">
                 <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -106,8 +109,26 @@ export default function Portfolio() {
             </header>
 
             {/* Main Content */}
-            <div className="max-w-5xl mx-auto px-4 py-6">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className=" mx-auto px-4 py-6">
+                <div className='flex justify-between my-10 m-5'>
+                    <div className='flex justify-between my-10 m-5 '>
+                        <div className=' '>
+                            <Sidebar active="portfolio" />
+                        </div>
+                        <div className='mx-2'>
+
+                        </div>
+                        <div className='mx-2'>
+
+
+                        </div>
+                        <div className='mx-2'>
+
+
+                        </div>
+                    </div>
+                    <div className="w-fit grid grid-cols-1 lg:grid-cols-3 gap-6">
+                </div>
                     {/* Left Column */}
                     <div className="lg:col-span-2 space-y-6">
                         {/* Profile Card */}
