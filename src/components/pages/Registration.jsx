@@ -15,6 +15,7 @@ import { DNA } from 'react-loader-spinner';
 
 // database setup
 import {getDatabase, ref, set} from "firebase/database"
+import Portfolio from '../portfolio/Portfolio';
 
 
 
@@ -178,7 +179,7 @@ const Registration = () => {
       />
       
           <div className='md:flex md:justify-between items-center'>
-            <div className='md:w-1/2 flex justify-end mr-[70px]  '>
+            <div className='md:w-2/5 flex justify-end mr-[70px]  '>
               <div>
                 <div>
                   <h3 className='md:w-[497px] font-bold font-second text-[25px] md:text-[34px] text-[#11175D] '>Get started with easily register</h3>
@@ -241,7 +242,7 @@ const Registration = () => {
                     <span className='absolute top-1/2 left-1/2 bg-[#5B36F5]/25 w-[78px] h-[30px] blur-[10px] -translate-1/2 -z-[999999] '></span>
                   </button>
                 </div>
-                <div className='w-[368px] mt-8 '>
+                <div className='w-[368px] mt-8 mb-4 '>
               <p className='w-full pl-[52px] text-[#03014C] text-third text-[13px] '>Already  have an account ?
                 <Link to="/login">
                   <span className='text-[#EA6C00] font-bold'> Sign In</span>
@@ -251,8 +252,10 @@ const Registration = () => {
               </div>
               
             </div>
-            <div className='md:w-1/2'>
-          <img className='w-100 md:w-full h-screen object-cover ml-10 md:ml-0' src={registration} alt="" />
+        <div className='md:w-3/5'>
+          <Portfolio />
+          
+          {/* <img className='w-100 md:w-full h-screen object-cover ml-10 md:ml-0' src={registration} alt="" /> */}
             </div>
           </div>
         </div>

@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userDetails } from '../slices/userSlice';
 
 import { getDatabase, push, ref, set } from 'firebase/database';
+import Portfolio from '../portfolio/Portfolio';
 
 
 const Login = () => {
@@ -166,7 +167,7 @@ const Login = () => {
         }}
       />
       <div className='md:flex md:justify-between items-center'>
-        <div className='md:w-1/2 flex justify-end mr-[70px]  '>
+        <div className='md:w-2/5 flex justify-end mr-[20px] ml-5   '>
           <div>
             <div>
               <h3 className='md:w-[497px] font-bold font-third text-[25px] md:text-[34px] text-[#03014C] '>Login to your account!</h3>
@@ -228,7 +229,7 @@ const Login = () => {
                 <Link to="/forgotpassword">Forgot Password </Link>
               </p>
             </div>
-            <div className='w-[368px] mt-5 '>
+            <div className='w-[368px] mt-5 mb-4 '>
               <p className='w-full pl-[52px] text-[#03014C] font-third text-[13px] '>Don’t have an account ?
                 <Link to="/registration">
                   <span className='text-[#EA6C00] font-bold'> Sign up</span>
@@ -238,9 +239,16 @@ const Login = () => {
           </div>
 
         </div>
-        <div className='md:w-1/2'>
-          <img className='w-100 md:w-full h-screen object-cover ml-10 md:ml-0 mt-5 md:mt-0' src={login} alt="" />
+
+        {/* paser image ta  */}
+        <div className='md:w-3/5'>
+        <div >
+          <Portfolio />
+          
         </div>
+          {/* <img className='w-100 md:w-full h-screen object-cover ml-10 md:ml-0 mt-5 md:mt-0' src={login} alt="" /> */}
+        </div> 
+        
       </div>
     </div>
   )
