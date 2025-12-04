@@ -18,7 +18,7 @@ import { userDetails } from '../slices/userSlice';
 
 
 
-const Sidebar = (active) => {
+const Sidebar = ({active}) => {
     //Bring Data from Database - profile update part 
     const data = useSelector((selector) => (selector.userDetails.value))
     
@@ -47,18 +47,18 @@ const Sidebar = (active) => {
     }
   return (
       <div>
-          <div className='bg-primary w-[186px] text-white font-primary rounded-xl'>
+          <div className='bg-primary w-[200px] text-white font-primary rounded-xl'>
               <div className='flex justify-center pt-6'>
                   <img src={profile} alt="Profile" className='h-25 w-25 rounded-full border-white/65 border-4 mt-10' />
               </div>
               <div className='flex justify-center pt-6'>
                   <div>
-                      <h1 className='font-semibold '>{data?.displayName}</h1>
-                      <h1 className='font-semibold text-xs '>{data?.email}</h1>
+                      <h1 className='flex justify-center mt-[57px] bg-gray-600 py-2 hover:bg-gray-700 text-xl rounded-xl  '>{data?.displayName}</h1>
+                      <h1 className='flex justify-center mt-4 bg-gray-600 py-2 hover:bg-gray-700 text-[12px] rounded-sm  '>{data?.email}</h1>
                   </div>
               </div>
               <div className=''>
-                  <div className='flex justify-center mt-[57px] py-5 hover:bg-gray-700   '>
+                  <div className='flex justify-center mt-[57px] bg-red-600 py-7 hover:bg-gray-700   '>
                       
                       <Link to="/portfolio">My Portfolio
                           <FaDollarSign className='text-[#bebaba] text-7xl hover:text-amber-400 shadow-2xs/90 shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)] ' />
@@ -67,37 +67,39 @@ const Sidebar = (active) => {
                   </div>
               </div>
               <div className=''>
-                  <div className={`flex justify-center mt-[78px] py-5 
-                  ${active === "home" ? "bg-gray-300" : "bg-red-500"} rounded-l-2xl ml-6 relative 
-                  after:absolute after:top-0 after:left-0 after:content-[" "] after:w-[167px] after:h-full after:ml-5 
+                  <div className={`relative after:absolute after:top-0 after:left-0 after:content-[" "] after:w-[167px] after:h-full
+                 ${ active == "home" ? "after:bg-white" : "after:bg-red-500"}  after:ml-5 after:z-[-1] z-1 after:rounded-lg
 
-                  before:absolute before:top-0 before:right-0 before:content-[" "] before:w-[15px] before:h-full before:bg-primary before:rounded-l-lg before:shadow-2xs/90 before:shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)]`}>
+                  before:absolute before:top-0 before:right-0 before:content-[" "] before:w-[25px] before:h-full before:rounded-l-2xl before:bg-primary before:shadow-2xs/90 before:shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)] flex justify-center mt-[78px] py-6 my-4 cursor-pointer`}>
                       
                       {/* message work day 14... */}
                     
                       <Link to="/">
-                          <SlHome className='text-[#1E1E1E] text-5xl ' />
+                          <SlHome className={`text-5xl ${active == "home" ? "text-primary" : "text-white"} `} />
                       </Link>
                       
 
                   </div>
               </div>
               <div className=''>
-                  <div className={`flex justify-center mt-[78px] py-5 
-                  ${active == "message" ? "bg-gray-300" : "bg-red-500"} rounded-l-2xl ml-6 relative 
-                  after:absolute after:top-0 after:left-0 after:content-[" "] after:w-[167px] after:h-full after:ml-5 
+                  <div className={`relative after:absolute after:top-0 after:left-0 after:content-[" "] after:w-[167px] after:h-full
+                 ${ active == "message" ? "after:bg-white" : "after:bg-red-500"}  after:ml-5 after:z-[-1] z-1 after:rounded-lg
 
-                  before:absolute before:top-0 before:right-0 before:content-[" "] before:w-[15px] before:h-full before:bg-primary before:rounded-l-lg before:shadow-2xs/90 before:shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)]`}>
+                  before:absolute before:top-0 before:right-0 before:content-[" "] before:w-[25px] before:h-full before:rounded-l-2xl before:bg-primary before:shadow-2xs/90 before:shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)] flex justify-center mt-[78px] py-6 my-4 `}>
                       
                       <Link to="/message">
-                          <LuMessageCircleMore className='text-[#C3C3C3] text-5xl shadow-2xs/90 shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)] ' />
+                          <LuMessageCircleMore
+                              className={`text-5xl shadow-2xs/90 shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)] ${active == "message" ? "text-primary" : "text-[#C3C3C3]"} `} />
                       </Link>
                       
 
                   </div>
               </div>
               <div className=''>
-                  <div className='flex justify-center mt-[69px] py-5   '>
+                  <div className={`relative after:absolute after:top-0 after:left-0 after:content-[" "] after:w-[167px] after:h-full
+                 ${active == "settings" ? "after:bg-white" : "after:bg-red-500"}  after:ml-5 after:z-[-1] z-1 after:rounded-lg
+
+                  before:absolute before:top-0 before:right-0 before:content-[" "] before:w-[25px] before:h-full before:rounded-l-2xl before:bg-primary before:shadow-2xs/90 before:shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)] flex justify-center mt-[78px] py-6 my-4 `}>
 
                       <IoSettingsOutline className='text-white text-5xl shadow-2xs/90 shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)] ' />
 

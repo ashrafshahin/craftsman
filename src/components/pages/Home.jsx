@@ -54,6 +54,7 @@ const Home = () => {
       {verify ?
         <div className='flex justify-between my-10 m-5 '>
           <div className=' '>
+            {/* active props pass kortese 04 december */}
             <Sidebar active = "home" />
           </div>
           <div className='mx-2'>

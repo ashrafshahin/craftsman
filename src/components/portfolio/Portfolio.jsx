@@ -92,7 +92,7 @@ export default function Portfolio() {
             <header className="bg-gray-800 border-b border-gray-700">
                 <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
                     <div className="flex items-center gap-6">
-                        <div className="text-red-500 font-bold text-2xl">in</div>
+                        <div className="text-red-500 font-bold text-2xl">AS</div>
                         <input
                             type="text"
                             placeholder="Search"
@@ -110,24 +110,26 @@ export default function Portfolio() {
 
             {/* Main Content */}
             <div className=" mx-auto px-4 py-6">
-                <div className='flex justify-between my-10 m-5'>
+                <div className='md:flex justify-between my-10 m-5'>
                     <div className='flex justify-between my-10 m-5 '>
                         <div className=' '>
                             <Sidebar active="portfolio" />
                         </div>
-                        <div className='mx-2'>
+                        <div className='mx-0'>
+                            <p>v</p>
+                        </div>
+                        <div className='mx-0'>
+
 
                         </div>
-                        <div className='mx-2'>
-
-
-                        </div>
-                        <div className='mx-2'>
+                        <div className='mx-0'>
 
 
                         </div>
                     </div>
+            
                     <div className="w-fit grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        
                 </div>
                     {/* Left Column */}
                     <div className="lg:col-span-2 space-y-6">
@@ -345,7 +347,7 @@ export default function Portfolio() {
                                             </div>
                                         </div>
                                     </div>
-                                    // Contact section use it later
+                                    // ***Contact section use it later***
                                     // <div className="space-y-4">
                                     //     <div className="flex items-start gap-3">
                                     //         <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0 text-red-500 font-bold">
@@ -448,7 +450,7 @@ export default function Portfolio() {
                     </div>
 
                     {/* Right Column */}
-                    <div className="space-y-6">
+                    <div className="w-full space-y-6 ml-3">
                         
                         {/* {/* Education Card */}
                         <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
@@ -542,10 +544,10 @@ export default function Portfolio() {
                 
                 {/* Copyright Footer */}
                 <footer className="bg-gray-800 border-t border-gray-700 mt-8">
-                    <div className="max-w-5xl mx-auto px-4 py-6">
+                    <div className=" mx-auto px-4 py-6">
                         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                             <div className="flex items-center gap-4">
-                                <div className="text-red-500 font-bold text-xl">ASH</div>
+                                <div className="text-red-500 font-bold text-xl">AS</div>
                                 <p className="text-gray-400 text-sm">© 2025 Ashraf Shahin Profile. All rights reserved.</p>
                             </div>
                             <div className="flex gap-6 text-sm">
