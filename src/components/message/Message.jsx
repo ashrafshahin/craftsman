@@ -1,12 +1,12 @@
 import React from 'react'
-import Sidebar from '../sidebar/Sidebar'
-import FriendRequest from '../friendRequest/FriendRequest'
-import Friends from '../friends/Friends'
-import Userlist from '../userList/Userlist'
-import BlockedUsers from '../blockedUsers/BlockedUsers'
-import GroupList from '../groupList/Grouplist'
-import MyGroups from '../myGroups/MyGroups'
-import ChatBox from '../chatBox/ChatBox'
+import Sidebar from '../../components/sidebar/Sidebar'
+import FriendRequest from '../../components/friendRequest/FriendRequest'
+import Friends from '../../components/friends/Friends'
+import Userlist from '../../components/userList/Userlist'
+import BlockedUsers from '../../components/blockedUsers/BlockedUsers'
+import GroupList from '../../components/groupList/Grouplist'
+import MyGroups from '../../components/myGroups/MyGroups'
+import ChatBox from '../../components/chatBox/ChatBox'
 
 const Message = () => {
     return (
@@ -16,13 +16,12 @@ const Message = () => {
                     <Sidebar active="message" />
                 </div>
                 <div className='md:flex justify-between mx-auto'>
-                    <div className='mx-2'>
-                        <Friends />
-
-                    </div>
+                    
                     <div className='mx-2'>
                         <ChatBox />
-
+                    </div>
+                    <div className='mx-2'>
+                        <Friends />
                     </div>
                 </div>
                 

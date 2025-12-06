@@ -243,11 +243,8 @@ const Login = () => {
 
         {/* paser image ta  */}
         <div className='md:w-3/5'>
-        <div >
-          <Portfolio />
-          
-        </div>
-          {/* <img className='w-100 md:w-full h-screen object-cover ml-10 md:ml-0 mt-5 md:mt-0' src={login} alt="" /> */}
+        
+          <img className='w-100 md:w-full h-screen object-cover ml-10 md:ml-0 mt-5 md:mt-0' src={login} alt="" />
         </div> 
         
       </div>

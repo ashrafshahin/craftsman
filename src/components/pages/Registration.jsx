@@ -253,9 +253,9 @@ const Registration = () => {
               
             </div>
         <div className='md:w-3/5'>
-          <Portfolio />
           
-          {/* <img className='w-100 md:w-full h-screen object-cover ml-10 md:ml-0' src={registration} alt="" /> */}
+          
+          <img className='w-100 md:w-full h-screen object-cover ml-10 md:ml-0' src={registration} alt="" />
             </div>
           </div>
         </div>

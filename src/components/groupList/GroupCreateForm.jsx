@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { getDatabase, onValue, push, ref, set } from 'firebase/database'
 import { useNavigate } from 'react-router'
 
-const GroupCreateForm = () => {
+const GroupCreateForm = ({ GroupForm }) => {
     //navigate page 
     const navigate = useNavigate()
 
@@ -27,6 +27,8 @@ const GroupCreateForm = () => {
     const [loading, setLoading] = useState(false)
 
     const [show, setShow] = useState(false)
+
+    
 
     const handleCreateGroup = () => {
         
@@ -57,23 +59,13 @@ const GroupCreateForm = () => {
                 groupTagline: groupTagline,
                 groupAdmin: data?.uid,
             });
-            setTimeout(() => {
-                navigate("/groupList")
-            }, 2000)
-            setLoading(false)
-            // after group create fields will be empty bcoz of these codes ..
-            setGroupName('')
-            setGroupCreator('')
-            setGroupTagline('')
-            /// windows reload...
-            // setTimeout(() => {
-            //     window.location.reload()
-            // }, 5000)
+            
+            
         }
       
     }
 
-    const handleGoBack = () => {
+    const handleCancel = () => {
         setTimeout(() => {
             navigate("/")
         }, 2000)
@@ -81,6 +73,7 @@ const GroupCreateForm = () => {
 
     return (
         <div>
+            GroupForm={GroupCreateForm}
             <div className='md:w-full'>
                 <div className=' font-primary text-center'>
                     <div>
@@ -115,8 +108,8 @@ const GroupCreateForm = () => {
                         
                         <button onClick={handleCreateGroup}
                             className=' w-full bg-primary hover:bg-green-800  rounded-xl text-white py-5 font-second font-semibold text-[20px] cursor-pointer'>Create Group</button>
-                        <button onClick={handleGoBack}
-                            className='bg-red-500 hover:bg-green-800 rounded-lg text-white py-2 px-4 cursor-pointer mt-10'>Go Back</button>
+                        <button onClick={handleCancel}
+                            className='bg-red-500 hover:bg-green-800 rounded-lg text-white py-2 px-4 cursor-pointer mt-10'>Cancel</button>
 
                     </div>
 

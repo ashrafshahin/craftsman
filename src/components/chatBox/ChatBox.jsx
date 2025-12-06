@@ -1,31 +1,44 @@
 import React from 'react';
 import userImage from '../images/friends.png'
 
+import { HiDotsVertical } from "react-icons/hi";
+
+
 const ChatBox = () => {
 
     return (
-        <div className="flex flex-col h-screen bg-white">
+        <div className="flex flex-col h-screen bg-white shadow-lg shadow-black rounded-b-xl">
             {/* Header */}
-            <div className="bg-gray-800 text-white px-6 py-4 shadow-lg rounded-xl">
-                <div className="flex items-center space-x-3">
-                    <img
-                        src={userImage}
-                        alt="User"
-                        className="w-10 h-10 rounded-full object-cover"
-                    />
-                    <div>
-                        <h2 className="font-semibold text-lg">Name</h2>
-                        <p className="text-xs text-gray-300">Online</p>
+            <div className="bg-primary text-white px-6 py-7 shadow-t-lg shadow-black rounded-t-xl  ">
+                <div className="flex items-center gap-x-5 ">
+                    <div className=''>
+                        <img
+                            src={userImage}
+                            alt="User"
+                            className="w-15 h-14 md:w-25 md:h-25 rounded-full object-cover"
+                        />
                     </div>
+                   
+                    <div className='flex justify-end items-center space-x-70 '>
+                        <div>
+                            <h2 className="font-bold text-2xl">Name</h2>
+                            <p className="text-sm text-gray-300">Online</p>
+                        </div>
+                        <div>
+                            <HiDotsVertical className='text-3xl md:ml-70' />
+                        </div>
+                </div>
+                    
                 </div>
             </div>
 
             {/* Messages Container */}
             <div className="flex-1 overflow-y-auto p-6 space-y-4">
-                {/* Received Message */}
+                
+                {/* Received Message design */}
                 <div className="flex items-start space-x-3">
                     <img
-                        src="https://i.pravatar.cc/150?img=1"
+                        src={userImage}
                         alt="User"
                         className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
                     />
@@ -35,28 +48,28 @@ const ChatBox = () => {
                     </div>
                 </div>
 
-                {/* Sent Message */}
+                {/* Sent Message design */}
                 <div className="flex items-start space-x-3 justify-end">
-                    <div className="bg-gray-800 rounded-lg rounded-tr-none px-4 py-3 max-w-xs">
+                    <div className="bg-primary rounded-lg rounded-tr-none px-4 py-3 max-w-xs">
                         <p className="text-white text-sm">Hi! I need some information about your services.</p>
                         <span className="text-xs text-gray-300 mt-1 block text-right">10:32 AM</span>
                     </div>
                     <img
-                        src="https://i.pravatar.cc/150?img=5"
+                        src= {userImage}
                         alt="Me"
                         className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
                     />
                 </div>
 
-                {/* Received Message with Image */}
+                {/* Received Message with Image design */}
                 <div className="flex items-start space-x-3">
                     <img
                         src="https://i.pravatar.cc/150?img=1"
                         alt="User"
                         className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
                     />
-                    <div className="bg-gray-100 rounded-lg rounded-tl-none px-4 py-3 max-w-xs">
-                        <div className="bg-gray-300 h-32 w-full rounded mb-2 flex items-center justify-center text-gray-600 text-sm">
+                    <div className="bg-primary/30 rounded-lg rounded-tl-none px-4 py-3 max-w-xs">
+                        <div className="bg-primary/30 h-32 w-full rounded mb-2 flex items-center justify-center text-gray-600 text-sm">
                             Image Preview
                         </div>
                         <p className="text-gray-800 text-sm">Check out this document</p>
@@ -64,9 +77,9 @@ const ChatBox = () => {
                     </div>
                 </div>
 
-                {/* Sent Message */}
+                {/* Sent Message 2nd design */}
                 <div className="flex items-start space-x-3 justify-end">
-                    <div className="bg-gray-800 rounded-lg rounded-tr-none px-4 py-3 max-w-xs">
+                    <div className="bg-primary rounded-lg rounded-tr-none px-4 py-3 max-w-xs">
                         <p className="text-white text-sm">That looks great! Thank you 😊</p>
                         <span className="text-xs text-gray-300 mt-1 block text-right">10:36 AM</span>
                     </div>
@@ -77,14 +90,14 @@ const ChatBox = () => {
                     />
                 </div>
 
-                {/* Document Message */}
+                {/* Document Message design */}
                 <div className="flex items-start space-x-3">
                     <img
                         src="https://i.pravatar.cc/150?img=1"
                         alt="User"
                         className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
                     />
-                    <div className="bg-gray-100 rounded-lg rounded-tl-none px-4 py-3 max-w-xs">
+                    <div className="bg-primary/30 rounded-lg rounded-tl-none px-4 py-3 max-w-xs">
                         <div className="flex items-center space-x-3 bg-white rounded p-3 border border-gray-300">
                             <div className="w-10 h-10 bg-red-600 rounded flex items-center justify-center text-white text-xs font-bold">
                                 PDF
@@ -99,13 +112,14 @@ const ChatBox = () => {
                 </div>
             </div>
 
-            {/* Input Area */}
+            {/* Input Area design */}
             <div className="border-t border-gray-200 bg-white px-6 py-4">
+                
                 {/* Image Preview Section */}
                 <div className="mb-3 flex flex-wrap gap-2">
                     {/* Example uploaded image preview - you'll populate this dynamically */}
                     <div className="relative group">
-                        <div className="w-20 h-20 bg-gray-200 rounded-lg overflow-hidden border-2 border-gray-300">
+                        <div className="w-20 h-20 bg-primary/30 rounded-lg overflow-hidden border-2 border-gray-300">
                             <div className="w-full h-full flex items-center justify-center text-gray-500 text-xs">
                                 Image
                             </div>
@@ -117,7 +131,7 @@ const ChatBox = () => {
 
                     {/* Example document preview */}
                     <div className="relative group">
-                        <div className="w-20 h-20 bg-gray-200 rounded-lg overflow-hidden border-2 border-gray-300 flex flex-col items-center justify-center">
+                        <div className="w-20 h-20 bg-primary/30 rounded-lg overflow-hidden border-2 border-gray-300 flex flex-col items-center justify-center">
                             <svg className="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                             </svg>
@@ -130,7 +144,9 @@ const ChatBox = () => {
                 </div>
 
                 <div className="flex items-end space-x-3">
+                    
                     {/* Attachment Button */}
+
                     <label className="flex-shrink-0 w-10 h-10 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center justify-center transition-colors cursor-pointer">
                         <input type="file" className="hidden" accept=".pdf,.doc,.docx,.txt" />
                         <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -159,8 +175,8 @@ const ChatBox = () => {
                         </button>
                     </div>
 
-                    {/* Send Button */}
-                    <button className="flex-shrink-0 w-10 h-10 bg-red-600 hover:bg-red-700 rounded-lg flex items-center justify-center transition-colors">
+                    {/* Send Button design */}
+                    <button className="flex-shrink-0 w-18 h-12 bg-red-600 hover:bg-red-700 rounded-lg flex items-center justify-center transition-colors">
                         <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                         </svg>

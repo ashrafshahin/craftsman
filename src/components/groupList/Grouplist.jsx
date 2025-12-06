@@ -46,6 +46,7 @@ const GroupList = () => {
 
     return (
         <div>
+
             <div className=' rounded-xl md:px-5 md:py-3 font-primary shadow shadow-black/40 scrollbar-thin mb-10  '>
                 <div className='flex justify-between items-center pb-3 '>
                     <h2 className='font-semibold text-lg  '>Groups List</h2>

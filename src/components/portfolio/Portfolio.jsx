@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Sidebar from '../sidebar/Sidebar';
+import Sidebar from '../../components/sidebar/Sidebar';
 
 export default function Portfolio() {
     const [activeTab, setActiveTab] = useState('about');
@@ -109,14 +109,14 @@ export default function Portfolio() {
             </header>
 
             {/* Main Content */}
-            <div className=" mx-auto px-4 py-6">
-                <div className='md:flex justify-between my-10 m-5'>
-                    <div className='flex justify-between my-10 m-5 '>
-                        <div className=' '>
+            <div className=" mx-auto px-5 py-2">
+                <div className='md:flex justify-between my-10 mx-auto'>
+                    <div className='flex justify-between my-10 m-5 mx-auto '>
+                        <div className=''>
                             <Sidebar active="portfolio" />
                         </div>
                         <div className='mx-0'>
-                            <p>v</p>
+                            
                         </div>
                         <div className='mx-0'>
 
