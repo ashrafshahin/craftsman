@@ -113,6 +113,25 @@ const Userlist = () => {
 
     }, [])
 
+    // Search Filter work- december-06...
+    const [filterUserList, setFilterUserList] = useState([])
+
+    const handleSearch = (e) => {
+        const arr = [ ]
+        if (e.target.value.length == 0) {
+            setFilterUserList([])
+        } else {
+            userList.filter((item) => {
+                if (item.username.toLowerCase().includes(e.target.value.toLowerCase())) {
+                    arr.push(item)
+                    setFilterUserList(arr)
+                }
+            })
+        } 
+    }
+    console.log(filterUserList);
+    
+
     return (
         <div>
             <div className='rounded-xl px-5 py-3 font-primary shadow shadow-black/40 mb-10 '>
@@ -121,48 +140,56 @@ const Userlist = () => {
                     <HiDotsVertical className='font-semibold text-xl' />
 
                 </div>
+
+                {/* userList search filter setup */}
+                <div className='border-gray-800 border-3 rounded-lg my-2 cursor-pointer '>
+                    <input onChange={handleSearch}
+                        type="text" placeholder='Search here...'
+                        className='w-full py-2 border-none pl-4'
+                    />
+                </div>
                 <div className='h-[400px] overflow-y-scroll custom-scrollbar pr-1 '>
-                    {/* map kora hoise uporer userList Arrar sob data dynamically show korar jonno */}
-                    
+                    {/* search filter here december-06 - same system just show here   */}
                     {
-                        userList.map((item) => (
-                            <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>
-                                <img className='pr-2 mb-3' src={friends} alt="" />
-                                <div className='pr-12'>
-                                    <p className='font-semibold text-lg'>{item?.username}</p>
-                                    <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>{item?.email}</p>
-                                </div>
-                                {/* *update - 3rd condition - block korle userList e blocked hoye jabe, je block kora person unblock korte parbe... */}
-                                {
-                                    
+                        filterUserList.length > 0 ?
+                            filterUserList.map((item) => (
+                                <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>
+                                    <img className='pr-2 mb-3' src={friends} alt="" />
+                                    <div className='pr-12'>
+                                        <p className='font-semibold text-lg'>{item?.username}</p>
+                                        <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>{item?.email}</p>
+                                    </div>
+                                    {/* *update - 3rd condition - block korle userList e blocked hoye jabe, je block kora person unblock korte parbe... */}
+                                    {
+
                                         blockList.includes(data?.uid + item?.userId) ||
                                             blockList.includes(item?.userId + data?.uid)
 
                                             ?
                                             <button
-                                            className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'> Blocked </button>
-                                        
-                                        :
-                                        
-                                        friendList.includes(data?.uid + item?.userId) ||
-                                            friendList.includes(item?.userId + data?.uid)
+                                                className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'> Blocked </button>
 
-                                            ?
-                                            <button
-                                                className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Friend</button>
                                             :
-                                            friendRequestList.includes(data?.uid + item?.userId) ||
-                                                friendRequestList.includes(item?.userId + data?.uid)
+
+                                            friendList.includes(data?.uid + item?.userId) ||
+                                                friendList.includes(item?.userId + data?.uid)
+
                                                 ?
                                                 <button
-                                                    className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Request Sent </button>
+                                                    className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Friend</button>
                                                 :
-                                                <button onClick={() => handleFriendRequest(item)}
-                                                    className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'> Add Friend </button>
+                                                friendRequestList.includes(data?.uid + item?.userId) ||
+                                                    friendRequestList.includes(item?.userId + data?.uid)
+                                                    ?
+                                                    <button
+                                                        className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Request Sent </button>
+                                                    :
+                                                    <button onClick={() => handleFriendRequest(item)}
+                                                        className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'> Add Friend </button>
 
-                                }
-             {/* update- friendList either 12 or 21 hoi, tahole Friend otherwise ':' agar moto add friend or request sent dekhabe */}
-                                {/* {
+                                    }
+                                    {/* update- friendList either 12 or 21 hoi, tahole Friend otherwise ':' agar moto add friend or request sent dekhabe */}
+                                    {/* {
                                     friendList.includes(data?.uid + item?.userId) ||
                                         friendList.includes(item?.userId + data?.uid)
                                         
@@ -179,9 +206,9 @@ const Userlist = () => {
                                             <button onClick={() => handleFriendRequest(item)}
                                                 className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'> Add Friend </button>
                                 } */}
-         {/* already condition written here for 'add friend' system */}
-                                
-                                {/* friend request sending system
+                                    {/* already condition written here for 'add friend' system */}
+
+                                    {/* friend request sending system
                                 {
                                     friendRequestList.includes(data?.uid + item?.userId) || 
                                     friendRequestList.includes(item?.userId + data?.uid)
@@ -193,9 +220,155 @@ const Userlist = () => {
                                             className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Add Friend </button>
 
                                 } */}
+
+                                </div>
+                            ))
+                            :
+                            userList.map((item) => (
+                                <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>
+                                    <img className='pr-2 mb-3' src={friends} alt="" />
+                                    <div className='pr-12'>
+                                        <p className='font-semibold text-lg'>{item?.username}</p>
+                                        <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>{item?.email}</p>
+                                    </div>
+                                    {/* *update - 3rd condition - block korle userList e blocked hoye jabe, je block kora person unblock korte parbe... */}
+                                    {
+
+                                        blockList.includes(data?.uid + item?.userId) ||
+                                            blockList.includes(item?.userId + data?.uid)
+
+                                            ?
+                                            <button
+                                                className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'> Blocked </button>
+
+                                            :
+
+                                            friendList.includes(data?.uid + item?.userId) ||
+                                                friendList.includes(item?.userId + data?.uid)
+
+                                                ?
+                                                <button
+                                                    className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Friend</button>
+                                                :
+                                                friendRequestList.includes(data?.uid + item?.userId) ||
+                                                    friendRequestList.includes(item?.userId + data?.uid)
+                                                    ?
+                                                    <button
+                                                        className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Request Sent </button>
+                                                    :
+                                                    <button onClick={() => handleFriendRequest(item)}
+                                                        className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'> Add Friend </button>
+
+                                    }
+                                    {/* update- friendList either 12 or 21 hoi, tahole Friend otherwise ':' agar moto add friend or request sent dekhabe */}
+                                    {/* {
+                                    friendList.includes(data?.uid + item?.userId) ||
+                                        friendList.includes(item?.userId + data?.uid)
+                                        
+                                        ?
+                                            <button
+                                                className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Friend</button>
+                                        :
+                                        friendRequestList.includes(data?.uid + item?.userId) ||
+                                            friendRequestList.includes(item?.userId + data?.uid)
+                                            ?
+                                            <button
+                                                className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Request Sent </button>
+                                            :
+                                            <button onClick={() => handleFriendRequest(item)}
+                                                className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'> Add Friend </button>
+                                } */}
+                                    {/* already condition written here for 'add friend' system */}
+
+                                    {/* friend request sending system
+                                {
+                                    friendRequestList.includes(data?.uid + item?.userId) || 
+                                    friendRequestList.includes(item?.userId + data?.uid)
+                                        ?
+                                        <button 
+                                            className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Request Sent </button>  
+                                        :
+                                        <button onClick={() => handleFriendRequest(item)}
+                                            className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Add Friend </button>
+
+                                } */}
+
+                                </div>
+                            ))
+                    }
+                    {/* map kora hoise uporer userList Arrar sob data dynamically show korar jonno */}
+                    {
+        //                 userList.map((item) => (
+        //                     <div className='flex justify-between items-center mt-4 border-b-2 border-b-black/25  '>
+        //                         <img className='pr-2 mb-3' src={friends} alt="" />
+        //                         <div className='pr-12'>
+        //                             <p className='font-semibold text-lg'>{item?.username}</p>
+        //                             <p className='font-medium text-sm text-[rgba(77,77,77,0.75)] '>{item?.email}</p>
+        //                         </div>
+        //                         {/* *update - 3rd condition - block korle userList e blocked hoye jabe, je block kora person unblock korte parbe... */}
+        //                         {
+                                    
+        //                                 blockList.includes(data?.uid + item?.userId) ||
+        //                                     blockList.includes(item?.userId + data?.uid)
+
+        //                                     ?
+        //                                     <button
+        //                                     className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'> Blocked </button>
+                                        
+        //                                 :
+                                        
+        //                                 friendList.includes(data?.uid + item?.userId) ||
+        //                                     friendList.includes(item?.userId + data?.uid)
+
+        //                                     ?
+        //                                     <button
+        //                                         className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Friend</button>
+        //                                     :
+        //                                     friendRequestList.includes(data?.uid + item?.userId) ||
+        //                                         friendRequestList.includes(item?.userId + data?.uid)
+        //                                         ?
+        //                                         <button
+        //                                             className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Request Sent </button>
+        //                                         :
+        //                                         <button onClick={() => handleFriendRequest(item)}
+        //                                             className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'> Add Friend </button>
+
+        //                         }
+        //      {/* update- friendList either 12 or 21 hoi, tahole Friend otherwise ':' agar moto add friend or request sent dekhabe */}
+        //                         {/* {
+        //                             friendList.includes(data?.uid + item?.userId) ||
+        //                                 friendList.includes(item?.userId + data?.uid)
+                                        
+        //                                 ?
+        //                                     <button
+        //                                         className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Friend</button>
+        //                                 :
+        //                                 friendRequestList.includes(data?.uid + item?.userId) ||
+        //                                     friendRequestList.includes(item?.userId + data?.uid)
+        //                                     ?
+        //                                     <button
+        //                                         className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Request Sent </button>
+        //                                     :
+        //                                     <button onClick={() => handleFriendRequest(item)}
+        //                                         className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'> Add Friend </button>
+        //                         } */}
+        //  {/* already condition written here for 'add friend' system */}
                                 
-                            </div>
-                        ))
+        //                         {/* friend request sending system
+        //                         {
+        //                             friendRequestList.includes(data?.uid + item?.userId) || 
+        //                             friendRequestList.includes(item?.userId + data?.uid)
+        //                                 ?
+        //                                 <button 
+        //                                     className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Request Sent </button>  
+        //                                 :
+        //                                 <button onClick={() => handleFriendRequest(item)}
+        //                                     className='bg-primary py-1 px-3 rounded-lg text-white  text-xl'>Add Friend </button>
+
+        //                         } */}
+                                
+        //                     </div>
+        //                 ))
                     }
 
                 </div>
