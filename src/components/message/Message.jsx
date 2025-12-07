@@ -7,6 +7,7 @@ import BlockedUsers from '../../components/blockedUsers/BlockedUsers'
 import GroupList from '../../components/groupList/Grouplist'
 import MyGroups from '../../components/myGroups/MyGroups'
 import ChatBox from '../../components/chatBox/ChatBox'
+import ChatFriends from '../chatBox/ChatFriends'
 
 const Message = () => {
     return (
@@ -21,7 +22,7 @@ const Message = () => {
                         <ChatBox />
                     </div>
                     <div className='mx-2'>
-                        <Friends />
+                        <ChatFriends />
                     </div>
                 </div>
                 

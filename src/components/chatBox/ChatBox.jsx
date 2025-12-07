@@ -2,14 +2,22 @@ import React from 'react';
 import userImage from '../images/friends.png'
 
 import { HiDotsVertical } from "react-icons/hi";
+import { useSelector } from 'react-redux';
 
 
 const ChatBox = () => {
+    
+    const activeData = useSelector((state) => state.activeChatInfo.value)
+    console.log(activeData);
+    // localstorage setup dec-07 , uporer variable name ta 'activeData' asbe...
+    
+    localStorage.setItem("activeChatInfo", JSON.stringify(activeData))
+    
 
     return (
         <div className="flex flex-col h-screen bg-white shadow-lg shadow-black rounded-b-xl">
             {/* Header */}
-            <div className="bg-primary text-white px-6 py-7 shadow-t-lg shadow-black rounded-t-xl  ">
+            <div className="bg-primary text-white px-4 py-3 shadow-t-lg  shadow-black rounded-t-xl  ">
                 <div className="flex items-center gap-x-5 ">
                     <div className=''>
                         <img
@@ -21,11 +29,19 @@ const ChatBox = () => {
                    
                     <div className='flex justify-end items-center space-x-70 '>
                         <div>
-                            <h2 className="font-bold text-2xl">Name</h2>
+                            <h2 className="font-bold text-2xl">
+                                
+                                {
+                                    activeData ?
+                                        <p>{activeData.name}</p>
+                                        :
+                                        <p>Unknown</p>
+                                     }  
+                                </h2>
                             <p className="text-sm text-gray-300">Online</p>
                         </div>
                         <div>
-                            <HiDotsVertical className='text-3xl md:ml-70' />
+                            <HiDotsVertical className='text-3xl md:ml-20' />
                         </div>
                 </div>
                     

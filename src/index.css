@@ -18,12 +18,12 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-    background: rgba(140, 176, 248, 0.612);
+    background: rgba(22, 24, 28, 0.612);
     border-radius: 10px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(109, 157, 241, 0.632);
+    background: rgba(32, 33, 35, 0.632);
     border-radius: 10px;
     
 }

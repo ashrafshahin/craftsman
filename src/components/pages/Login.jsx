@@ -94,6 +94,7 @@ const Login = () => {
           // sending data using REDUX
           dispatch(userDetails(user))
           
+          // upore 'user' varialbe name, tai user deya chatBox e variable activeData 
           localStorage.setItem("userDetails", JSON.stringify(user))
 
           setTimeout(() => {
