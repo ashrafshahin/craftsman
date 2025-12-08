@@ -102,7 +102,7 @@ const ChatBox = () => {
                        // Sent Message design... dec-08
                         <div className="flex items-start space-x-3 justify-end">
                             <div className="bg-primary rounded-lg rounded-tr-none px-4 py-3 max-w-xs">
-                                <p className="text-white text-sm">hello...</p>
+                                    <p className="text-white text-sm">{ item.message}</p>
                                 <span className="text-xs text-gray-300 mt-1 block text-right">10:32 AM</span>
                             </div>
                             <img
@@ -120,7 +120,7 @@ const ChatBox = () => {
                                     className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
                                 />
                                 <div className="bg-gray-100 rounded-lg rounded-tl-none px-4 py-3 max-w-xs">
-                                    <p className="text-gray-800 text-sm">helo ola</p>
+                                    <p className="text-gray-800 text-sm">{item.message}</p>
                                     <span className="text-xs text-gray-500 mt-1 block">10:30 AM</span>
                                 </div>
                             </div>
@@ -273,7 +273,7 @@ const ChatBox = () => {
                     </div>
 
                     {/* Send Button design */}
-                    
+
                     {/* Chatting with friends- message sending dec-08 */}
                     <button onClick={handleMsg}
                         className="flex-shrink-0 w-18 h-12 bg-red-600 hover:bg-red-700 rounded-lg flex items-center justify-center transition-colors">
