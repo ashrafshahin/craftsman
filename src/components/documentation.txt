@@ -7,6 +7,8 @@ email verification - Done
 forgotpassword design - Done
 google signin Done
 
+security setup for database
+https://www.npmjs.com/package/bcryptjs
 
 firebase setup and everything here link
 https://firebase.google.com/docs/web/setup#available-libraries

@@ -1,18 +1,63 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import userImage from '../images/friends.png'
 
 import { HiDotsVertical } from "react-icons/hi";
+
 import { useSelector } from 'react-redux';
+
+import { getDatabase, onValue, push, ref, set } from 'firebase/database';
 
 
 const ChatBox = () => {
-    
+    // msg sending dec-08
+    const db = getDatabase()
+    //Get data from Redux dec-08
+    const data = useSelector((selector) => (selector.userDetails.value))
+
+    //redux-ar setup work dec-07
     const activeData = useSelector((state) => state.activeChatInfo.value)
-    console.log(activeData);
+    // console.log(activeData);
+
     // localstorage setup dec-07 , uporer variable name ta 'activeData' asbe...
-    
     localStorage.setItem("activeChatInfo", JSON.stringify(activeData))
+
+    // message sending to redux to show on firebase.. dec-08 
+    const [msg, SetMsg] = useState('')
+    const handleMsg = (e) => {
+        console.log(msg);
+        set(push(ref(db, "message")), {
+            senderID: data.uid,
+            senderName: data.displayName,
+            receiverID: activeData.ID,
+            receiverName: activeData.name,
+            message: msg
+        })
+
+    }
+    // from firebase - send message to display dec-08 
+    // useState ([]) vitore array hobe
+    const [msgList, setMsgList] = useState([])
     
+    useEffect(() => {
+        const messageRef = ref(db, "message")
+        onValue(messageRef, (snapshot) => {
+            let arr = []
+            snapshot.forEach((item) => {
+                if (
+                    (data.uid == item.val().senderID && activeData.ID == item.val().receiverID)
+                    ||
+                    (data.uid == item.val().receiverID && activeData.ID == item.val().senderID)
+                )
+                    arr.push(item.val())
+
+            });    
+            setMsgList(arr)
+        });
+
+    }, [])
+    console.log(msgList, 'check , chat messages');
+
+
 
     return (
         <div className="flex flex-col h-screen bg-white shadow-lg shadow-black rounded-b-xl">
@@ -26,59 +71,91 @@ const ChatBox = () => {
                             className="w-15 h-14 md:w-25 md:h-25 rounded-full object-cover"
                         />
                     </div>
-                   
+
                     <div className='flex justify-end items-center space-x-70 '>
                         <div>
+                            {/* kar sathe chatting korchi tar name asbe... dec-07 */}
                             <h2 className="font-bold text-2xl">
-                                
+
                                 {
                                     activeData ?
                                         <p>{activeData.name}</p>
                                         :
                                         <p>Unknown</p>
-                                     }  
-                                </h2>
+                                }
+                            </h2>
                             <p className="text-sm text-gray-300">Online</p>
                         </div>
                         <div>
                             <HiDotsVertical className='text-3xl md:ml-20' />
                         </div>
-                </div>
-                    
+                    </div>
+
                 </div>
             </div>
 
-            {/* Messages Container */}
+            {/* Messages Container */} {/* map for message dec-08 */}
             <div className="flex-1 overflow-y-auto p-6 space-y-4">
+                {
+                    msgList.map((item) => (
+                        data.uid == item.senderID ?
+                       // Sent Message design... dec-08
+                        <div className="flex items-start space-x-3 justify-end">
+                            <div className="bg-primary rounded-lg rounded-tr-none px-4 py-3 max-w-xs">
+                                <p className="text-white text-sm">hello...</p>
+                                <span className="text-xs text-gray-300 mt-1 block text-right">10:32 AM</span>
+                            </div>
+                            <img
+                                src={userImage}
+                                alt="Me"
+                                className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
+                            />
+                            </div>
+                            :
+                            // Received Message design
+                            <div className="flex items-start space-x-3">
+                                <img
+                                    src={userImage}
+                                    alt="User"
+                                    className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
+                                />
+                                <div className="bg-gray-100 rounded-lg rounded-tl-none px-4 py-3 max-w-xs">
+                                    <p className="text-gray-800 text-sm">helo ola</p>
+                                    <span className="text-xs text-gray-500 mt-1 block">10:30 AM</span>
+                                </div>
+                            </div>
+                    ))
+                }
+                
                 
                 {/* Received Message design */}
-                <div className="flex items-start space-x-3">
+                {/* <div className="flex items-start space-x-3">
                     <img
                         src={userImage}
                         alt="User"
                         className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
                     />
                     <div className="bg-gray-100 rounded-lg rounded-tl-none px-4 py-3 max-w-xs">
-                        <p className="text-gray-800 text-sm">Hello! How can I help you today?</p>
+                        <p className="text-gray-800 text-sm">helo ola</p>
                         <span className="text-xs text-gray-500 mt-1 block">10:30 AM</span>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Sent Message design */}
-                <div className="flex items-start space-x-3 justify-end">
+                {/* <div className="flex items-start space-x-3 justify-end">
                     <div className="bg-primary rounded-lg rounded-tr-none px-4 py-3 max-w-xs">
-                        <p className="text-white text-sm">Hi! I need some information about your services.</p>
+                        <p className="text-white text-sm">hello...</p>
                         <span className="text-xs text-gray-300 mt-1 block text-right">10:32 AM</span>
                     </div>
                     <img
-                        src= {userImage}
+                        src={userImage}
                         alt="Me"
                         className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
                     />
-                </div>
+                </div> */}
 
                 {/* Received Message with Image design */}
-                <div className="flex items-start space-x-3">
+                {/* <div className="flex items-start space-x-3">
                     <img
                         src="https://i.pravatar.cc/150?img=1"
                         alt="User"
@@ -91,10 +168,10 @@ const ChatBox = () => {
                         <p className="text-gray-800 text-sm">Check out this document</p>
                         <span className="text-xs text-gray-500 mt-1 block">10:35 AM</span>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Sent Message 2nd design */}
-                <div className="flex items-start space-x-3 justify-end">
+                {/* <div className="flex items-start space-x-3 justify-end">
                     <div className="bg-primary rounded-lg rounded-tr-none px-4 py-3 max-w-xs">
                         <p className="text-white text-sm">That looks great! Thank you 😊</p>
                         <span className="text-xs text-gray-300 mt-1 block text-right">10:36 AM</span>
@@ -104,10 +181,10 @@ const ChatBox = () => {
                         alt="Me"
                         className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
                     />
-                </div>
+                </div> */}
 
                 {/* Document Message design */}
-                <div className="flex items-start space-x-3">
+                {/* <div className="flex items-start space-x-3">
                     <img
                         src="https://i.pravatar.cc/150?img=1"
                         alt="User"
@@ -125,16 +202,17 @@ const ChatBox = () => {
                         </div>
                         <span className="text-xs text-gray-500 mt-2 block">10:38 AM</span>
                     </div>
-                </div>
+                </div> */}
+            
             </div>
 
             {/* Input Area design */}
             <div className="border-t border-gray-200 bg-white px-6 py-4">
-                
+
                 {/* Image Preview Section */}
                 <div className="mb-3 flex flex-wrap gap-2">
                     {/* Example uploaded image preview - you'll populate this dynamically */}
-                    <div className="relative group">
+                    {/* <div className="relative group">
                         <div className="w-20 h-20 bg-primary/30 rounded-lg overflow-hidden border-2 border-gray-300">
                             <div className="w-full h-full flex items-center justify-center text-gray-500 text-xs">
                                 Image
@@ -143,10 +221,10 @@ const ChatBox = () => {
                         <button className="absolute -top-2 -right-2 w-6 h-6 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">
                             ×
                         </button>
-                    </div>
+                    </div> */}
 
                     {/* Example document preview */}
-                    <div className="relative group">
+                    {/* <div className="relative group">
                         <div className="w-20 h-20 bg-primary/30 rounded-lg overflow-hidden border-2 border-gray-300 flex flex-col items-center justify-center">
                             <svg className="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
@@ -156,11 +234,12 @@ const ChatBox = () => {
                         <button className="absolute -top-2 -right-2 w-6 h-6 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">
                             ×
                         </button>
-                    </div>
+                    </div> */}
+
                 </div>
 
                 <div className="flex items-end space-x-3">
-                    
+
                     {/* Attachment Button */}
 
                     <label className="flex-shrink-0 w-10 h-10 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center justify-center transition-colors cursor-pointer">
@@ -179,8 +258,10 @@ const ChatBox = () => {
                     </label>
 
                     {/* Input Field */}
+                    
+                    {/* Chatting with friends- message sending dec-08 */}
                     <div className="flex-1 relative">
-                        <input
+                        <input onChange={(e) => SetMsg(e.target.value)}
                             type="text"
                             placeholder="Type your message..."
                             className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 text-gray-800"
@@ -192,7 +273,10 @@ const ChatBox = () => {
                     </div>
 
                     {/* Send Button design */}
-                    <button className="flex-shrink-0 w-18 h-12 bg-red-600 hover:bg-red-700 rounded-lg flex items-center justify-center transition-colors">
+                    
+                    {/* Chatting with friends- message sending dec-08 */}
+                    <button onClick={handleMsg}
+                        className="flex-shrink-0 w-18 h-12 bg-red-600 hover:bg-red-700 rounded-lg flex items-center justify-center transition-colors">
                         <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                         </svg>
