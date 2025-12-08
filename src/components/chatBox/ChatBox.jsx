@@ -21,18 +21,26 @@ const ChatBox = () => {
     // localstorage setup dec-07 , uporer variable name ta 'activeData' asbe...
     localStorage.setItem("activeChatInfo", JSON.stringify(activeData))
 
+    
+
     // message sending to redux to show on firebase.. dec-08 
     const [msg, SetMsg] = useState('')
     const handleMsg = (e) => {
+        if (msg.trim()) {
+            set(push(ref(db, "message")), {
+                senderID: data.uid,
+                senderName: data.displayName,
+                receiverID: activeData.ID,
+                receiverName: activeData.name,
+                message: msg
+                
+            })
+            // Clear input after sending dec-08
+            SetMsg('');
+        }
         console.log(msg);
-        set(push(ref(db, "message")), {
-            senderID: data.uid,
-            senderName: data.displayName,
-            receiverID: activeData.ID,
-            receiverName: activeData.name,
-            message: msg
-        })
-
+        
+        
     }
     // from firebase - send message to display dec-08 
     // useState ([]) vitore array hobe
@@ -262,6 +270,14 @@ const ChatBox = () => {
                     {/* Chatting with friends- message sending dec-08 */}
                     <div className="flex-1 relative">
                         <input onChange={(e) => SetMsg(e.target.value)}
+                    // enter dele message chole jabe dec-08
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    e.preventDefault();
+                                    handleMsg();
+                                }
+                            }}
+                            value={msg}
                             type="text"
                             placeholder="Type your message..."
                             className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 text-gray-800"
