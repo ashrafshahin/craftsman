@@ -7,6 +7,9 @@ import { useSelector } from 'react-redux';
 
 import { getDatabase, onValue, push, ref, set } from 'firebase/database';
 
+// date and time setup- dec-8..
+import moment from 'moment'
+
 
 const ChatBox = () => {
     // msg sending dec-08
@@ -32,10 +35,11 @@ const ChatBox = () => {
                 senderName: data.displayName,
                 receiverID: activeData.ID,
                 receiverName: activeData.name,
-                message: msg
+                message: msg,
+                date: moment().format()
                 
             })
-            // Clear input after sending dec-08
+            // Clear input after sending, trim() method used dec-08
             SetMsg('');
         }
         console.log(msg);
@@ -62,9 +66,9 @@ const ChatBox = () => {
             setMsgList(arr)
         });
 
-    }, [])
+    }, [activeData.ID])
     console.log(msgList, 'check , chat messages');
-
+    // here activeData.ID dele refresh korle data chole jabe na , dec-08,,,
 
 
     return (
@@ -111,7 +115,8 @@ const ChatBox = () => {
                         <div className="flex items-start space-x-3 justify-end">
                             <div className="bg-primary rounded-lg rounded-tr-none px-4 py-3 max-w-xs">
                                     <p className="text-white text-sm">{ item.message}</p>
-                                <span className="text-xs text-gray-300 mt-1 block text-right">10:32 AM</span>
+                                    <span className="text-xs text-gray-300 mt-1 block text-right">{moment(item.date).fromNow()}</span>
+                                    <span className="text-xs text-gray-300 mt-1 block text-right">{moment.locale(item.date)}</span>
                             </div>
                             <img
                                 src={userImage}
@@ -127,9 +132,10 @@ const ChatBox = () => {
                                     alt="User"
                                     className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
                                 />
-                                <div className="bg-gray-100 rounded-lg rounded-tl-none px-4 py-3 max-w-xs">
-                                    <p className="text-gray-800 text-sm">{item.message}</p>
-                                    <span className="text-xs text-gray-500 mt-1 block">10:30 AM</span>
+                                <div className="bg-gray-300 rounded-lg rounded-tl-none px-4 py-3 max-w-xs">
+                                    <p className="text-gray-900 text-sm">{item.message}</p>
+                                    <span className="text-xs text-gray-500 mt-1 block">{moment(item.date).fromNow()}</span>
+                                    <span className="text-xs text-gray-300 mt-1 block text-right">{moment.locale(item.date)}</span>
                                 </div>
                             </div>
                     ))
@@ -270,7 +276,8 @@ const ChatBox = () => {
                     {/* Chatting with friends- message sending dec-08 */}
                     <div className="flex-1 relative">
                         <input onChange={(e) => SetMsg(e.target.value)}
-                    // enter dele message chole jabe dec-08
+                   
+                        // enter dele message chole jabe dec-08
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter') {
                                     e.preventDefault();
