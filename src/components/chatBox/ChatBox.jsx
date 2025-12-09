@@ -10,6 +10,13 @@ import { getDatabase, onValue, push, ref, set } from 'firebase/database';
 // date and time setup- dec-8..
 import moment from 'moment'
 
+// emoji setup Dec-08
+import EmojiPicker from 'emoji-picker-react';
+import { ImCross } from "react-icons/im";
+import { FaRegSmile } from "react-icons/fa";
+
+
+
 
 const ChatBox = () => {
     // msg sending dec-08
@@ -70,7 +77,11 @@ const ChatBox = () => {
     console.log(msgList, 'check , chat messages');
     // here activeData.ID dele refresh korle data chole jabe na , dec-08,,,
 
-
+    // emoji setup er jonno dec-08
+    const [showEmoji, setShowEmoji] = useState(false)
+    const [showIcon, setShowIcon] = useState(false)
+    
+    
     return (
         <div className="flex flex-col h-screen bg-white shadow-lg shadow-black rounded-b-xl">
             {/* Header */}
@@ -252,7 +263,7 @@ const ChatBox = () => {
 
                 </div>
 
-                <div className="flex items-end space-x-3">
+                <div className="flex items-end space-x-3 relative">
 
                     {/* Attachment Button */}
 
@@ -272,9 +283,16 @@ const ChatBox = () => {
                     </label>
 
                     {/* Input Field */}
+                    {/* emoji design and position fixed dec-09 */}
+                    <div className='absolute bottom-13 left-27 '>
+                        {
+                            showEmoji && <EmojiPicker className='' />
+                        }
+                    </div>
                     
                     {/* Chatting with friends- message sending dec-08 */}
                     <div className="flex-1 relative">
+                        
                         <input onChange={(e) => SetMsg(e.target.value)}
                    
                         // enter dele message chole jabe dec-08
@@ -289,17 +307,30 @@ const ChatBox = () => {
                             placeholder="Type your message..."
                             className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 text-gray-800"
                         />
-                        {/* Emoji Button */}
-                        <button className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors text-xl">
+                        {/* Emoji Button  */}
+
+                        <button onClick={(e)=>setShowEmoji(!showEmoji)}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors text-3xl bg-transparent">
+                            
                             😊
-                        </button>
+                                  
+                                </button>
+                            
+                                
+                        
+                        
+                        
                     </div>
 
                     {/* Send Button design */}
 
                     {/* Chatting with friends- message sending dec-08 */}
+                    {/* <div className='absolute top-[8px] right-[60px] '>
+                        <FaRegSmile onClick={(e) => setShowEmoji(!showEmoji)}
+                            className='text-[35px] ' />
+                    </div> */}
                     <button onClick={handleMsg}
-                        className="flex-shrink-0 w-18 h-12 bg-red-600 hover:bg-red-700 rounded-lg flex items-center justify-center transition-colors">
+                        className="flex-shrink-0 w-12 h-12 bg-red-600 hover:bg-red-700 rounded-lg flex items-center justify-center transition-colors">
                         <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                         </svg>
