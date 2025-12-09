@@ -15,6 +15,7 @@ import ForgotPassword from './components/pages/ForgotPassword';
 import firebaseConfig from './components/firebase/firebaseConfig';
 import Message from './components/message/Message';
 import Portfolio from './components/portfolio/Portfolio';
+import Settings from './components/pages/Settings';
 
 
 
@@ -45,6 +46,10 @@ function App() {
     {
       path: "/portfolio",
       element: <Portfolio />,
+    },
+    {
+      path: "/settings",
+      element: <Settings />,
     },
   ]);
 

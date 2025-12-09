@@ -101,7 +101,12 @@ const Sidebar = ({active}) => {
 
                   before:absolute before:top-0 before:right-0 before:content-[" "] before:w-[25px] before:h-full before:rounded-l-2xl before:bg-primary before:shadow-2xs/90 before:shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)] flex justify-center mt-[78px] py-6 my-4 `}>
 
-                      <IoSettingsOutline className='text-white text-5xl shadow-2xs/90 shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)] ' />
+                      {/* settings navigation work dec-09.. upore aro kaj kora hoise, components banai, app.jsx e add kore hoise  */}
+                      <Link to="/settings">
+                          <IoSettingsOutline className={`text-5xl shadow-2xs/90 shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)] ${active == "settings" ? "text-primary" : "text-[#C3C3C3]"} `} />
+                      </Link>
+                      
+                      
 
                   </div>
               </div>
