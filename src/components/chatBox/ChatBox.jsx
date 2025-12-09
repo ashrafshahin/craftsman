@@ -79,7 +79,13 @@ const ChatBox = () => {
 
     // emoji setup er jonno dec-08
     const [showEmoji, setShowEmoji] = useState(false)
-    const [showIcon, setShowIcon] = useState(false)
+    
+    // emoji dynamic on chatting with emoji dec-09
+    const onEmojiClick = (emoji) => {
+        console.log(emoji.emoji, 'check emoji');
+        SetMsg(msg + emoji.emoji)
+        
+    }
     
     
     return (
@@ -286,7 +292,8 @@ const ChatBox = () => {
                     {/* emoji design and position fixed dec-09 */}
                     <div className='absolute bottom-13 left-27 '>
                         {
-                            showEmoji && <EmojiPicker className='' />
+                            showEmoji &&
+                            <EmojiPicker onEmojiClick={(emoji) => onEmojiClick(emoji)} />
                         }
                     </div>
                     
@@ -302,6 +309,7 @@ const ChatBox = () => {
                                     handleMsg();
                                 }
                             }}
+                        // value must dete hobe - emoji dynamic kore chatting korte
                             value={msg}
                             type="text"
                             placeholder="Type your message..."

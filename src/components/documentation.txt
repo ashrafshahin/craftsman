@@ -7,6 +7,10 @@ email verification - Done
 forgotpassword design - Done
 google signin Done
 
+react emoji picker link
+https://www.npmjs.com/package/emoji-picker-react
+
+
 security setup for database
 https://www.npmjs.com/package/bcryptjs
 
