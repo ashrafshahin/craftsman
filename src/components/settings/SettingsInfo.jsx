@@ -5,6 +5,7 @@ import profile from "../images/profile.png"
 import { useDispatch, useSelector } from 'react-redux';
 import { getDatabase, ref, set } from 'firebase/database';
 import { getAuth, updateProfile } from 'firebase/auth';
+import { userNameUpdate } from '../slices/userSlice';
 
 const SettingsInfo = () => {
 
@@ -19,10 +20,17 @@ const SettingsInfo = () => {
     //Bring Data from Database - profile update part 
     const data = useSelector((selector) => (selector.userDetails.value))
 
+    //redux-ar setup work dec-07
+    const settingData = useSelector((state) => state.userDetails.value)
+        // console.log(settingData);
+    
+        // localstorage setup dec-07 , uporer variable name ta 'activeData' asbe...
+    localStorage.setItem("userDetails", JSON.stringify(settingData))
+
     const [show, setShow] = useState(false)
 
     // profile name edit work... dec-10
-    const [showDisplayName, setShowDisplayName] = useState('')
+    // const [showDisplayName, setShowDisplayName] = useState(data.displayName || " ")
 
     // finally used this one dec-11...
     const [newName, setNewName] = useState('')
@@ -35,7 +43,7 @@ const SettingsInfo = () => {
         updateProfile(auth.currentUser, {
             displayName: newName,
         })
-         set(ref(db, 'users/' + user.uid), {
+         set(ref(db, 'users/' + data.uid), {
              username: newName,
              
          }).then(() => {
@@ -85,7 +93,7 @@ const SettingsInfo = () => {
                             </div>
                             <div>
                                 <h3 className="text-base font-semibold text-white">
-                                    {data.displayName}
+                                    {data?.displayName}
                                 </h3>
                                 <p className="text-gray-400 text-sm flex items-center gap-1">
                                     Stay home <span className="text-yellow-400">🏠</span> stay <span className="text-yellow-400">😊</span>

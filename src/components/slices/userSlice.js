@@ -21,8 +21,8 @@ export const userSlice = createSlice({
                 state.value.user.displayName = action.payload
             }
             // we can keep localstorage work here too-make sure your variables are correct... december-11
-            const updateProfileName = { ...state.value }
-            localStorage.setItem('userDetails', JSON.stringify(updateProfileName))
+            // const updateProfileName = { ...state.value }
+            // localStorage.setItem('userDetails', JSON.stringify(updateProfileName))
         }
     },
 
