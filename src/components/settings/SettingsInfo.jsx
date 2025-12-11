@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import profile from "../images/profile.png"
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getDatabase, ref, set } from 'firebase/database';
+import { getDatabase, ref, set, update } from 'firebase/database';
 import { getAuth, updateProfile } from 'firebase/auth';
 import { userNameUpdate } from '../slices/userSlice';
 
@@ -20,12 +20,7 @@ const SettingsInfo = () => {
     //Bring Data from Database - profile update part 
     const data = useSelector((selector) => (selector.userDetails.value))
 
-    //redux-ar setup work dec-07
-    const settingData = useSelector((state) => state.userDetails.value)
-        // console.log(settingData);
     
-        // localstorage setup dec-07 , uporer variable name ta 'activeData' asbe...
-    localStorage.setItem("userDetails", JSON.stringify(settingData))
 
     const [show, setShow] = useState(false)
 
@@ -33,7 +28,7 @@ const SettingsInfo = () => {
     // const [showDisplayName, setShowDisplayName] = useState(data.displayName || " ")
 
     // finally used this one dec-11...
-    const [newName, setNewName] = useState('')
+    const [newName, setNewName] = useState(data.displayName)
 
     const handleEditNameShow = () => {
         setShow(!show)
@@ -43,7 +38,7 @@ const SettingsInfo = () => {
         updateProfile(auth.currentUser, {
             displayName: newName,
         })
-         set(ref(db, 'users/' + data.uid), {
+         update(ref(db, 'users/' + user.uid), {
              username: newName,
              
          }).then(() => {
@@ -117,7 +112,7 @@ const SettingsInfo = () => {
                                 <div>
                                     <input
                                             onChange={(e) => setNewName(e.target.value)}
-                                        // value={showDisplayName}
+                                            value={newName}
                                         type="text" placeholder='Edit Profile Name...'
                                         className='w-[320px] border-2 rounded-lg border-white text-sm text-white py-2 pl-4 mr-2' />
                                     <button onClick={handleEditName}
