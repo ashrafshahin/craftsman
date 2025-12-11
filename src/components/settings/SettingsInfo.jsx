@@ -2,19 +2,54 @@ import React, { useState } from 'react';
 
 import profile from "../images/profile.png"
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDatabase, ref, set } from 'firebase/database';
+import { getAuth, updateProfile } from 'firebase/auth';
 
 const SettingsInfo = () => {
+
+    const db = getDatabase()
+    const auth = getAuth()
+    // **user not defined Error** solve hoise ai variable deye... dec-10..
+    const user = auth.currentUser;
+
+    // redux er kahini korba,,, dec-10
+    const dispatch = useDispatch()
+
     //Bring Data from Database - profile update part 
     const data = useSelector((selector) => (selector.userDetails.value))
 
     const [show, setShow] = useState(false)
+
+    // profile name edit work... dec-10
+    const [showDisplayName, setShowDisplayName] = useState('')
+
+    // finally used this one dec-11...
+    const [newName, setNewName] = useState('')
+
     const handleEditNameShow = () => {
         setShow(!show)
     }
+    const handleEditName = () => {
+        console.log(newName);
+        updateProfile(auth.currentUser, {
+            displayName: newName,
+        })
+         set(ref(db, 'users/' + user.uid), {
+             username: newName,
+             
+         }).then(() => {
+            dispatch(userNameUpdate(newName))
+        }).catch((error) => {
+        console.log(error, "Name Update work Error");
+        
+        })
+
+    }
+
     return (
-        <div className="min-h-screen font-primary bg-primary shadow-2xl shadow-black p-6 rounded-xl ml-10">
-            <div className="md:w-6xl mx-auto">
+        <div className="min-h-screen font-primary bg-primary shadow-2xl shadow-black p-6 mt-2 rounded-xl ml-4">
+            <div className="md:w-5xl mx-auto">
                 {/* Search Bar */}
                 <div className="mb-6 relative">
                     <span className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/20 text-lg">🔍</span>
@@ -50,7 +85,7 @@ const SettingsInfo = () => {
                             </div>
                             <div>
                                 <h3 className="text-base font-semibold text-white">
-                                    {data.displayName} 
+                                    {data.displayName}
                                 </h3>
                                 <p className="text-gray-400 text-sm flex items-center gap-1">
                                     Stay home <span className="text-yellow-400">🏠</span> stay <span className="text-yellow-400">😊</span>
@@ -60,20 +95,25 @@ const SettingsInfo = () => {
 
                         {/* Settings Options */}
                         <div className="space-y-1">
-                            
-                    {/* working on profile edit dec-09... */}
+
+                            {/* working on profile edit dec-09... dec-10 following */}
                             <button onClick={handleEditNameShow}
                                 className="w-full flex items-center gap-3 px-3 py-3 text-white hover:bg-gray-900 rounded-lg transition-colors text-left">
                                 <span className="text-gray-400 text-lg flex-shrink-0">✏️</span>
                                 <span className="text-sm">Edit Profile Name.</span>
 
                             </button>
+                            {/* profile name edit work... dec-10 */}
                             {
-                                show && 
+                                show &&
                                 <div>
-                                        <input type="text" placeholder='Edit Profile Name...'
-                                            className='w-[350px] border-2 rounded-lg border-white text-l text-white py-2 pl-4 mr-2' />
-                                        <button className='border-2 rounded-lg border-white text-l text-white p-2 hover:bg-white hover:text-black '>Update Name</button>
+                                    <input
+                                            onChange={(e) => setNewName(e.target.value)}
+                                        // value={showDisplayName}
+                                        type="text" placeholder='Edit Profile Name...'
+                                        className='w-[320px] border-2 rounded-lg border-white text-sm text-white py-2 pl-4 mr-2' />
+                                    <button onClick={handleEditName}
+                                        className='border-2 rounded-lg border-white text-sm text-white p-2 hover:bg-white hover:text-black '>Update Name</button>
                                 </div>
                             }
                             <button className="w-full flex items-center gap-3 px-3 py-3 text-white hover:bg-gray-900 rounded-lg transition-colors text-left">

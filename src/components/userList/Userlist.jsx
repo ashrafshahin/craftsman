@@ -144,7 +144,7 @@ const Userlist = () => {
                 {/* userList search filter setup */}
                 <div className='border-gray-800 border-3 rounded-lg my-2 cursor-pointer '>
                     <input onChange={handleSearch}
-                        type="text" placeholder='Search here...'
+                        type="text" placeholder=' 🔍 Search here...'
                         className='w-full py-2 border-none pl-4'
                     />
                 </div>

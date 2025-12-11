@@ -13,18 +13,21 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         userDetails: (state, action) => {
-            console.log(state.value, 'before')
-            console.log(action.payload, 'Payload')
-            
-            state.value = action.payload
-            
-            console.log(state.value, 'after');
-         
+            state.value = action.payload  
         },
+        // user name or information update korar jonno... dec-10
+        userNameUpdate: (state, action) => {
+            if (state.value && state.value.user) {
+                state.value.user.displayName = action.payload
+            }
+            // we can keep localstorage work here too-make sure your variables are correct... december-11
+            const updateProfileName = { ...state.value }
+            localStorage.setItem('userDetails', JSON.stringify(updateProfileName))
+        }
     },
 
 });
 
-export const { userDetails } = userSlice.actions;
+export const { userDetails, userNameUpdate } = userSlice.actions;
 
 export default userSlice.reducer;
