@@ -24,8 +24,6 @@ const SettingsInfo = () => {
 
     const [show, setShow] = useState(false)
 
-    // profile name edit work... dec-10
-    // const [showDisplayName, setShowDisplayName] = useState(data.displayName || " ")
 
     // finally used this one dec-11...
     const [newName, setNewName] = useState(data.displayName)
@@ -41,6 +39,7 @@ const SettingsInfo = () => {
          update(ref(db, 'users/' + user.uid), {
              username: newName,
              
+             
          }).then(() => {
             dispatch(userNameUpdate(newName))
         }).catch((error) => {
@@ -48,6 +47,17 @@ const SettingsInfo = () => {
         
         })
 
+    }
+    // status show edit work 17 dec...
+    const [showStatus, setShowStatus] = useState(false)
+    const [newStatus, setNewStatus] = useState('')
+
+    const handleEditStatusShow = () => {
+        setShowStatus(!showStatus)
+    }
+    const handleStatus = () => {
+        console.log(newStatus, 'status input working...?');
+        
     }
 
     return (
@@ -99,14 +109,14 @@ const SettingsInfo = () => {
                         {/* Settings Options */}
                         <div className="space-y-1">
 
-                            {/* working on profile edit dec-09... dec-10 following */}
+            {/* working on profile edit dec-09... dec-10 following */}
                             <button onClick={handleEditNameShow}
                                 className="w-full flex items-center gap-3 px-3 py-3 text-white hover:bg-gray-900 rounded-lg transition-colors text-left">
                                 <span className="text-gray-400 text-lg flex-shrink-0">✏️</span>
                                 <span className="text-sm">Edit Profile Name.</span>
 
                             </button>
-                            {/* profile name edit work... dec-10 */}
+                 {/* profile name edit work... dec-10 */}
                             {
                                 show &&
                                 <div>
@@ -119,10 +129,24 @@ const SettingsInfo = () => {
                                         className='border-2 rounded-lg border-white text-sm text-white p-2 hover:bg-white hover:text-black '>Update Name</button>
                                 </div>
                             }
-                            <button className="w-full flex items-center gap-3 px-3 py-3 text-white hover:bg-gray-900 rounded-lg transition-colors text-left">
+
+                 {/* status show edit work 17 dec... */}
+                            <button onClick={handleEditStatusShow}
+                                className="w-full flex items-center gap-3 px-3 py-3 text-white hover:bg-gray-900 rounded-lg transition-colors text-left">
                                 <span className="text-gray-400 text-lg flex-shrink-0">💬</span>
                                 <span className="text-sm">Edit Profile Status Info.</span>
                             </button>
+                            {
+                                showStatus && 
+                                <div>
+                                        <input onChange={(e)=> setNewStatus(e.target.value)}
+                                            type="text" placeholder='Update Status...' value={newStatus}
+                                            className='w-[320px] border-2 rounded-lg border-white text-sm text-white py-2 pl-4 mr-2' />
+                                        <button onClick={handleStatus}
+                                            className='border-2 rounded-lg border-white text-sm text-white p-2 hover:bg-white hover:text-black '>Update Status</button>
+                                        
+                                </div>
+                            }
                             <button className="w-full flex items-center gap-3 px-3 py-3 text-white hover:bg-gray-900 rounded-lg transition-colors text-left">
                                 <span className="text-gray-400 text-lg flex-shrink-0">📷</span>
                                 <span className="text-sm">Edit Profile Photo.</span>
