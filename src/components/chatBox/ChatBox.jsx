@@ -38,8 +38,8 @@ const ChatBox = () => {
     const handleMsg = (e) => {
         if (msg.trim()) {
             set(push(ref(db, "message")), {
-                senderID: data.uid,
-                senderName: data.displayName,
+                senderID: data?.uid,
+                senderName: data?.displayName,
                 receiverID: activeData.ID,
                 receiverName: activeData.name,
                 message: msg,
@@ -63,9 +63,9 @@ const ChatBox = () => {
             let arr = []
             snapshot.forEach((item) => {
                 if (
-                    (data.uid == item.val().senderID && activeData.ID == item.val().receiverID)
+                    (data?.uid == item.val().senderID && activeData.ID == item.val().receiverID)
                     ||
-                    (data.uid == item.val().receiverID && activeData.ID == item.val().senderID)
+                    (data?.uid == item.val().receiverID && activeData.ID == item.val().senderID)
                 )
                     arr.push(item.val())
 
@@ -127,7 +127,7 @@ const ChatBox = () => {
             <div className="flex-1 overflow-y-auto p-6 space-y-4">
                 {
                     msgList.map((item) => (
-                        data.uid == item.senderID ?
+                        data?.uid == item.senderID ?
                        // Sent Message design... dec-08
                         <div className="flex items-start space-x-3 justify-end">
                             <div className="bg-primary rounded-lg rounded-tr-none px-4 py-3 max-w-xs">
