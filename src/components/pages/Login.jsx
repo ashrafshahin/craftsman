@@ -120,6 +120,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user
         
+        
         console.log(user, "google user information");
         // google log-in data will go to database
             set(ref(db, 'users/' + user.uid), {
@@ -133,15 +134,18 @@ const Login = () => {
         // sending data using REDUX
         dispatch(userDetails(user))
         localStorage.setItem("userDetails", JSON.stringify(user))
-          
+        // google login will nevigate to homepage
+        setTimeout(() => {
+          navigate("/")
+        }, 2000)   
 
-        // ...
+        
       }).catch((error) => {
 
         const errorCode = error.code;
         const errorMessage = error.message;
 
-        // ...
+       
       });
   }
   

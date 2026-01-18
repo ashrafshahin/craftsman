@@ -35,7 +35,7 @@ const Sidebar = ({active}) => {
                 localStorage.removeItem('userDetails')
                 
             // remove data from redux, use any of these
-                dispatch(userDetails())
+                dispatch(userDetails(null))
             
             setTimeout(() => {
                 navigate('/login')
