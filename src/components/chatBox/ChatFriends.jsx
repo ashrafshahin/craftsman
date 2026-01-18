@@ -28,7 +28,7 @@ const ChatFriends = () => {
             const arr = []
             snapshot.forEach((item) => {
                 // data.uid mane je login ase hoi receiverID hobe or senderID hobe...
-                if (data.uid == item.val().receiverID || data.uid == item.val().senderID) {
+                if (data?.uid == item?.val().receiverID || data?.uid == item?.val().senderID) {
                     arr.push({ ...item?.val(), removalId: item.key })
                 }
 
