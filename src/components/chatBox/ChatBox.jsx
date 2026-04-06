@@ -102,8 +102,12 @@ const ChatBox = () => {
     // early return AFTER all hooks
     if (!activeData) {
         return (
-            <div className="items-center justify-center h-screen text-gray-400 text-2xl border-1 border-black m-1">
-                 Select a friend to start chatting...x
+            <div className="flex flex-col items-center justify-center gap-3 py-20">
+                <div className="text-5xl">💬</div>
+                <h2 className="text-xl font-bold text-gray-700">No Chat Selected...</h2>
+                <p className="text-gray-500 text-sm font-medium text-center">
+                    Select a friend from the list to start chatting
+                </p>
             </div>
         )
     }
