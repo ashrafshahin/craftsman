@@ -40,7 +40,7 @@ const ChatBox = () => {
             set(push(ref(db, "message")), {
                 senderID: data?.uid,
                 senderName: data?.displayName,
-                receiverID: activeData?.ID,
+                receiverID: activeData?.userId,
                 receiverName: activeData?.name,
                 message: msg,
                 date: moment().format()
@@ -63,9 +63,9 @@ const ChatBox = () => {
             let arr = []
             snapshot.forEach((item) => {
                 if (
-                    (data?.uid == item.val().senderID && activeData?.ID == item.val().receiverID)
+                    (data?.uid == item.val().senderID && activeData?.userId == item.val().receiverID)
                     ||
-                    (data?.uid == item.val().receiverID && activeData?.ID == item.val().senderID)
+                    (data?.uid == item.val().receiverID && activeData?.userId == item.val().senderID)
                 )
                     arr.push(item.val())
 
@@ -73,7 +73,7 @@ const ChatBox = () => {
             setMsgList(arr)
         });
 
-    }, [activeData?.ID])
+    }, [activeData?.userId])
     console.log(msgList, 'check , chat messages');
     // here activeData.ID dele refresh korle data chole jabe na , dec-08,,,
 
@@ -166,6 +166,7 @@ const ChatBox = () => {
 
                 {/* Image Preview Section */}
                 <div className="mb-3 flex flex-wrap gap-2">
+
 
                 </div>
 
