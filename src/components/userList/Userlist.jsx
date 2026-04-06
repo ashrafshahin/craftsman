@@ -29,6 +29,7 @@ const Userlist = () => {
     // third-party api or kono database theke data Read korte
     //  useEffect() lagbe
     useEffect(() => {
+        if (!data?.uid) return;  // ✅ Don't run until user is loaded
         const userRef = ref(db, "users/")
         onValue(userRef, (snapshot) => {
             const arr = []
@@ -36,7 +37,7 @@ const Userlist = () => {
             snapshot.forEach((item) => {
                 // item.key used to specify data and Not sign "!" to ignore loggedin user/person here... 
                 if (data?.uid !== item.key) {
-                    arr.push({...item.val(), userId: item.key })
+                    arr.push({...item?.val(), userId: item.key })
                 }
 
             })
@@ -45,7 +46,7 @@ const Userlist = () => {
 
         })
 
-    }, [])
+    }, [data?.uid]) // ✅ Fix 2: depend on uid
     console.log(userList);
 
     const handleFriendRequest = (item, uid) => {

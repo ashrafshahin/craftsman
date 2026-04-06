@@ -13,7 +13,7 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         userDetails: (state, action) => {
-            state.value = action.payload  
+            state?.value = action?.payload  
         },
         // user name or information update korar jonno... dec-10
         userNameUpdate: (state, action) => {

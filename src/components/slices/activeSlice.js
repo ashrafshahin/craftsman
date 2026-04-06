@@ -18,7 +18,7 @@ export const activeSlice = createSlice({
             console.log(action.payload, 'Payload')
             
             // data dispatch to redux e jabe dec-07
-            state.value = action.payload
+            state?.value = action?.payload
 
             console.log(state.value, 'after');
 
