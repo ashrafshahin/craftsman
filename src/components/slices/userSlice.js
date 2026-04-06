@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 
 const initialState = {
-    value: localStorage.getItem('userDetail') ? JSON.parse(localStorage.getItem('userDetail')) : null,
+    value: localStorage.getItem('userDetails') ? JSON.parse(localStorage.getItem('userDetails')) : null,
 
 }
  console.log(initialState);
@@ -18,7 +18,7 @@ export const userSlice = createSlice({
         // user name or information update korar jonno... dec-10
         userNameUpdate: (state, action) => {
             if (state?.value && state?.value.user) {
-                state.value.user.displayName = action.payload
+                state?.value.user.displayName = action.payload
             }
             // we can keep localstorage work here too-make sure your variables are correct... december-11
             const updateProfileName = { ...state?.value }

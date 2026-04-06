@@ -113,7 +113,7 @@ const Sidebar = ({active}) => {
               <div className=''>
                   <div className='flex justify-center mt-[334px] pb-[47px] py-5   '>
 
-                      <ImExit className='text-white text-5xl  hover:text-red-600 hover:p-[1px] 
+                      <ImExit className='text-white text-5xl  hover:text-red-600 hover:p-px 
                       shadow-2xs/90 shadow-[-2px_0px_4px_0px_rgba(0,0,0,0,0.25)] cursor-pointer' onClick={handleSignout}
                       />
                       

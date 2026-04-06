@@ -173,7 +173,7 @@ const Login = () => {
         }}
       />
       <div className='md:flex md:justify-between items-center'>
-        <div className='md:w-2/5 flex justify-end mr-[20px] ml-5   '>
+        <div className='md:w-2/5 flex justify-end mr-5 ml-5   '>
           <div>
             <div>
               <h3 className='md:w-[497px] font-bold font-third text-[25px] md:text-[34px] text-[#03014C] '>Login to your account!</h3>
@@ -183,14 +183,14 @@ const Login = () => {
               <div>
                 <button onClick={handleGoogleSignIn}
                   className='w-full bg-transparent border-2 border-[#B3B3C9] rounded-lg py-5 font-third font-semibold text-[14px] cursor-pointer'>
-                  <span><FcGoogle className='absolute top-[22px] left-[0px] w-1/3 h-1/3 cursor-pointer ' /></span> Login with Google</button>
+                  <span><FcGoogle className='absolute top-[22px] left-0 w-1/3 h-1/3 cursor-pointer ' /></span> Login with Google</button>
               </div>
 
             </div>
             <div className='relative w-[368px] text-[#11175D] mt-12 '>
               <p className='absolute top-[-10px] bg-white px-3 tracking-[2px] text-[#585D8E] font-semibold text-[14px] font-third '>Email Address</p>
               <input onChange={handleEmail}
-                className='w-full border-b-2 text-[#585D8E] font-third py-[20px] pl-[12px] pr-[66px] rounded-[9px] outline-0 '
+                className='w-full border-b-2 text-[#585D8E] font-third py-5 pl-3 pr-[66px] rounded-[9px] outline-0 '
                 type="email" value={email} placeholder='Enter Your Email Address' />
               <p className='w-full bg-red-600 text-center rounded-full text-white px-3 mt-2 font-second font-semibold text-[20px]'>{emailError}</p>
             </div>
@@ -198,7 +198,7 @@ const Login = () => {
             <div className='relative w-[368px] text-[#11175D] mt-10 '>
               <p className='absolute top-[-10px] bg-white px-3 tracking-[2px] text-[#585D8E] font-semibold font-second text-[14px] '>Password</p>
               <input onChange={hanglePassword}
-                className='w-full border-b-2 text-[#585D8E] font-second py-[20px] pl-[12px] pr-[66px] rounded-[9px] outline-0 '
+                className='w-full border-b-2 text-[#585D8E] font-second py-5 pl-3 pr-[66px] rounded-[9px] outline-0 '
                 type={showPassword ? 'text' : 'password'}
                 value={password} placeholder='Enter your password' />
 
