@@ -13,12 +13,12 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         userDetails: (state, action) => {
-            state?.value = action?.payload  
+            state.value = action.payload  
         },
         // user name or information update korar jonno... dec-10
         userNameUpdate: (state, action) => {
-            if (state?.value && state?.value.user) {
-                state?.value.user.displayName = action.payload
+            if (state.value && state.value.user) {
+                state.value.user.displayName = action.payload
             }
             // we can keep localstorage work here too-make sure your variables are correct... december-11
             const updateProfileName = { ...state?.value }
