@@ -28,6 +28,13 @@ const ChatBox = () => {
     const activeData = useSelector((state) => state.activeChatInfo.value)
     // console.log(activeData);
 
+    //  Add this guard - prevents crash when no chat is selected
+    if (!activeData) return (
+        <div className="flex items-center justify-center h-screen text-gray-400 text-xl">
+             Select a friend to start chatting...
+        </div>
+    )
+
     // localstorage setup dec-07 , uporer variable name ta 'activeData' asbe...
     localStorage.setItem("activeChatInfo", JSON.stringify(activeData))
 
