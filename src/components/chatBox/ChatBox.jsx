@@ -29,12 +29,15 @@ const ChatBox = () => {
     // console.log(activeData);
 
     // localstorage setup dec-07 , uporer variable name ta 'activeData' asbe...
-    localStorage.setItem("activeChatInfo", JSON.stringify(activeData))
+    // localStorage.setItem("activeChatInfo", JSON.stringify(activeData))
 
     
 
     // message sending to redux to show on firebase.. dec-08 
-    const [msg, SetMsg] = useState('')
+    const [msg, SetMsg] = useState('');
+    const [msgList, setMsgList] = useState([]);
+    const [showEmoji, setShowEmoji] = useState(false);
+    
     const handleMsg = (e) => {
         if (msg.trim()) {
             set(push(ref(db, "message")), {
@@ -55,9 +58,11 @@ const ChatBox = () => {
     }
     // from firebase - send message to display dec-08 
     // useState ([]) vitore array hobe
-    const [msgList, setMsgList] = useState([])
+    // const [msgList, setMsgList] = useState([])
     
     useEffect(() => {
+        if (!activeData?.ID || !data?.uid) return  // guard INSIDE 
+
         const messageRef = ref(db, "message")
         onValue(messageRef, (snapshot) => {
             let arr = []
@@ -73,12 +78,12 @@ const ChatBox = () => {
             setMsgList(arr)
         });
 
-    }, [activeData.ID])
+    }, [activeData?.ID, data?.uid])
     console.log(msgList, 'check , chat messages');
     // here activeData.ID dele refresh korle data chole jabe na , dec-08,,,
 
     // emoji setup er jonno dec-08
-    const [showEmoji, setShowEmoji] = useState(false)
+    // const [showEmoji, setShowEmoji] = useState(false)
     
     // emoji dynamic on chatting with emoji dec-09
     const onEmojiClick = (emoji) => {
@@ -87,6 +92,21 @@ const ChatBox = () => {
         
     }
     
+    // localstorage kept inside a useEffect hook...
+    useEffect(() => {
+        if (activeData) {
+            localStorage.setItem("activeChatInfo", JSON.stringify(activeData))
+        }
+    }, [activeData])
+
+    // early return AFTER all hooks
+    if (!activeData) {
+        return (
+            <div className="flex items-center justify-center h-screen text-gray-400 text-xl">
+                 Select a friend to start chatting...x
+            </div>
+        )
+    }
     
     return (
         <div className="flex flex-col h-screen bg-white shadow-lg shadow-black rounded-b-xl">
