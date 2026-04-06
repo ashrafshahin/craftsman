@@ -28,13 +28,6 @@ const ChatBox = () => {
     const activeData = useSelector((state) => state.activeChatInfo.value)
     // console.log(activeData);
 
-    //  Add this guard - prevents crash when no chat is selected
-    if (!activeData) return (
-        <div className="flex items-center justify-center h-screen text-gray-400 text-xl">
-             Select a friend to start chatting...
-        </div>
-    )
-
     // localstorage setup dec-07 , uporer variable name ta 'activeData' asbe...
     localStorage.setItem("activeChatInfo", JSON.stringify(activeData))
 
@@ -47,8 +40,8 @@ const ChatBox = () => {
             set(push(ref(db, "message")), {
                 senderID: data?.uid,
                 senderName: data?.displayName,
-                receiverID: activeData?.userId,
-                receiverName: activeData?.name,
+                receiverID: activeData.ID,
+                receiverName: activeData.name,
                 message: msg,
                 date: moment().format()
                 
@@ -70,9 +63,9 @@ const ChatBox = () => {
             let arr = []
             snapshot.forEach((item) => {
                 if (
-                    (data?.uid == item.val().senderID && activeData?.userId == item.val().receiverID)
+                    (data?.uid == item.val().senderID && activeData.ID == item.val().receiverID)
                     ||
-                    (data?.uid == item.val().receiverID && activeData?.userId == item.val().senderID)
+                    (data?.uid == item.val().receiverID && activeData.ID == item.val().senderID)
                 )
                     arr.push(item.val())
 
@@ -80,7 +73,7 @@ const ChatBox = () => {
             setMsgList(arr)
         });
 
-    }, [activeData?.userId])
+    }, [activeData.ID])
     console.log(msgList, 'check , chat messages');
     // here activeData.ID dele refresh korle data chole jabe na , dec-08,,,
 
@@ -145,7 +138,7 @@ const ChatBox = () => {
                             <img
                                 src={userImage}
                                 alt="Me"
-                                className="w-8 h-8 rounded-full shrink-0 object-cover"
+                                className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
                             />
                             </div>
                             :
@@ -154,7 +147,7 @@ const ChatBox = () => {
                                 <img
                                     src={userImage}
                                     alt="User"
-                                    className="w-8 h-8 rounded-full shrink-0 object-cover"
+                                    className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
                                 />
                                 <div className="bg-gray-300 rounded-lg rounded-tl-none px-4 py-3 max-w-xs">
                                     <p className="text-gray-900 text-sm">{item.message}</p>
@@ -165,6 +158,82 @@ const ChatBox = () => {
                     ))
                 }
                 
+                
+                {/* Received Message design */}
+                {/* <div className="flex items-start space-x-3">
+                    <img
+                        src={userImage}
+                        alt="User"
+                        className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
+                    />
+                    <div className="bg-gray-100 rounded-lg rounded-tl-none px-4 py-3 max-w-xs">
+                        <p className="text-gray-800 text-sm">helo ola</p>
+                        <span className="text-xs text-gray-500 mt-1 block">10:30 AM</span>
+                    </div>
+                </div> */}
+
+                {/* Sent Message design */}
+                {/* <div className="flex items-start space-x-3 justify-end">
+                    <div className="bg-primary rounded-lg rounded-tr-none px-4 py-3 max-w-xs">
+                        <p className="text-white text-sm">hello...</p>
+                        <span className="text-xs text-gray-300 mt-1 block text-right">10:32 AM</span>
+                    </div>
+                    <img
+                        src={userImage}
+                        alt="Me"
+                        className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
+                    />
+                </div> */}
+
+                {/* Received Message with Image design */}
+                {/* <div className="flex items-start space-x-3">
+                    <img
+                        src="https://i.pravatar.cc/150?img=1"
+                        alt="User"
+                        className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
+                    />
+                    <div className="bg-primary/30 rounded-lg rounded-tl-none px-4 py-3 max-w-xs">
+                        <div className="bg-primary/30 h-32 w-full rounded mb-2 flex items-center justify-center text-gray-600 text-sm">
+                            Image Preview
+                        </div>
+                        <p className="text-gray-800 text-sm">Check out this document</p>
+                        <span className="text-xs text-gray-500 mt-1 block">10:35 AM</span>
+                    </div>
+                </div> */}
+
+                {/* Sent Message 2nd design */}
+                {/* <div className="flex items-start space-x-3 justify-end">
+                    <div className="bg-primary rounded-lg rounded-tr-none px-4 py-3 max-w-xs">
+                        <p className="text-white text-sm">That looks great! Thank you 😊</p>
+                        <span className="text-xs text-gray-300 mt-1 block text-right">10:36 AM</span>
+                    </div>
+                    <img
+                        src="https://i.pravatar.cc/150?img=5"
+                        alt="Me"
+                        className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
+                    />
+                </div> */}
+
+                {/* Document Message design */}
+                {/* <div className="flex items-start space-x-3">
+                    <img
+                        src="https://i.pravatar.cc/150?img=1"
+                        alt="User"
+                        className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
+                    />
+                    <div className="bg-primary/30 rounded-lg rounded-tl-none px-4 py-3 max-w-xs">
+                        <div className="flex items-center space-x-3 bg-white rounded p-3 border border-gray-300">
+                            <div className="w-10 h-10 bg-red-600 rounded flex items-center justify-center text-white text-xs font-bold">
+                                PDF
+                            </div>
+                            <div className="flex-1">
+                                <p className="text-gray-800 text-sm font-medium">document.pdf</p>
+                                <p className="text-xs text-gray-500">2.4 MB</p>
+                            </div>
+                        </div>
+                        <span className="text-xs text-gray-500 mt-2 block">10:38 AM</span>
+                    </div>
+                </div> */}
             
             </div>
 
@@ -173,7 +242,30 @@ const ChatBox = () => {
 
                 {/* Image Preview Section */}
                 <div className="mb-3 flex flex-wrap gap-2">
+                    {/* Example uploaded image preview - you'll populate this dynamically */}
+                    {/* <div className="relative group">
+                        <div className="w-20 h-20 bg-primary/30 rounded-lg overflow-hidden border-2 border-gray-300">
+                            <div className="w-full h-full flex items-center justify-center text-gray-500 text-xs">
+                                Image
+                            </div>
+                        </div>
+                        <button className="absolute -top-2 -right-2 w-6 h-6 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">
+                            ×
+                        </button>
+                    </div> */}
 
+                    {/* Example document preview */}
+                    {/* <div className="relative group">
+                        <div className="w-20 h-20 bg-primary/30 rounded-lg overflow-hidden border-2 border-gray-300 flex flex-col items-center justify-center">
+                            <svg className="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                            </svg>
+                            <span className="text-xs text-gray-600 mt-1">DOC</span>
+                        </div>
+                        <button className="absolute -top-2 -right-2 w-6 h-6 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">
+                            ×
+                        </button>
+                    </div> */}
 
                 </div>
 
@@ -181,7 +273,7 @@ const ChatBox = () => {
 
                     {/* Attachment Button */}
 
-                    <label className="shrink-0 w-10 h-10 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center justify-center transition-colors cursor-pointer">
+                    <label className="flex-shrink-0 w-10 h-10 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center justify-center transition-colors cursor-pointer">
                         <input type="file" className="hidden" accept=".pdf,.doc,.docx,.txt" />
                         <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
@@ -189,7 +281,7 @@ const ChatBox = () => {
                     </label>
 
                     {/* Image Button */}
-                    <label className="shrink-0 w-10 h-10 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center justify-center transition-colors cursor-pointer">
+                    <label className="flex-shrink-0 w-10 h-10 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center justify-center transition-colors cursor-pointer">
                         <input type="file" className="hidden" accept="image/*" multiple />
                         <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -246,7 +338,7 @@ const ChatBox = () => {
                             className='text-[35px] ' />
                     </div> */}
                     <button onClick={handleMsg}
-                        className="shrink-0 w-12 h-12 bg-red-600 hover:bg-red-700 rounded-lg flex items-center justify-center transition-colors">
+                        className="flex-shrink-0 w-12 h-12 bg-red-600 hover:bg-red-700 rounded-lg flex items-center justify-center transition-colors">
                         <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                         </svg>
